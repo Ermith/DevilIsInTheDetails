@@ -13,6 +13,8 @@ public class Inventory : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        gameObject.name = GameDirector.InventoryName;
+
         _list = new List<List<Cell>>();
         for (int y = 0; y < Height; y++)
         {

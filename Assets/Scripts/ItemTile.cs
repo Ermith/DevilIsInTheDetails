@@ -8,7 +8,7 @@ public class ItemTile : MonoBehaviour
 
     void Start()
     {
-        WordManager wordManager = GameObject.Find("WordManager").GetComponent<WordManager>();
+        WordManager wordManager = GameObject.Find(GameDirector.WordManagerName).GetComponent<WordManager>();
         Letter = wordManager.GetLetter();
     }
 
