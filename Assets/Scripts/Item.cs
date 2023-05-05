@@ -4,6 +4,7 @@ using System;
 using System.Runtime.CompilerServices;
 using JetBrains.Annotations;
 using UnityEngine;
+using static UnityEditor.PlayerSettings;
 
 public class Item : MonoBehaviour
 {
@@ -24,6 +25,12 @@ public class Item : MonoBehaviour
 
     [ItemCanBeNull] public ItemTile[,] Shape;
 
+    public int Width => Shape.GetLength(0);
+
+    public int Height => Shape.GetLength(1);
+
+    public int TileCount { get; private set; }
+
     public bool InInventory { get; private set; }
 
     [CanBeNull] public static Item DraggedItem;
@@ -36,6 +43,45 @@ public class Item : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        if (Shape == null)
+            InitShape();
+    }
+
+    void InitShape()
+    {
+        int width = 0;
+        int height = 0;
+        foreach (var tile in GetComponentsInChildren<ItemTile>())
+        {
+            var pos = tile.InItemPos();
+            width = Mathf.Max(width, pos.x + 1);
+            height = Mathf.Max(height, pos.y + 1);
+        }
+
+        TileCount = 0;
+        Shape = new ItemTile[width, height];
+        foreach (var tile in GetComponentsInChildren<ItemTile>())
+        {
+            var pos = tile.InItemPos();
+            Shape[pos.x, pos.y] = tile;
+            TileCount++;
+        }
+    }
+
+    public void TileDestroyed(ItemTile tile)
+    {
+        var pos = tile.InItemPos();
+        Shape[pos.x, pos.y] = null;
+        TileCount--;
+        if (TileCount == 0)
+        {
+            Destroy(gameObject);
+        }
+    }
+
+    public ItemTile GetTile(Vector2Int pos)
+    {
+        return Shape[pos.x, pos.y];
     }
 
     void ChangeColor(Color color)
@@ -70,7 +116,7 @@ public class Item : MonoBehaviour
         {
             if (_moving)
             {
-                if (InInventory)
+                if (!CanDrop())
                 {
                     transform.position = _dragStartPosition;
                 }
@@ -95,6 +141,18 @@ public class Item : MonoBehaviour
         }
     }
 
+    bool CanDrop()
+    {
+        if (InInventory)
+        {
+            // TODO check if we are dropping on an inventory tile and if it is valid
+            return false;
+        }
+
+        // TODO check out of bounds
+        return true;
+    }
+    
     void OnDestroy()
     {
         if (DraggedItem == this)
