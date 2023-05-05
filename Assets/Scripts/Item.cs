@@ -3,21 +3,9 @@ using System.Collections.Generic;
 using System;
 using UnityEngine;
 
-[Serializable]
-public class EffectParams
-{
-    public bool Heal;
-    public float HealAmount;
-
-    public bool Damage;
-    public float DamageAmount;
-}
-
 [RequireComponent(typeof(Collider2D), typeof(SpriteRenderer))]
 public class Item : MonoBehaviour
 {
-    public EffectParams EffectParams;
-
     [HideInInspector]
     public Inventory Inventory;
 
@@ -25,6 +13,11 @@ public class Item : MonoBehaviour
     public bool CanMove = true;
 
     private bool _moving;
+
+    public void Execute()
+    {
+        gameObject.BroadcastMessage("ItemExecute");
+    }
 
     // Start is called before the first frame update
     void Start()
