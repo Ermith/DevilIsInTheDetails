@@ -2,30 +2,20 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[RequireComponent(typeof(Item))]
-public class ItemHeal : MonoBehaviour, IEffect
+public class ItemDamage : MonoBehaviour, IEffect
 {
-    public int HealAmmount = 20;
+    public int Damage = 20;
     public void ExecuteEffect()
     {
         Vector2 dir = GetComponent<Item>().Direction;
         Health health = null;
 
-        if (dir == Vector2.up)
-        {
-
-        } else if (dir == Vector2.left)
-        {
-            health = GameObject.Find("Hero").GetComponent<Health>();
-        } else if (dir == Vector2.down)
-        {
-           
-        } else if (dir == Vector2.right)
-        {
+        if (dir == Vector2.right)
             health = GameObject.Find("Enemy").GetComponent<Health>();
-        }
+        if (dir == Vector2.left)
+            health = GameObject.Find("Hero").GetComponent<Health>();
 
-        health?.HealBy(HealAmmount, gameObject);
+        health?.HitBy(Damage, gameObject);
     }
 
     // Start is called before the first frame update

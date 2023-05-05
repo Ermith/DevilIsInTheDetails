@@ -14,6 +14,12 @@ public class Health : MonoBehaviour
     public delegate void OnDeathHandler(GameObject attacker);
     public event OnDeathHandler OnDeath;
 
+    public delegate void OnHealHandler(int heal, GameObject healer);
+    public event OnHitHandler OnHeal;
+
+    public delegate void OnHealthFullHandler(GameObject healer);
+    public event OnDeathHandler OnHealthFull;
+
     private void Awake()
     {
         HealthPoints = MaxHealth;
@@ -28,6 +34,18 @@ public class Health : MonoBehaviour
         {
             OnDeath?.Invoke(attacker);
             Destroy(gameObject);
+        }
+    }
+
+    public void HealBy(int health, GameObject healer)
+    {
+        HealthPoints += health;
+        OnHeal?.Invoke(health, healer);
+
+        if (HealthPoints >= MaxHealth)
+        {
+            HealthPoints = MaxHealth;
+            OnHealthFull?.Invoke(healer);
         }
     }
 }
