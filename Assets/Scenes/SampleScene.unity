@@ -154,9 +154,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Width: 5
   Height: 5
-  CellWidth: 1
-  CellHeight: 1
-  CellSprite: {fileID: 21300000, guid: 0ccc508108fa6ed4fa11b4a467d7f609, type: 3}
+  Cell: {fileID: 2876919743810713813, guid: 236aa1339df293a4bbf743a761634864, type: 3}
 --- !u!4 &146661499
 Transform:
   m_ObjectHideFlags: 0
