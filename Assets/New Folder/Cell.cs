@@ -2,12 +2,15 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class NewBehaviourScript : MonoBehaviour
+[RequireComponent(typeof(SpriteRenderer))]
+public class Cell : MonoBehaviour
 {
+    [HideInInspector]
+    public Inventory Inventory;
+
     // Start is called before the first frame update
     void Start()
     {
-        
     }
 
     // Update is called once per frame
