@@ -24,12 +24,13 @@ public class ItemTile : MonoBehaviour
         return new Vector2Int(x, y);
     }
 
+    public Item Item => GetComponentInParent<Item>();
+
     void OnDestroy()
     {
-        Item item = GetComponentInParent<Item>();
-        if (item != null)
+        if (Item != null)
         {
-            item.TileDestroyed(this);
+            Item.TileDestroyed(this);
         }
     }
 }

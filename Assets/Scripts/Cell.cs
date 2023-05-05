@@ -21,4 +21,9 @@ public class Cell : MonoBehaviour
     {
         
     }
+
+    public Vector2Int InInventoryPos()
+    {
+        return new Vector2Int((int)transform.localPosition.x, (int)transform.localPosition.y);
+    }
 }

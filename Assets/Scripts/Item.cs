@@ -9,9 +9,6 @@ using static UnityEditor.PlayerSettings;
 public class Item : MonoBehaviour
 {
     [HideInInspector]
-    public Inventory Inventory;
-
-    [HideInInspector]
     public bool CanMove = true;
 
     [HideInInspector]
@@ -31,7 +28,7 @@ public class Item : MonoBehaviour
 
     public int TileCount { get; private set; }
 
-    public bool InInventory { get; private set; }
+    public bool InInventory { get; set; }
 
     [CanBeNull] public static Item DraggedItem;
 
@@ -116,13 +113,9 @@ public class Item : MonoBehaviour
         {
             if (_moving)
             {
-                if (!CanDrop())
+                if (!CanDrop() || !OnDropped())
                 {
                     transform.position = _dragStartPosition;
-                }
-                else
-                {
-                    OnDropped();
                 }
                 ChangeColor(new Color(1, 1, 1, 1));
                 DraggedItem = null;
@@ -168,19 +161,31 @@ public class Item : MonoBehaviour
         return null;
     }
 
-    void OnDropped()
+    bool OnDropped()
     {
         if (DragOnTrash())
         {
             Destroy(gameObject);
-            return;
+            return true;
         }
 
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
         var collider = Physics2D.GetRayIntersection(ray, distance: float.MaxValue, layerMask: LayerMask.GetMask("Inventory")).collider;
         if (collider != null)
         {
+            Cell cell = collider.gameObject.GetComponent<Cell>();
+            Inventory inventory = cell.transform.parent.GetComponent<Inventory>();
+            // TODO shift pos by where we are holding the thing
+            if (inventory.CanPlace(this, cell.InInventoryPos(), this))
+            {
+                inventory.PlaceItem(this, cell.InInventoryPos());
+                return true;
+            }
 
+            // TODO check if we aren't overlapping with inventory grid maybe?
+            return false;
         }
+
+        return false;
     }
 }
