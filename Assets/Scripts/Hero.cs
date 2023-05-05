@@ -9,4 +9,13 @@ class Hero : MonoBehaviour
     {
         Health = MaxHealth;
     }
+
+    public void HitBy(int damage, GameObject attacker)
+    {
+        Health -= damage;
+        if (Health <= 0)
+        {
+            Destroy(gameObject);
+        }
+    }
 }
