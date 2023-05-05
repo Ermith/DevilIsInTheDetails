@@ -7,7 +7,21 @@ public class ItemHeal : MonoBehaviour, IEffect
 {
     public void ExecuteEffect()
     {
-        GetComponent<Item>();
+        Vector2 dir = GetComponent<Item>().Direction;
+
+        if (dir == Vector2.up)
+        {
+
+        } else if (dir == Vector2.left)
+        {
+
+        } else if (dir == Vector2.down)
+        {
+           
+        } else if (dir == Vector2.right)
+        {
+
+        }
     }
 
     // Start is called before the first frame update

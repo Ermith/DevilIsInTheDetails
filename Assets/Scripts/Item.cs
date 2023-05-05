@@ -14,6 +14,9 @@ public class Item : MonoBehaviour
     [HideInInspector]
     public bool CanMove = true;
 
+    [HideInInspector]
+    public Vector2 Direction = Vector2.up;
+
     private bool _moving;
 
     private Vector2 _dragStartPosition;
@@ -26,7 +29,7 @@ public class Item : MonoBehaviour
 
     public void Execute()
     {
-        gameObject.BroadcastMessage("ItemExecute");
+        gameObject.BroadcastMessage("ExecuteEffect");
     }
 
     // Start is called before the first frame update
