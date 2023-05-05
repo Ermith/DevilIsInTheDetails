@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class WordManager : MonoBehaviour
 {
-    public readonly TextAsset WordFile;
+    public TextAsset WordFile;
 
     private readonly HashSet<string> _words = new();
 
