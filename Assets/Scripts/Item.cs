@@ -5,7 +5,6 @@ using System.Runtime.CompilerServices;
 using JetBrains.Annotations;
 using UnityEngine;
 
-[RequireComponent(typeof(Collider2D), typeof(SpriteRenderer))]
 public class Item : MonoBehaviour
 {
     [HideInInspector]
@@ -23,6 +22,8 @@ public class Item : MonoBehaviour
 
     private Vector2 _dragOffset;
 
+    [ItemCanBeNull] public ItemTile[,] Shape;
+
     public bool InInventory { get; private set; }
 
     [CanBeNull] public static Item DraggedItem;
@@ -37,6 +38,14 @@ public class Item : MonoBehaviour
     {
     }
 
+    void ChangeColor(Color color)
+    {
+        foreach (var spriteRenderer in GetComponentsInChildren<SpriteRenderer>())
+        {
+            spriteRenderer.color = color;
+        }
+    }
+
     // Update is called once per frame
     void Update()
     {
@@ -46,8 +55,8 @@ public class Item : MonoBehaviour
         if (Input.GetMouseButtonDown(0) && CanMove && !_moving)
         {
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-            Collider2D collider = Physics2D.GetRayIntersection(ray).collider;
-            _moving = collider != null && collider.gameObject == gameObject;
+            Collider2D collider = Physics2D.GetRayIntersection(ray, float.MaxValue, LayerMask.GetMask("Item")).collider;
+            _moving = collider != null && collider.gameObject.transform.parent == transform;
             if (_moving)
             {
                 _dragStartPosition = transform.position;
@@ -69,7 +78,7 @@ public class Item : MonoBehaviour
                 {
                     OnDropped();
                 }
-                spriteRenderer.color = new Color(1, 1, 1, 1);
+                ChangeColor(new Color(1, 1, 1, 1));
                 DraggedItem = null;
             }
 
@@ -79,7 +88,7 @@ public class Item : MonoBehaviour
         // Drag button with mouse
         if (_moving)
         {
-            spriteRenderer.color = DragOnTrash() ? new Color(1, 0.5f, 0.5f, 0.5f) : new Color(1, 1, 1, 1);
+            ChangeColor(DragOnTrash() ? new Color(1, 0.5f, 0.5f, 0.5f) : new Color(1, 1, 1, 1));
             var pos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
             pos.z = transform.position.z;
             transform.position = pos + (Vector3)_dragOffset;
