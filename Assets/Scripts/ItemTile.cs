@@ -6,7 +6,6 @@ using UnityEngine;
 [RequireComponent(typeof(Collider2D), typeof(SpriteRenderer))]
 public class ItemTile : MonoBehaviour
 {
-    [SerializeField]
     public char Letter
     {
         get => _letter;
@@ -19,7 +18,9 @@ public class ItemTile : MonoBehaviour
 
     [CanBeNull] public Cell Cell;
 
+    [SerializeField]
     private TextMeshPro _text;
+    [SerializeField]
     private char _letter;
 
     void Start()

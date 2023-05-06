@@ -24,7 +24,20 @@ public class Item : MonoBehaviour
 
     private Vector2 _dragOffset;
 
-    [ItemCanBeNull] public ItemTile[,] Shape;
+    [ItemCanBeNull] private ItemTile[,] _shape;
+
+    public ItemTile[,] Shape
+    {
+        get
+        {
+            if (_shape == null)
+            {
+                InitShape();
+            }
+
+            return _shape;
+        }
+    }
 
     public int Width => Shape.GetLength(0);
 
@@ -41,13 +54,6 @@ public class Item : MonoBehaviour
         gameObject.BroadcastMessage("ExecuteEffect");
     }
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        if (Shape == null)
-            InitShape();
-    }
-
     void InitShape()
     {
         int width = 0;
@@ -60,7 +66,7 @@ public class Item : MonoBehaviour
         }
 
         TileCount = 0;
-        Shape = new ItemTile[width, height];
+        _shape = new ItemTile[width, height];
         foreach (var tile in GetComponentsInChildren<ItemTile>())
         {
             var pos = tile.InItemPos();

@@ -2,18 +2,38 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[System.Serializable]
+public class GridRow
+{
+    public List<Cell> Cells = new List<Cell>();
+
+    public GridRow(int width)
+    {
+        for (int i = 0; i < width; i++)
+        {
+            Cells.Add(null);
+        }
+    }
+
+    public GridRow(List<Cell> cells)
+    {
+        Cells = cells;
+    }
+}
+
 public class Inventory : MonoBehaviour
 {
     public int Width;
     public int Height;
     public Cell Cell;
 
-    private List<List<Cell>> _grid;
+    [SerializeField]
+    private List<GridRow> _grid;
 
     // Start is called before the first frame update
     void Start()
     {
-        _grid = new List<List<Cell>>();
+        _grid = new ();
         for (int y = 0; y < Height; y++)
         {
             var row = new List<Cell>();
@@ -29,7 +49,7 @@ public class Inventory : MonoBehaviour
                 cell.transform.localPosition = (Vector2.right * width * x) + (Vector2.up * height * y);
                 row.Add(cell);
             }
-            _grid.Add(row);
+            _grid.Add(new GridRow(row));
         }
     }
 
@@ -59,7 +79,7 @@ public class Inventory : MonoBehaviour
     {
         if (x < 0 || x >= Width || y < 0 || y >= Height)
             return null;
-        return _grid[y][x];
+        return _grid[y].Cells[x];
     }
 
     public Cell GetCell(Vector2Int pos)
@@ -89,7 +109,7 @@ public class Inventory : MonoBehaviour
     {
         foreach (var row in _grid)
         {
-            foreach (var cell in row)
+            foreach (var cell in row.Cells)
             {
                 yield return cell;
             }
@@ -156,3 +176,4 @@ public class Inventory : MonoBehaviour
         item.transform.localPosition = (Vector2)pos;
     }
 }
+//
