@@ -153,6 +153,10 @@ public class GameDirector : MonoBehaviour
             Unpause();
         IsGameOver = true;
         GameOverCanvas.gameObject.SetActive(true);
+
+        Health heroHealth = HeroInstance.GetComponent<Health>();
+        heroHealth.Healthbar.SetHealth(0, heroHealth.MaxHealth, 0f);
+
         Time.timeScale = 0f;
     }
 
