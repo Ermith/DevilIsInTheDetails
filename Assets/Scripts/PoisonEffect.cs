@@ -48,11 +48,12 @@ public class PoisonEffect : MonoBehaviour, IEffect
         if (itemTile == null || Ticks <= 1)
             return;
 
-        var poison = itemTile.gameObject.AddComponent<PoisonEffect>();
-
+        args.Target = itemTile.transform.position;
         args.Effect += () =>
         {
+            var poison = itemTile.gameObject.AddComponent<PoisonEffect>();
             poison.Ticks = Ticks - 1;
+            itemTile.Item.ColorTo(Color.green);
         };
     }
 

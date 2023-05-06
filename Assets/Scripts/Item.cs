@@ -5,6 +5,7 @@ using System.Runtime.CompilerServices;
 using JetBrains.Annotations;
 using UnityEngine;
 using static UnityEditor.PlayerSettings;
+using TMPro;
 
 public class Item : MonoBehaviour
 {
@@ -79,6 +80,15 @@ public class Item : MonoBehaviour
         }
     }
 
+    public void ColorTo(Color color)
+    {
+        foreach (var text in GetComponentsInChildren<TextMeshPro>())
+        {
+            var rightColor = text.colorGradient.topRight;
+            var gradient = new VertexGradient(color, rightColor, color, rightColor);
+            text.colorGradient = gradient;
+        }
+    }
     public void TileDestroyed(ItemTile tile)
     {
         var pos = tile.InItemPos();

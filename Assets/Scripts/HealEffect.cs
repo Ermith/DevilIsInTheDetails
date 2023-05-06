@@ -48,7 +48,13 @@ public class HealEffect : MonoBehaviour, IEffect
         if (itemTile == null)
             return;
 
-        args.Effect += () => itemTile.gameObject.AddComponent<HealEffect>().HealAmount = HealAmount / 2;
+
+        args.Target = itemTile.transform.position;
+        args.Effect += () =>
+        {
+            itemTile.gameObject.AddComponent<HealEffect>().HealAmount = HealAmount / 2;
+            itemTile.Item.ColorTo(Color.red);
+        };
     }
 
     // Start is called before the first frame update
