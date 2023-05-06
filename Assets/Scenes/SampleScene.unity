@@ -458,9 +458,9 @@ Camera:
     height: 1
   near clip plane: 0.3
   far clip plane: 1000
-  field of view: 38.093613
+  field of view: 35.9834
   orthographic: 1
-  orthographic size: 7.175713
+  orthographic size: 6.75
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -1586,7 +1586,8 @@ MonoBehaviour:
     - {fileID: 6442309791268930786, guid: c84bf0c92ddb7e34abfef1c81476304a, type: 3}
     - {fileID: 6442309791268930786, guid: d5b9e92b4e0bd6948b748f71c00e67c6, type: 3}
     - {fileID: 6442309791268930786, guid: 64686a344a77bfc4097e7c5a951b9ae0, type: 3}
-    values: 1400000064000000050000000a0000000a0000001400000014000000
+    - {fileID: 7952085110807939507, guid: 8d72470fc1bffa147b040e3c1bdff406, type: 3}
+    values: 1400000064000000050000000a0000000a000000140000001400000064000000
   LooseItems: 0
   MaxLooseItems: 3
   PerSecondChance: 0.3
