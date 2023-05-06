@@ -13,20 +13,31 @@ public class Enemy : MonoBehaviour
     SpriteRenderer _spriteRenderer;
     public SpriteRenderer SpriteRenderer => _spriteRenderer ??= GetComponent<SpriteRenderer>();
 
+    private float _lastAttackTime;
     private float _nextAttackTime;
+
+    public Health.DamageType NextDamageType;
 
     void Start()
     {
         Health.OnDeath += OnDeath;
-        _nextAttackTime = GameDirector.SimulationTime;
+    }
+
+    void PrepareNextAttack()
+    {
+        _lastAttackTime = _nextAttackTime;
+        _nextAttackTime = GameDirector.SimulationTime + AttackInterval;
+        NextDamageType = (Health.DamageType)Random.Range(0, 3);
     }
 
     void Update()
     {
+        float progress = (GameDirector.SimulationTime - _lastAttackTime) / (_nextAttackTime - _lastAttackTime);
+        Health.Healthbar.SetAttack(progress, NextDamageType, 0f);
         if (GameDirector.SimulationTime >= _nextAttackTime)
         {
             AttackHero();
-            _nextAttackTime += AttackInterval;
+            PrepareNextAttack();
         }
     }
 

@@ -13,6 +13,11 @@ public class Healthbar : MonoBehaviour
     public UnityEngine.UI.Image StrikeBlock;
     public UnityEngine.UI.Image ThrustBlock;
     public UnityEngine.UI.Image PoisonIndicator;
+    public UnityEngine.UI.Image AttackIndicator;
+    public UnityEngine.UI.Image AttackSlash;
+    public UnityEngine.UI.Image AttackStrike;
+    public UnityEngine.UI.Image AttackThrust;
+    public UnityEngine.UI.Image AttackPoison;
     public TextMeshProUGUI Text;
     public Health Health;
 
@@ -108,6 +113,25 @@ public class Healthbar : MonoBehaviour
     public void OnHeal(int amount, GameObject whatever)
     {
         SetHealth(Health.HealthPoints, Health.MaxHealth);
+    }
+
+    public void SetAttack(float progress, Health.DamageType type, float tweenTime = 0.1f)
+    {
+        if (progress < 0)
+        {
+            AttackIndicator.gameObject.SetActive(false);
+            return;
+        }
+        AttackIndicator.gameObject.SetActive(true);
+        if (tweenTime > 0)
+            AttackIndicator.DOFillAmount(progress, tweenTime);
+        else
+            AttackIndicator.fillAmount = progress;
+
+        AttackStrike.gameObject.SetActive(type == Health.DamageType.Strike);
+        AttackSlash.gameObject.SetActive(type == Health.DamageType.Slash);
+        AttackThrust.gameObject.SetActive(type == Health.DamageType.Thrust);
+        AttackPoison.gameObject.SetActive(type == Health.DamageType.Poison);
     }
 
     void OnDestroy()

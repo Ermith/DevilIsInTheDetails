@@ -99,7 +99,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Damage: 2
-  AttackInterval: 1
+  AttackInterval: 5
+  NextDamageType: 0
 --- !u!114 &2181893674414024699
 MonoBehaviour:
   m_ObjectHideFlags: 0
