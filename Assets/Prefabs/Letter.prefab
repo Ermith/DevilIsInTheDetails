@@ -102,7 +102,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: _
+  m_text: BLABLA
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: a13dc4a67d6e54e4e9a556c3ac6c5908, type: 2}
   m_sharedMaterial: {fileID: -6437024165034687344, guid: a13dc4a67d6e54e4e9a556c3ac6c5908, type: 2}
@@ -111,7 +111,7 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 3372221183
+    rgba: 3388997631
   m_fontColor: {r: 1, g: 0.008412408, b: 0, a: 0.7882353}
   m_enableVertexGradient: 1
   m_colorMode: 1
@@ -186,6 +186,7 @@ Animation:
   m_Animation: {fileID: 0}
   m_Animations:
   - {fileID: 7400000, guid: 1cf7dd16ed82a0645a6fdaba0346d684, type: 2}
+  - {fileID: 7400000, guid: 8c92cf37ff4dda1488570a193a75275f, type: 2}
   m_WrapMode: 0
   m_PlayAutomatically: 0
   m_AnimatePhysics: 0
@@ -202,4 +203,3 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b75b6fff401f94e4bac467bf0f98296f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _appearingAnimation: {fileID: 7400000, guid: 1cf7dd16ed82a0645a6fdaba0346d684, type: 2}
