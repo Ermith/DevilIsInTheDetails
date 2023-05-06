@@ -204,8 +204,6 @@ public class Item : MonoBehaviour
 
     bool OnDropped()
     {
-        // TODO return false on out of bounds
-        
         if (!InInventory && DragOnTrash())
         {
             Destroy(gameObject);
