@@ -21,6 +21,7 @@ public class Enemy : MonoBehaviour
     void Start()
     {
         Health.OnDeath += OnDeath;
+        PrepareNextAttack();
     }
 
     void PrepareNextAttack()
