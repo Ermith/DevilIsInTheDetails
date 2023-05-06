@@ -182,7 +182,8 @@ public class Item : MonoBehaviour
 
     public (Cell, Vector2Int)? GetPlaceData()
     {
-        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+        // ray from the _draggedTile
+        Ray ray = new Ray(_draggedTile.transform.position + new Vector3(0, 0, 1), Vector3.back);
         var collider = Physics2D.GetRayIntersection(ray, distance: float.MaxValue, layerMask: LayerMask.GetMask("Inventory")).collider;
         if (collider != null)
         {
