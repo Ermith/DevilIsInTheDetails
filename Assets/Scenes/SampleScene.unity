@@ -458,9 +458,9 @@ Camera:
     height: 1
   near clip plane: 0.3
   far clip plane: 1000
-  field of view: 35.36899
+  field of view: 38.093613
   orthographic: 1
-  orthographic size: 6.627018
+  orthographic size: 7.175713
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -980,10 +980,12 @@ MonoBehaviour:
     keys:
     - {fileID: 4002420723338126241, guid: 74417bbcce8652449a6e14e88108695b, type: 3}
     - {fileID: 7479835052029008222, guid: 6d8da83a15ef4e04d95503e1418458cb, type: 3}
-    - {fileID: 6442309791268930786, guid: c84bf0c92ddb7e34abfef1c81476304a, type: 3}
-    - {fileID: 6442309791268930786, guid: f6fc701b32b3eb84bbd87b98e50f0626, type: 3}
     - {fileID: 6442309791268930786, guid: 600bdbccdc00aa740b56e3e1747b05de, type: 3}
-    values: 1400000064000000140000001400000014000000
+    - {fileID: 6442309791268930786, guid: f6fc701b32b3eb84bbd87b98e50f0626, type: 3}
+    - {fileID: 6442309791268930786, guid: c84bf0c92ddb7e34abfef1c81476304a, type: 3}
+    - {fileID: 6442309791268930786, guid: d5b9e92b4e0bd6948b748f71c00e67c6, type: 3}
+    - {fileID: 6442309791268930786, guid: 64686a344a77bfc4097e7c5a951b9ae0, type: 3}
+    values: 1400000064000000050000000a0000000a0000001400000014000000
   LooseItems: 0
   MaxLooseItems: 3
   PerSecondChance: 0.3
