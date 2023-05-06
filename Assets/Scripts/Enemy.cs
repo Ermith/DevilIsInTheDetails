@@ -2,7 +2,7 @@
 
 public class Enemy : MonoBehaviour
 {
-    public int Damage = 10;
+    public int Damage = 0;
     public float AttackInterval = 1;
 
     void Start()

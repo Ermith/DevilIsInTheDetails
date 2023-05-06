@@ -38,6 +38,12 @@ public class GameDirector : MonoBehaviour
 
     public bool IsPaused = false;
 
+    [SerializeField]
+    public float PosSentiment { get; set; }
+
+    [SerializeField]
+    public float NegSentiment { get; set; }
+
     public void StartFight()
     {
         if (_fighting) return;
@@ -108,6 +114,9 @@ public class GameDirector : MonoBehaviour
 
         if (GUILayout.Button("EndFight"))
             EndFight();
+
+        GUILayout.Label($"PosSentiment: {PosSentiment}");
+        GUILayout.Label($"NegSentiment: {NegSentiment}");
 
         GUILayout.EndVertical();
     }
