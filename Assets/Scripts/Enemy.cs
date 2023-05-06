@@ -13,10 +13,21 @@ public class Enemy : MonoBehaviour
     SpriteRenderer _spriteRenderer;
     public SpriteRenderer SpriteRenderer => _spriteRenderer ??= GetComponent<SpriteRenderer>();
 
+    private float _nextAttackTime;
+
     void Start()
     {
         Health.OnDeath += OnDeath;
-        InvokeRepeating("AttackHero", AttackInterval, AttackInterval);
+        _nextAttackTime = GameDirector.SimulationTime;
+    }
+
+    void Update()
+    {
+        if (GameDirector.SimulationTime >= _nextAttackTime)
+        {
+            AttackHero();
+            _nextAttackTime += AttackInterval;
+        }
     }
 
     void AttackHero()

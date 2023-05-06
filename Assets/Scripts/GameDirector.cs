@@ -124,8 +124,8 @@ public class GameDirector : MonoBehaviour
         if (GUILayout.Button("EndFight"))
             EndFight();
 
-        GUILayout.Label($"PosSentiment: {PosSentiment}");
-        GUILayout.Label($"NegSentiment: {NegSentiment}");
+        // GUILayout.Label($"PosSentiment: {PosSentiment}");
+        // GUILayout.Label($"NegSentiment: {NegSentiment}");
 
         GUILayout.EndVertical();
     }
@@ -144,6 +144,7 @@ public class GameDirector : MonoBehaviour
             Unpause();
         IsGameOver = true;
         GameOverCanvas.gameObject.SetActive(true);
+        Time.timeScale = 0f;
     }
 
     public void Unpause()

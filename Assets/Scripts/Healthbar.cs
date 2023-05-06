@@ -9,6 +9,9 @@ public class Healthbar : MonoBehaviour
     public UnityEngine.UI.Image HealthBar;
     public UnityEngine.UI.Image DamageBar;
     public UnityEngine.UI.Image Background;
+    public UnityEngine.UI.Image SlashBlock;
+    public UnityEngine.UI.Image StrikeBlock;
+    public UnityEngine.UI.Image PierceBlock;
     public TextMeshProUGUI Text;
     public Health Health;
 
@@ -44,6 +47,42 @@ public class Healthbar : MonoBehaviour
         float relDelta = (health - _healthTextNumber) * 1f / maxHealth;
         if (relDelta < 0)
             transform.DOShakePosition(0.5f, relDelta * 1f);
+    }
+
+    public void OnBlockChange()
+    {
+        if (Health.StrikeBlock > 0)
+        {
+            StrikeBlock.gameObject.SetActive(true);
+            TextMeshProUGUI strikeText = StrikeBlock.GetComponentInChildren<TextMeshProUGUI>();
+            strikeText.text = Health.StrikeBlock.ToString();
+        }
+        else
+        {
+            StrikeBlock.gameObject.SetActive(false);
+        }
+
+        if (Health.SlashBlock > 0)
+        {
+            SlashBlock.gameObject.SetActive(true);
+            TextMeshProUGUI slashText = SlashBlock.GetComponentInChildren<TextMeshProUGUI>();
+            slashText.text = Health.SlashBlock.ToString();
+        }
+        else
+        {
+            SlashBlock.gameObject.SetActive(false);
+        }
+
+        if (Health.ThrustBlock > 0)
+        {
+            PierceBlock.gameObject.SetActive(true);
+            TextMeshProUGUI pierceText = PierceBlock.GetComponentInChildren<TextMeshProUGUI>();
+            pierceText.text = Health.ThrustBlock.ToString();
+        }
+        else
+        {
+            PierceBlock.gameObject.SetActive(false);
+        }
     }
 
     public void OnHit(int amount, Health.DamageType type, GameObject whatever)
