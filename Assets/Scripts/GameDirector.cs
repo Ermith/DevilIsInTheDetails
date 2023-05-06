@@ -22,7 +22,6 @@ public class GameDirector : MonoBehaviour
     public static WordManager WordManagerInstance { get; private set; }
     public static GameDirector GameDirectorInstance { get; private set; }
     public static Inventory InventoryInstance { get; private set; }
-
     public static ItemManager ItemManagerInstance { get; private set; }
 
     public static float SimulationTime = 0f;
@@ -44,6 +43,8 @@ public class GameDirector : MonoBehaviour
 
     [SerializeField]
     public float NegSentiment { get; set; }
+
+    public Enemy DummyEnemy;
 
     public void StartFight()
     {
@@ -92,13 +93,15 @@ public class GameDirector : MonoBehaviour
     {
         if (!_fighting) return;
         _fighting = false;
-        
-        EnemyInstance = null;
+
+        EnemyInstance = DummyEnemy;
     }
 
     // Happens before Start
     private void Awake()
     {
+        Time.timeScale = 1f;
+
         GameDirectorInstance = this;
         WordManagerInstance = FindObjectOfType<WordManager>();
         InventoryInstance = FindObjectOfType<Inventory>();
@@ -107,6 +110,9 @@ public class GameDirector : MonoBehaviour
         // HERO
         HeroInstance = Instantiate(_heroPrefab);
         HeroInstance.transform.position = _heroSpawn.position;
+
+        // ENEMY
+        EnemyInstance = DummyEnemy;
     }
 
     private void Start()
@@ -122,10 +128,13 @@ public class GameDirector : MonoBehaviour
             StartFight();
 
         if (GUILayout.Button("EndFight"))
-            EndFight();
+        {
+            if (EnemyInstance != DummyEnemy)
+                EnemyInstance.GetComponent<Health>().Die();
+        }
 
-        // GUILayout.Label($"PosSentiment: {PosSentiment}");
-        // GUILayout.Label($"NegSentiment: {NegSentiment}");
+        GUILayout.Label($"PosSentiment: {PosSentiment}");
+        GUILayout.Label($"NegSentiment: {NegSentiment}");
 
         GUILayout.EndVertical();
     }
@@ -144,6 +153,10 @@ public class GameDirector : MonoBehaviour
             Unpause();
         IsGameOver = true;
         GameOverCanvas.gameObject.SetActive(true);
+
+        Health heroHealth = HeroInstance.GetComponent<Health>();
+        heroHealth.Healthbar.SetHealth(0, heroHealth.MaxHealth, 0f);
+
         Time.timeScale = 0f;
     }
 

@@ -6,7 +6,16 @@ public class Enemy : MonoBehaviour
 {
     public int Damage = 0;
     public float AttackInterval = 1;
-    
+    public float AttackSlashWeight = 1f;
+    public float AttackStrikeWeight = 1f;
+    public float AttackThrustWeight = 1f;
+    public float AttackPoisonWeight = 0f;
+    public float BlockChance = 0.5f;
+    public float BlockSlashWeight = 1f;
+    public float BlockStrikeWeight = 1f;
+    public float BlockThrustWeight = 1f;
+    public int BlockAmount = 5;
+
     Health _health;
     public Health Health => _health ??= GetComponent<Health>();
 
@@ -21,13 +30,52 @@ public class Enemy : MonoBehaviour
     void Start()
     {
         Health.OnDeath += OnDeath;
+        PrepareNextAttack();
     }
 
     void PrepareNextAttack()
     {
-        _lastAttackTime = _nextAttackTime;
+        _lastAttackTime = GameDirector.SimulationTime;
         _nextAttackTime = GameDirector.SimulationTime + AttackInterval;
-        NextDamageType = (Health.DamageType)Random.Range(0, 3);
+        
+        {
+            float r = Random.value * (AttackSlashWeight + AttackStrikeWeight + AttackThrustWeight + AttackPoisonWeight);
+            if (r < AttackSlashWeight)
+            {
+                NextDamageType = Health.DamageType.Slash;
+            }
+            else if (r < AttackSlashWeight + AttackStrikeWeight)
+            {
+                NextDamageType = Health.DamageType.Strike;
+            }
+            else if (r < AttackSlashWeight + AttackStrikeWeight + AttackThrustWeight)
+            {
+                NextDamageType = Health.DamageType.Thrust;
+            }
+            else
+            {
+                NextDamageType = Health.DamageType.Poison;
+            }
+        }
+
+        if (Health.TotalBlock == 0 && Random.value < BlockChance)
+        {
+            float r = Random.value * (BlockSlashWeight + BlockStrikeWeight + BlockThrustWeight);
+            Health.DamageType blockType;
+            if (r < BlockSlashWeight)
+            {
+                blockType = Health.DamageType.Slash;
+            }
+            else if (r < BlockSlashWeight + BlockStrikeWeight)
+            {
+                blockType = Health.DamageType.Strike;
+            }
+            else
+            {
+                blockType = Health.DamageType.Thrust;
+            }
+            Health.AddBlock(BlockAmount, blockType);
+        }
     }
 
     void Update()

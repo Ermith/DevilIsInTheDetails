@@ -23,19 +23,19 @@ public class Healthbar : MonoBehaviour
 
     private int _healthTextNumber = -1;
 
-    public void SetHealth(int health, int maxHealth)
+    public void SetHealth(int health, int maxHealth, float tweenTime = 0.5f)
     {
         if (_healthTextNumber == -1)
             _healthTextNumber = health;
 
         float ratio = health * 1f / maxHealth;
 
-        HealthBar.DOFillAmount(ratio, 0.5f);
+        HealthBar.DOFillAmount(ratio, tweenTime);
 
         // delay on DamageBar tweening
         Sequence damageSequence = DOTween.Sequence();
-        damageSequence.AppendInterval(0.5f);
-        damageSequence.Append(DamageBar.DOFillAmount(ratio, 0.25f));
+        damageSequence.AppendInterval(tweenTime);
+        damageSequence.Append(DamageBar.DOFillAmount(ratio, tweenTime / 2));
         damageSequence.Play();
 
         // tween the text
@@ -47,12 +47,12 @@ public class Healthbar : MonoBehaviour
                 Text.text = $"{x} / {maxHealth}";
             },
             health,
-            0.5f
+            tweenTime
         );
 
         float relDelta = (health - _healthTextNumber) * 1f / maxHealth;
         if (relDelta < 0)
-            transform.DOShakePosition(0.5f, relDelta * 1f);
+            transform.DOShakePosition(tweenTime, relDelta * 1f);
     }
 
     public void OnBlockChange()

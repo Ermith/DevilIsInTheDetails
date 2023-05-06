@@ -63,6 +63,12 @@ public class Health : MonoBehaviour
         SetupHealthbar();
     }
 
+    public void Die()
+    {
+        HealthPoints = 0;
+        OnDeath?.Invoke(null);
+    }
+
     public void AddBlock(int slash, int thrust, int strike)
     {
         _slashBlock += slash;
@@ -71,6 +77,26 @@ public class Health : MonoBehaviour
 
         OnBlockChange?.Invoke();
     }
+
+    public void AddBlock(int amount, DamageType type)
+    {
+        if (type == DamageType.Slash) _slashBlock += amount;
+        if (type == DamageType.Thrust) _thrustBlock += amount;
+        if (type == DamageType.Strike) _strikeBlock += amount;
+
+        OnBlockChange?.Invoke();
+    }
+
+    public void ClearBlock()
+    {
+        _slashBlock = 0;
+        _thrustBlock = 0;
+        _strikeBlock = 0;
+
+        OnBlockChange?.Invoke();
+    }
+
+    public int TotalBlock => _slashBlock + _thrustBlock + _strikeBlock;
 
     public void SetupHealthbar()
     {
@@ -93,11 +119,7 @@ public class Health : MonoBehaviour
         if (type == DamageType.Thrust) damage -= _thrustBlock;
         if (type == DamageType.Strike) damage -= _strikeBlock;
 
-        _slashBlock = 0;
-        _thrustBlock = 0;
-        _strikeBlock = 0;
-
-        OnBlockChange?.Invoke();
+        ClearBlock();
 
         if (damage < 0) damage = 0;
 
