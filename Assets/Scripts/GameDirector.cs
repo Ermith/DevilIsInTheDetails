@@ -100,6 +100,8 @@ public class GameDirector : MonoBehaviour
     // Happens before Start
     private void Awake()
     {
+        Time.timeScale = 1f;
+
         GameDirectorInstance = this;
         WordManagerInstance = FindObjectOfType<WordManager>();
         InventoryInstance = FindObjectOfType<Inventory>();
