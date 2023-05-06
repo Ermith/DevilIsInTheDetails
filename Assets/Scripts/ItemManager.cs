@@ -1,8 +1,21 @@
+using System;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 public class ItemManager : MonoBehaviour
 {
     public UDictionary<Item, int> ItemSpawnWeights;
+
+    public bool SpawningItems
+    {
+        get => !GameDirector.IsPaused;
+    }
+
+    public int LooseItems = 0;
+
+    public int MaxLooseItems = 3;
+
+    public double PerSecondChance = 0.9f;
 
     private Item PickItem()
     {
@@ -44,8 +57,8 @@ public class ItemManager : MonoBehaviour
         {
             // random position in the camera view
             item.transform.position = new Vector3(
-                Random.Range(-camera.orthographicSize * camera.aspect, camera.orthographicSize * camera.aspect - 1),
-                Random.Range(-camera.orthographicSize, camera.orthographicSize - 1),
+                Random.Range(-camera.orthographicSize * camera.aspect, camera.orthographicSize * camera.aspect),
+                Random.Range(-camera.orthographicSize, camera.orthographicSize),
                 0);
             item.transform.rotation = Quaternion.Euler(0, 0, Random.Range(0, 4) * 90);
         } while ((item.OverlapsAnyCell() || !item.InCameraView()) && nTries-- > 0);
@@ -55,5 +68,14 @@ public class ItemManager : MonoBehaviour
         item.Invoke("PlayAppearing", 0.1f);
         
         return item;
+    }
+
+    public void Update()
+    {
+        double prob = 1 - Math.Pow(1 - PerSecondChance, Time.deltaTime);
+        if (SpawningItems && LooseItems < MaxLooseItems && Random.Range(0f, 1f) < prob)
+        {
+            SpawnItem();
+        }
     }
 }

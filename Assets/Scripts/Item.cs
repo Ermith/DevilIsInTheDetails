@@ -54,6 +54,11 @@ public class Item : MonoBehaviour
         gameObject.BroadcastMessage("ExecuteEffect");
     }
 
+    public void Start()
+    {
+        GameDirector.ItemManagerInstance.LooseItems++;
+    }
+
     void InitShape()
     {
         int width = 0;
@@ -121,7 +126,7 @@ public class Item : MonoBehaviour
         }
 
         // Left Up
-        if (Input.GetMouseButtonUp(0))
+        if (Input.GetMouseButtonUp(0) || GameDirector.IsPaused)
         {
             if (_moving)
             {
@@ -150,8 +155,6 @@ public class Item : MonoBehaviour
             {
                 Rotate(left: false);
             }
-
-            
         }
     }
 
@@ -175,6 +178,8 @@ public class Item : MonoBehaviour
     {
         if (DraggedItem == this)
             DraggedItem = null;
+        if (!InInventory)
+            GameDirector.ItemManagerInstance.LooseItems--;
     }
 
     GameObject DragOnTrash()
