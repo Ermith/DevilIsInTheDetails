@@ -18,6 +18,8 @@ public class Item : MonoBehaviour
 
     private Vector2 _dragStartPosition;
 
+    [CanBeNull] private ItemTile _draggedTile;
+
     private Vector2 _dragOffset;
 
     [ItemCanBeNull] public ItemTile[,] Shape;
@@ -105,6 +107,7 @@ public class Item : MonoBehaviour
                 _dragStartPosition = transform.position;
                 _dragOffset = transform.position - Camera.main.ScreenToWorldPoint(Input.mousePosition);
                 DraggedItem = this;
+                _draggedTile = collider.gameObject.GetComponentInParent<ItemTile>();
             }
         }
 
@@ -113,12 +116,13 @@ public class Item : MonoBehaviour
         {
             if (_moving)
             {
-                if (!CanDrop() || !OnDropped())
+                if (!OnDropped())
                 {
                     transform.position = _dragStartPosition;
                 }
                 ChangeColor(new Color(1, 1, 1, 1));
                 DraggedItem = null;
+                _draggedTile = null;
             }
 
             _moving = false;
@@ -132,18 +136,6 @@ public class Item : MonoBehaviour
             pos.z = transform.position.z;
             transform.position = pos + (Vector3)_dragOffset;
         }
-    }
-
-    bool CanDrop()
-    {
-        if (InInventory)
-        {
-            // TODO check if we are dropping on an inventory tile and if it is valid
-            return false;
-        }
-
-        // TODO check out of bounds
-        return true;
     }
     
     void OnDestroy()
@@ -161,9 +153,20 @@ public class Item : MonoBehaviour
         return null;
     }
 
+    public IEnumerable<ItemTile> GetTiles()
+    {
+        foreach (var tile in Shape)
+        {
+            if (tile != null)
+                yield return tile;
+        }
+    }
+
     bool OnDropped()
     {
-        if (DragOnTrash())
+        // TODO return false on out of bounds
+        
+        if (!InInventory && DragOnTrash())
         {
             Destroy(gameObject);
             return true;
@@ -176,9 +179,10 @@ public class Item : MonoBehaviour
             Cell cell = collider.gameObject.GetComponent<Cell>();
             Inventory inventory = cell.transform.parent.GetComponent<Inventory>();
             // TODO shift pos by where we are holding the thing
-            if (inventory.CanPlace(this, cell.InInventoryPos(), this))
+            var placePos = cell.InInventoryPos - _draggedTile.InItemPos();
+            if (inventory.CanPlace(this, placePos, this))
             {
-                inventory.PlaceItem(this, cell.InInventoryPos());
+                inventory.PlaceItem(this, placePos);
                 return true;
             }
 
