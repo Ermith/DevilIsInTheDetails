@@ -13,7 +13,7 @@ public class Enemy : MonoBehaviour
     void AttackHero()
     {
         var hero = GameDirector.HeroInstance;
-        hero.GetComponent<Health>().HitBy(Damage, gameObject);
+        hero.GetComponent<Health>().HitBy(Damage, Health.DamageType.Slash, gameObject);
     }
 
     private void OnDestroy()

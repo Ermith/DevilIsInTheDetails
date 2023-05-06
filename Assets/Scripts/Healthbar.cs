@@ -45,7 +45,12 @@ public class Healthbar : MonoBehaviour
             transform.DOShakePosition(0.5f, relDelta * 1f);
     }
 
-    public void OnHealthChange(int amount, GameObject whatever)
+    public void OnHit(int amount, Health.DamageType type, GameObject whatever)
+    {
+        SetHealth(Health.HealthPoints, Health.MaxHealth);
+    }
+
+    public void OnHeal(int amount, GameObject whatever)
     {
         SetHealth(Health.HealthPoints, Health.MaxHealth);
     }
