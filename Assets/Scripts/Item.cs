@@ -113,7 +113,7 @@ public class Item : MonoBehaviour
         {
             if (_moving)
             {
-                if (!CanDrop() || !OnDropped())
+                if (!OnDropped())
                 {
                     transform.position = _dragStartPosition;
                 }
@@ -133,18 +133,6 @@ public class Item : MonoBehaviour
             transform.position = pos + (Vector3)_dragOffset;
         }
     }
-
-    bool CanDrop()
-    {
-        if (InInventory)
-        {
-            // TODO check if we are dropping on an inventory tile and if it is valid
-            return false;
-        }
-
-        // TODO check out of bounds
-        return true;
-    }
     
     void OnDestroy()
     {
@@ -163,7 +151,9 @@ public class Item : MonoBehaviour
 
     bool OnDropped()
     {
-        if (DragOnTrash())
+        // TODO return false on out of bounds
+        
+        if (!InInventory && DragOnTrash())
         {
             Destroy(gameObject);
             return true;
