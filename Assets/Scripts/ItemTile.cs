@@ -1,4 +1,5 @@
 using JetBrains.Annotations;
+using TMPro;
 using UnityEngine;
 
 
@@ -9,9 +10,18 @@ public class ItemTile : MonoBehaviour
 
     [CanBeNull] public Cell Cell;
 
+    private TextMeshPro _text;
+
     void Start()
     {
         Letter = GameDirector.WordManagerInstance.GetLetter();
+        _text = GetComponentInChildren<TextMeshPro>();
+        _text.text = Letter.ToString();
+    }
+
+    public void FixLetterRotation()
+    {
+        _text.transform.up = Vector3.up;
     }
 
     public Vector2Int InItemPos()

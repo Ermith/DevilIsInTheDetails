@@ -154,6 +154,11 @@ public class Item : MonoBehaviour
         // rotate around _dragOffset position
         transform.RotateAround(Camera.main.ScreenToWorldPoint(Input.mousePosition), Vector3.forward, left ? 90 : -90);
         _dragOffset = transform.position - Camera.main.ScreenToWorldPoint(Input.mousePosition);
+
+        foreach (ItemTile tile in GetTiles())
+        {
+            tile.FixLetterRotation();
+        }
     }
     
     void OnDestroy()
