@@ -16,13 +16,13 @@ public class ItemHeal : MonoBehaviour, IEffect
 
         } else if (dir == Vector2.left)
         {
-            health = GameObject.Find(GameDirector.HeroName).GetComponent<Health>();
+            health = GameDirector.HeroInstance.GetComponent<Health>();
         } else if (dir == Vector2.down)
         {
            
         } else if (dir == Vector2.right)
         {
-            health = GameObject.Find(GameDirector.EnemyName).GetComponent<Health>();
+            health = GameDirector.EnemyInstance.GetComponent<Health>();
         }
 
         health?.HealBy(HealAmmount, gameObject);
