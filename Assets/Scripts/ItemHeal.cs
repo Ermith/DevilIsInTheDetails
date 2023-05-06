@@ -6,9 +6,9 @@ using UnityEngine;
 public class ItemHeal : MonoBehaviour, IEffect
 {
     public int HealAmount = 20;
-    public void ExecuteEffect()
+    public void ExecuteEffect(EffectArgs args)
     {
-        Vector2 dir = GetComponent<Item>().Direction;
+        Vector2 dir = GetComponent<Item>().transform.up;
         Health health = null;
 
         if (dir == Vector2.up)
@@ -25,7 +25,11 @@ public class ItemHeal : MonoBehaviour, IEffect
             health = GameDirector.EnemyInstance.GetComponent<Health>();
         }
 
-        health?.HealBy(HealAmount, gameObject);
+        if (health == null)
+            return;
+
+        args.Target = health.transform.position;
+        args.Effect += () => health.HealBy(HealAmount, gameObject);
     }
 
     // Start is called before the first frame update

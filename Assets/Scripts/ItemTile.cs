@@ -18,7 +18,7 @@ public class ItemTile : MonoBehaviour
     }
 
     [CanBeNull] public Cell Cell;
-    
+
     [SerializeField]
     private char _letter;
 
@@ -59,26 +59,20 @@ public class ItemTile : MonoBehaviour
 
     public Item Item => GetComponentInParent<Item>();
 
-    public void UseAndDestroy(Vector3 target)
+    public void UseAndDestroy()
     {
         var letterAnim = GetComponentInChildren<LetterAnimation>();
-        transform.parent = null;
+        var effectArgs = new EffectArgs();
+        Item.gameObject.BroadcastMessage("ExecuteEffect", effectArgs);
         float throwTime = 0.5f;
 
-        if (Item != null)
-        {
-            Item.TileDestroyed(this);
-        }
-        if (Cell != null)
-        {
-            Cell.ItemTile = null;
-        }
-
+        Debug.Log("ABout to throw an item");
         letterAnim.PlayDisappearing(() =>
         {
-            transform.DOJump(target, 2, 1, throwTime).Join(
+            transform.DOJump(effectArgs.Target, 2, 1, throwTime).Join(
                 Rotation(throwTime)).OnComplete(() =>
                 {
+                    effectArgs.Effect();
                     Destroy(gameObject);
                 });
         });
@@ -99,4 +93,15 @@ public class ItemTile : MonoBehaviour
         return s.SetEase(Ease.InExpo);
     }
 
+    private void OnDestroy()
+    {
+        if (Item != null)
+        {
+            Item.TileDestroyed(this);
+        }
+        if (Cell != null)
+        {
+            Cell.ItemTile = null;
+        }
+    }
 }

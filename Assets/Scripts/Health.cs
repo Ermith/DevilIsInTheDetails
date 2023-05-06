@@ -66,4 +66,9 @@ public class Health : MonoBehaviour
             OnHealthFull?.Invoke(healer);
         }
     }
+
+    private void OnDestroy()
+    {
+        Destroy(_healthbar.gameObject);
+    }
 }
