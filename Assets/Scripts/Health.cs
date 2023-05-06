@@ -20,6 +20,8 @@ public class Health : MonoBehaviour
     public delegate void OnHealthFullHandler(GameObject healer);
     public event OnDeathHandler OnHealthFull;
 
+    public event Action OnBlockChange;
+
     public enum DamageType
     {
         Slash,
@@ -32,6 +34,11 @@ public class Health : MonoBehaviour
     private int _slashBlock;
     private int _thrustBlock;
     private int _strikeBlock;
+
+    public int SlashBlock => _slashBlock;
+    public int ThrustBlock => _thrustBlock;
+    public int StrikeBlock => _strikeBlock;
+    
 
     private void Awake()
     {
@@ -48,6 +55,8 @@ public class Health : MonoBehaviour
         _slashBlock += slash;
         _thrustBlock += thrust;
         _strikeBlock += strike;
+
+        OnBlockChange?.Invoke();
     }
 
     public void SetupHealthbar()
@@ -61,6 +70,7 @@ public class Health : MonoBehaviour
         rectTransform.anchoredPosition = transform.position + Vector3.up * 2f;
         OnHeal += Healthbar.OnHeal;
         OnHit += Healthbar.OnHit;
+        OnBlockChange += Healthbar.OnBlockChange;
     }
 
     public void HitBy(int damage, DamageType type, GameObject attacker)
@@ -72,6 +82,8 @@ public class Health : MonoBehaviour
         _slashBlock = 0;
         _thrustBlock = 0;
         _strikeBlock = 0;
+
+        OnBlockChange?.Invoke();
 
         if (damage < 0) damage = 0;
 
