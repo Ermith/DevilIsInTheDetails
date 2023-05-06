@@ -26,7 +26,7 @@ public class Enemy : MonoBehaviour
 
     void PrepareNextAttack()
     {
-        _lastAttackTime = _nextAttackTime;
+        _lastAttackTime = GameDirector.SimulationTime;
         _nextAttackTime = GameDirector.SimulationTime + AttackInterval;
         NextDamageType = (Health.DamageType)Random.Range(0, 3);
     }
