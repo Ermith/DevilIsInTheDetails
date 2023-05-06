@@ -160,7 +160,11 @@ public class Item : MonoBehaviour
         // rotate around _dragOffset position
         transform.RotateAround(Camera.main.ScreenToWorldPoint(Input.mousePosition), Vector3.forward, left ? 90 : -90);
         _dragOffset = transform.position - Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        FixLetterRotation();
+    }
 
+    public void FixLetterRotation()
+    {
         foreach (ItemTile tile in GetTiles())
         {
             tile.FixLetterRotation();
@@ -221,20 +225,11 @@ public class Item : MonoBehaviour
             var (cell, placePos) = placeData.Value;
             cell.Inventory.PlaceItem(this, placePos);
 
-            // For debugging purposes
-            //*/
-            foreach (var anim in GetComponentsInChildren<LetterAnimation>())
-                anim.PlayAppearing();
-            //*/
-
             return true;
         }
 
         // if out of camera view
-        Camera camera = Camera.main;
-        Vector3 viewPos = camera.WorldToViewportPoint(transform.position);
-        if (viewPos.x < 0 || viewPos.x > 1 || viewPos.y < 0 || viewPos.y > 1)
-        {
+        if (!InCameraView()) {
             return false;
         }
 
@@ -242,6 +237,36 @@ public class Item : MonoBehaviour
         if (InInventory)
             return false;
 
+        return true;
+    }
+
+    public void PlayAppearing()
+    {
+        foreach (var anim in GetComponentsInChildren<LetterAnimation>())
+            anim.PlayAppearing();
+    }
+
+    public bool OverlapsAnyCell()
+    {
+        foreach (var tile in GetTiles())
+        {
+            Ray ray = new Ray(tile.transform.position + new Vector3(0, 0, 1), Vector3.back);
+            var collider = Physics2D.GetRayIntersection(ray, distance: float.MaxValue, layerMask: LayerMask.GetMask("Inventory")).collider;
+            if (collider != null)
+                return true;
+        }
+        return false;
+    }
+
+    public bool InCameraView()
+    {
+        Camera camera = Camera.main;
+        Vector3 viewPos = camera.WorldToViewportPoint(transform.position - transform.rotation * new Vector3(0.5f, 0.5f, 0));
+        if (!(viewPos.x >= 0 && viewPos.x <= 1 && viewPos.y >= 0 && viewPos.y <= 1))
+            return false;
+        viewPos = camera.WorldToViewportPoint(transform.position + transform.rotation * new Vector3(Width - 0.5f, Height - 0.5f, 0));
+        if (!(viewPos.x >= 0 && viewPos.x <= 1 && viewPos.y >= 0 && viewPos.y <= 1))
+            return false;
         return true;
     }
 }

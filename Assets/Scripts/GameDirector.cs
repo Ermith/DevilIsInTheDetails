@@ -21,6 +21,8 @@ public class GameDirector : MonoBehaviour
     public static GameDirector GameDirectorInstance { get; private set; }
     public static Inventory InventoryInstance { get; private set; }
 
+    public static ItemManager ItemManagerInstance { get; private set; }
+
     private bool _fighting = false;
 
     public void StartFight()
@@ -57,7 +59,8 @@ public class GameDirector : MonoBehaviour
     {
         //StartFight();
     }
-
+    
+#if DEBUG
     private void OnGUI()
     {
         GUILayout.BeginVertical();
@@ -69,4 +72,5 @@ public class GameDirector : MonoBehaviour
 
         GUILayout.EndVertical();
     }
+#endif
 }

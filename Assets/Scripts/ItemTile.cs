@@ -4,7 +4,7 @@ using UnityEngine;
 using DG.Tweening;
 
 
-[RequireComponent(typeof(Collider2D), typeof(SpriteRenderer))]
+[RequireComponent(typeof(Collider2D), typeof(SpriteRenderer), typeof(TextMeshPro))]
 public class ItemTile : MonoBehaviour
 {
     public char Letter
@@ -13,26 +13,26 @@ public class ItemTile : MonoBehaviour
         set
         {
             _letter = value;
-            _text.text = Letter.ToString();
+            Text.text = Letter.ToString();
         }
     }
 
     [CanBeNull] public Cell Cell;
-
-    [SerializeField]
-    private TextMeshPro _text;
+    
     [SerializeField]
     private char _letter;
 
+    private TextMeshPro _textB;
+    private TextMeshPro Text => _textB ??= GetComponentInChildren<TextMeshPro>();
+
     void Start()
     {
-        _text = GetComponentInChildren<TextMeshPro>();
         Letter = GameDirector.WordManagerInstance.GetLetter();
     }
 
     public void FixLetterRotation()
     {
-        _text.transform.up = Vector3.up;
+        Text.transform.up = Vector3.up;
     }
 
     public Vector2Int InItemPos()
