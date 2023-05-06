@@ -55,7 +55,7 @@ public class GameDirector : MonoBehaviour
 
     private void Start()
     {
-        StartFight();
+        //StartFight();
     }
 
     private void OnGUI()
