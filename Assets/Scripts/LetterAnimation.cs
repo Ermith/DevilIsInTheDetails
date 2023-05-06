@@ -7,14 +7,11 @@ public static class AnimationExtensions
 {
     public static IEnumerator OnComplete(this Animation animation, string clipName, Action onComplete)
     {
-        Debug.Log("WTF");
         while (animation.IsPlaying(clipName))
         {
-            Debug.Log($"Yield return {clipName}");
             yield return new WaitForSeconds(0.01f);
         }
 
-        Debug.Log($"OnComplete");
         onComplete();
     }
 }
@@ -50,6 +47,5 @@ public class LetterAnimation : MonoBehaviour
 
     private void OnDestroy()
     {
-        Debug.Log("Destroying");
     }
 }

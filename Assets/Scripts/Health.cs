@@ -8,19 +8,29 @@ public class Health : MonoBehaviour
     public int MaxHealth = 100;
     public int HealthPoints { get; private set; }
 
-    public delegate void OnHitHandler(int damage, GameObject attacker);
+    public delegate void OnHitHandler(int damage, DamageType type, GameObject attacker);
     public event OnHitHandler OnHit;
 
     public delegate void OnDeathHandler(GameObject attacker);
     public event OnDeathHandler OnDeath;
 
     public delegate void OnHealHandler(int heal, GameObject healer);
-    public event OnHitHandler OnHeal;
+    public event OnHealHandler OnHeal;
 
     public delegate void OnHealthFullHandler(GameObject healer);
     public event OnDeathHandler OnHealthFull;
+
+    public enum DamageType
+    {
+        Slash,
+        Thrust,
+        Strike
+    }
     
     Healthbar _healthbar;
+    private int _slashBlock;
+    private int _thrustBlock;
+    private int _strikeBlock;
 
     private void Awake()
     {
@@ -32,6 +42,13 @@ public class Health : MonoBehaviour
         SetupHealthbar();
     }
 
+    public void AddBlock(int slash, int thrust, int strike)
+    {
+        _slashBlock += slash;
+        _thrustBlock += thrust;
+        _strikeBlock += strike;
+    }
+
     public void SetupHealthbar()
     {
         Canvas canvas = GameObject.FindWithTag("Canvas").GetComponent<Canvas>();
@@ -39,14 +56,22 @@ public class Health : MonoBehaviour
         _healthbar.Health = this;
         RectTransform rectTransform = _healthbar.GetComponent<RectTransform>();
         rectTransform.anchoredPosition = transform.position + Vector3.up * 2f;
-        OnHeal += _healthbar.OnHealthChange;
-        OnHit += _healthbar.OnHealthChange;
+        OnHeal += _healthbar.OnHeal;
+        OnHit += _healthbar.OnHit;
     }
 
-    public void HitBy(int damage, GameObject attacker)
+    public void HitBy(int damage, DamageType type, GameObject attacker)
     {
+        if (type == DamageType.Slash) damage -= _slashBlock;
+        if (type == DamageType.Thrust) damage -= _thrustBlock;
+        if (type == DamageType.Strike) damage -= _strikeBlock;
+
+        _slashBlock = 0;
+        _thrustBlock = 0;
+        _strikeBlock = 0;
+
         HealthPoints -= damage;
-        OnHit?.Invoke(damage, attacker);
+        OnHit?.Invoke(damage, type, attacker);
 
         if (HealthPoints <= 0)
         {

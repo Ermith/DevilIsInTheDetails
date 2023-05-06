@@ -63,10 +63,10 @@ public class ItemTile : MonoBehaviour
     {
         var letterAnim = GetComponentInChildren<LetterAnimation>();
         var effectArgs = new EffectArgs();
+        effectArgs.ItemTile = this;
         Item.gameObject.BroadcastMessage("ExecuteEffect", effectArgs);
         float throwTime = 0.5f;
 
-        Debug.Log("ABout to throw an item");
         letterAnim.PlayDisappearing(() =>
         {
             transform.DOJump(effectArgs.Target, 2, 1, throwTime).Join(

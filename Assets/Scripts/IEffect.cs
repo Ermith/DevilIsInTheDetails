@@ -5,6 +5,7 @@ using System;
 
 public class EffectArgs
 {
+    public ItemTile ItemTile;
     public Vector3 Target;
     public Action Effect;   
 }
