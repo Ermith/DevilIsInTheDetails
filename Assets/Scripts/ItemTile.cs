@@ -64,7 +64,7 @@ public class ItemTile : MonoBehaviour
         var letterAnim = GetComponentInChildren<LetterAnimation>();
         var effectArgs = new EffectArgs();
         effectArgs.ItemTile = this;
-        Item.gameObject.BroadcastMessage("ExecuteEffect", effectArgs);
+        Item.gameObject.BroadcastMessage("ExecuteEffect", effectArgs, SendMessageOptions.DontRequireReceiver);
         float throwTime = 0.5f;
 
         letterAnim.PlayDisappearing(() =>
