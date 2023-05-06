@@ -35,8 +35,13 @@ public class ItemTile : MonoBehaviour
         Text.transform.up = Vector3.up;
     }
 
+    private Vector2Int? _inItemPos;
+    
     public Vector2Int InItemPos()
     {
+        if (_inItemPos != null)
+            return _inItemPos.Value;
+        
         var pos = transform.localPosition;
         var x = (int)Mathf.Round(pos.x);
         var y = (int)Mathf.Round(pos.y);
@@ -44,7 +49,8 @@ public class ItemTile : MonoBehaviour
             throw new System.Exception("Relative position of item tile is negative");
         if (Mathf.Abs(x - pos.x) > 0.01f || Mathf.Abs(y - pos.y) > 0.01f)
             throw new System.Exception("Relative position of item tile is not integer");
-        return new Vector2Int(x, y);
+        _inItemPos = new Vector2Int(x, y);
+        return _inItemPos.Value;
     }
 
     public Vector2Int RotatedInItemPos()
