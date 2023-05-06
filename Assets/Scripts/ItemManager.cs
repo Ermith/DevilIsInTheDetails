@@ -8,7 +8,7 @@ public class ItemManager : MonoBehaviour
 
     public bool SpawningItems
     {
-        get => !GameDirector.IsPaused;
+        get => !GameDirector.GameDirectorInstance.IsPaused;
     }
 
     public int LooseItems = 0;

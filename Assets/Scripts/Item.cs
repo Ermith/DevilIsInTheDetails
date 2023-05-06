@@ -113,7 +113,7 @@ public class Item : MonoBehaviour
         SpriteRenderer spriteRenderer = GetComponent<SpriteRenderer>();
 
         // Left Down
-        if (Input.GetMouseButtonDown(0) && CanMove && !_moving)
+        if (Input.GetMouseButtonDown(0) && CanMove && !_moving && !GameDirector.GameDirectorInstance.IsPaused)
         {
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
             Collider2D collider = Physics2D.GetRayIntersection(ray, float.MaxValue, LayerMask.GetMask("Item")).collider;
@@ -129,7 +129,7 @@ public class Item : MonoBehaviour
         }
 
         // Left Up
-        if (Input.GetMouseButtonUp(0) || GameDirector.IsPaused)
+        if (Input.GetMouseButtonUp(0) || GameDirector.GameDirectorInstance.IsPaused)
         {
             if (_moving)
             {
