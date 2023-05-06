@@ -63,6 +63,12 @@ public class Health : MonoBehaviour
         SetupHealthbar();
     }
 
+    public void Die()
+    {
+        HealthPoints = 0;
+        OnDeath?.Invoke(null);
+    }
+
     public void AddBlock(int slash, int thrust, int strike)
     {
         _slashBlock += slash;
