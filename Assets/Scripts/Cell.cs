@@ -26,10 +26,7 @@ public class Cell : MonoBehaviour
 
     public void RefreshColor()
     {
-        if (ItemTile != null)
-            gameObject.GetComponent<SpriteRenderer>().color = new Color(0.5f, 1f, 0.5f);
-        else
-            gameObject.GetComponent<SpriteRenderer>().color = Color.white;
+        gameObject.GetComponent<SpriteRenderer>().color = ItemTile != null ? new Color(0.5f, 1f, 0.5f) : Color.white;
     }
 
     // Start is called before the first frame update

@@ -5,6 +5,8 @@ public class WordManager : MonoBehaviour
 {
     public TextAsset WordFile;
 
+    private const int MinWordLength = 4;
+
     private readonly HashSet<string> _words = new();
 
     private readonly  Dictionary<char, int> _letterFrequency = new();
@@ -18,6 +20,10 @@ public class WordManager : MonoBehaviour
         foreach (string line in lines)
         {
             string word = line.Trim();
+            if (word.Length < MinWordLength)
+            {
+                continue;
+            }
             _words.Add(word);
             foreach (char c in word)
             {

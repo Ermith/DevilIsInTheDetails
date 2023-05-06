@@ -1,5 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
+using System.Linq;
+using System.Text;
+using JetBrains.Annotations;
 using UnityEngine;
 
 [System.Serializable]
@@ -174,6 +178,59 @@ public class Inventory : MonoBehaviour
         item.InInventory = true;
         item.transform.parent = transform;
         item.transform.localPosition = (Vector2)pos;
+
+        ItemPlaced();
+    }
+
+    private void ItemPlaced()
+    {
+        foreach (Cell cell in GetActivations())
+        {
+            Destroy(cell.ItemTile.gameObject);
+        }
+    }
+
+    public bool WordAt(Vector2Int pos, Vector2Int dir, [NotNullWhen(true)] out string word, [NotNullWhen(true)] out List<Cell> cells)
+    {
+        word = null;
+        string currentWord = "";
+        cells = null;
+        List<Cell> currentCells = new();
+        Cell cell = GetCell(pos);
+        while (cell != null && cell.ItemTile != null)
+        {
+            currentWord += cell.ItemTile.Letter;
+            currentCells.Add(cell);
+            if (GameDirector.WordManagerInstance.IsWord(currentWord))
+            {
+                cells = currentCells.ToList();
+                word = currentWord;
+            }
+
+            pos += dir;
+            cell = GetCell(pos);
+        }
+
+        return word != null;
+    }
+
+    public List<Cell> GetActivations()
+    {
+        List<Cell> result = new();
+        foreach (Cell cell in GetCells())
+        {
+            foreach (Vector2Int dir in new[] { Vector2Int.down, Vector2Int.right })
+            {
+                if (WordAt(cell.InInventoryPos, dir, out string word, out List<Cell> cells))
+                {
+                    result.AddRange(cells);
+                    Debug.Log($"Word completed: {word}");
+                }
+            }
+        }
+
+        // deduplicate
+        result = result.Distinct().ToList();
+        return result;
     }
 }
-//
