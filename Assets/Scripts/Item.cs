@@ -11,9 +11,6 @@ public class Item : MonoBehaviour
     [HideInInspector]
     public bool CanMove = true;
 
-    [HideInInspector]
-    public Vector2 Direction = Vector2.up;
-
     private bool _moving;
 
     private Vector2 _dragStartPosition;
@@ -54,7 +51,6 @@ public class Item : MonoBehaviour
 
     public void Execute()
     {
-        gameObject.BroadcastMessage("ExecuteEffect");
     }
 
     public void Start()
@@ -251,18 +247,17 @@ public class Item : MonoBehaviour
     public void PlayAppearing()
     {
         string clip = "DevilAnimation";
-        var animation = Instantiate(_devilPrefab).GetComponent<Animation>();
-        animation.transform.position = transform.position + Vector3.right * 2;
-        animation.Play(clip);
+        var devilAnimation = Instantiate(_devilPrefab).GetComponent<Animation>();
+        devilAnimation.transform.position = transform.position + Vector3.right * 2;
+        devilAnimation.Play(clip);
 
-        StartCoroutine(animation.OnComplete(clip, () =>
+        StartCoroutine(devilAnimation.OnComplete(clip, () =>
         {
             foreach (var anim in GetComponentsInChildren<LetterAnimation>())
                 anim.PlayAppearing();
+
+            Destroy(devilAnimation.gameObject);
         }));
-
-        StartCoroutine(animation.OnComplete(clip, () => Destroy(animation.gameObject)));
-
     }
 
     public bool OverlapsAnyCell()
