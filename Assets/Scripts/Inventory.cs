@@ -188,7 +188,7 @@ public class Inventory : MonoBehaviour
     {
         foreach (Cell cell in GetActivations())
         {
-            Destroy(cell.ItemTile.gameObject);
+            cell.ItemTile.UseAndDestroy(GameDirector.HeroInstance.transform.position);
         }
     }
 

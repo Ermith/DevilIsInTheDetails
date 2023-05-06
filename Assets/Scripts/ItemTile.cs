@@ -1,6 +1,7 @@
 using JetBrains.Annotations;
 using TMPro;
 using UnityEngine;
+using DG.Tweening;
 
 
 [RequireComponent(typeof(Collider2D), typeof(SpriteRenderer), typeof(TextMeshPro))]
@@ -58,8 +59,12 @@ public class ItemTile : MonoBehaviour
 
     public Item Item => GetComponentInParent<Item>();
 
-    void OnDestroy()
+    public void UseAndDestroy(Vector3 target)
     {
+        var letterAnim = GetComponentInChildren<LetterAnimation>();
+        transform.parent = null;
+        float throwTime = 0.5f;
+
         if (Item != null)
         {
             Item.TileDestroyed(this);
@@ -68,5 +73,30 @@ public class ItemTile : MonoBehaviour
         {
             Cell.ItemTile = null;
         }
+
+        letterAnim.PlayDisappearing(() =>
+        {
+            transform.DOJump(target, 2, 1, throwTime).Join(
+                Rotation(throwTime)).OnComplete(() =>
+                {
+                    Destroy(gameObject);
+                });
+        });
     }
+
+    private Tween Rotation(float time, int iterations = 4)
+    {
+        Vector3 rotation = new Vector3(0, 0, 90);
+        float iterationTime = time / iterations;
+        Sequence s = DOTween.Sequence();
+
+        for (int i = 0; i < iterations; i++)
+        {
+            s.Append(transform.DORotate(rotation, iterationTime));
+            rotation.z += 90;
+        }
+
+        return s.SetEase(Ease.InExpo);
+    }
+
 }
