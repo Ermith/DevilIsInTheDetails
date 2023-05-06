@@ -816,6 +816,7 @@ GameObject:
   - component: {fileID: 65655227682570284}
   - component: {fileID: 6231352806211764298}
   - component: {fileID: 4418712099857871778}
+  - component: {fileID: 5197945666603871164}
   m_Layer: 5
   m_Name: AttackIndicator
   m_TagString: Untagged
@@ -885,6 +886,21 @@ MonoBehaviour:
   m_FillOrigin: 2
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &5197945666603871164
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3515391325237336541}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 99634edca86565b4a96a0b7b261787f8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  simpleTooltipStyle: {fileID: 11400000, guid: f1d1c287ded68be43934c42c517f05d2, type: 2}
+  infoLeft: Hello
+  infoRight: 
 --- !u!1 &3606875551746964139
 GameObject:
   m_ObjectHideFlags: 0

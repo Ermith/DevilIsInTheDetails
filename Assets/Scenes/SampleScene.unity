@@ -546,9 +546,9 @@ Camera:
     height: 1
   near clip plane: 0.3
   far clip plane: 1000
-  field of view: 33.483795
+  field of view: 28.083103
   orthographic: 1
-  orthographic size: 6.252252
+  orthographic size: 5.1981983
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -1456,6 +1456,9 @@ MonoBehaviour:
   IsGameOver: 0
   IsPaused: 0
   DummyEnemy: {fileID: 386759277}
+  TimeMouseStopped: 0
+  LastMousePosition: {x: 0, y: 0}
+  TooltipDelay: 0.3
 --- !u!4 &1726133491
 Transform:
   m_ObjectHideFlags: 0

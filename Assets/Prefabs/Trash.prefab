@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 1140570642655374772}
   - component: {fileID: 1444734654623477273}
   - component: {fileID: 7706387116255259156}
+  - component: {fileID: -3532216316171298211}
   m_Layer: 6
   m_Name: Trash
   m_TagString: Trash
@@ -111,3 +112,23 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 2, y: 2.4529924}
   m_EdgeRadius: 0
+--- !u!114 &-3532216316171298211
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6388760598372789309}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 99634edca86565b4a96a0b7b261787f8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  simpleTooltipStyle: {fileID: 11400000, guid: f1d1c287ded68be43934c42c517f05d2, type: 2}
+  infoLeft: 'Trash
+
+    Drop not-yet-placed items here to get rid of them.
+
+    You
+    can only have 3 not-yet-placed items at once.'
+  infoRight: 

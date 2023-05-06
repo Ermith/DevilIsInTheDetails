@@ -46,6 +46,12 @@ public class GameDirector : MonoBehaviour
 
     public Enemy DummyEnemy;
 
+    public float TimeMouseStopped = 0;
+
+    public Vector2 LastMousePosition = Vector2.zero;
+
+    public float TooltipDelay = 0.3f;
+
     public void StartFight()
     {
         if (_fighting) return;
@@ -87,6 +93,30 @@ public class GameDirector : MonoBehaviour
         {
             UnityEngine.SceneManagement.SceneManager.LoadScene("SampleScene");
         }
+
+        // Tooltip stuff, should be moved to its own class
+        var mousePos = (Vector2)Input.mousePosition;
+        if (mousePos == LastMousePosition)
+        {
+            TimeMouseStopped += Time.deltaTime;
+        }
+        else
+        {
+            if (TimeMouseStopped > TooltipDelay)
+            {
+                if (SimpleTooltip.ActiveTooltip != null)
+                    SimpleTooltip.ActiveTooltip.HideTooltip();
+            }
+            TimeMouseStopped = 0;
+        }
+
+        if (TimeMouseStopped > TooltipDelay && TimeMouseStopped - Time.deltaTime < TooltipDelay)
+        {
+            if (SimpleTooltip.ActiveTooltip != null)
+                SimpleTooltip.ActiveTooltip.ShowTooltipForReal();
+        }
+
+        LastMousePosition = mousePos;
     }
 
     public void EndFight()
