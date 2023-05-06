@@ -30,9 +30,14 @@ public class Enemy : MonoBehaviour
         GameDirector.GameDirectorInstance.EndFight();
 
         Sequence sequence = DOTween.Sequence();
-        sequence.Append(transform.DOScale(new Vector3(2f, 0f, 1f), 0.8f));
-        sequence.Join(transform.DOLocalMoveY(-1f, 0.8f));
-        sequence.Join(SpriteRenderer.DOColor(Color.red, 0.8f));
+        sequence.Append(transform.DOScale(new Vector3(2f, 0f, 1f), 0.8f).SetEase(Ease.InBack));
+        sequence.Join(transform.DOLocalMoveY(-1f, 0.8f).SetEase(Ease.InBack));
+        sequence.Join(SpriteRenderer.DOColor(Color.red, 0.8f).SetEase(Ease.InBack));
+        sequence.Join(Health.Healthbar.Background.DOColor(new Color(1f, 1f, 1f, 0f), 0.8f).SetEase(Ease.InBack));
+        sequence.Join(Health.Healthbar.HealthBar.DOColor(new Color(1f, 1f, 1f, 0f), 0.8f).SetEase(Ease.InBack));
+        sequence.Join(Health.Healthbar.DamageBar.DOColor(new Color(1f, 1f, 1f, 0f), 0.8f).SetEase(Ease.InBack));
+        sequence.Join(Health.Healthbar.Text.DOColor(new Color(1f, 1f, 1f, 0f), 0.8f).SetEase(Ease.InBack));
+        sequence.AppendInterval(0.2f);
         sequence.AppendCallback(() =>
         {
             Destroy(gameObject);

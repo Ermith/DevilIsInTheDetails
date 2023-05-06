@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using DG.Tweening;
 using Microsoft.Unity.VisualStudio.Editor;
 using UnityEngine;
 
@@ -50,7 +51,16 @@ public class GameDirector : MonoBehaviour
         _fighting = true;
 
         EnemyInstance = Instantiate(_enemyPrefab);
-        EnemyInstance.transform.position = _enemySpawn.position;
+        EnemyInstance.transform.position = _enemySpawn.position + Vector3.right * Random.Range(3f, 5f);
+        SpriteRenderer spriteRenderer = EnemyInstance.GetComponent<SpriteRenderer>();
+        spriteRenderer.color = new Color(1f, 1f, 1f, 0f);
+
+        spriteRenderer.DOColor(Color.white, 0.5f).SetEase(Ease.OutBack);
+        EnemyInstance.transform.DOMoveX(_enemySpawn.position.x, 0.5f).SetEase(Ease.OutBack);
+
+        EnemyInstance.GetComponent<Health>().SetupHealthbar();
+        RectTransform rt = EnemyInstance.GetComponent<Health>().Healthbar.GetComponent<RectTransform>();
+        rt.DOAnchorPos((Vector2)_enemySpawn.transform.position + Vector2.up * 2f, 0.5f).SetEase(Ease.OutBack);
     }
 
     void Update()

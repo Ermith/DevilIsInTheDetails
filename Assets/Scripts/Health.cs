@@ -27,7 +27,7 @@ public class Health : MonoBehaviour
         Strike
     }
     
-    Healthbar _healthbar;
+    public Healthbar Healthbar;
     private int _slashBlock;
     private int _thrustBlock;
     private int _strikeBlock;
@@ -51,13 +51,15 @@ public class Health : MonoBehaviour
 
     public void SetupHealthbar()
     {
+        if (Healthbar != null)
+            return;
         Canvas canvas = GameObject.FindWithTag("Canvas").GetComponent<Canvas>();
-        _healthbar = Instantiate(GameDirector.GameDirectorInstance.Healthbar, canvas.transform);
-        _healthbar.Health = this;
-        RectTransform rectTransform = _healthbar.GetComponent<RectTransform>();
+        Healthbar = Instantiate(GameDirector.GameDirectorInstance.Healthbar, canvas.transform);
+        Healthbar.Health = this;
+        RectTransform rectTransform = Healthbar.GetComponent<RectTransform>();
         rectTransform.anchoredPosition = transform.position + Vector3.up * 2f;
-        OnHeal += _healthbar.OnHeal;
-        OnHit += _healthbar.OnHit;
+        OnHeal += Healthbar.OnHeal;
+        OnHit += Healthbar.OnHit;
     }
 
     public void HitBy(int damage, DamageType type, GameObject attacker)
@@ -93,6 +95,6 @@ public class Health : MonoBehaviour
 
     private void OnDestroy()
     {
-        Destroy(_healthbar.gameObject);
+        Destroy(Healthbar.gameObject);
     }
 }
