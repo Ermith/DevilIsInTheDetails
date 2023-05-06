@@ -32,6 +32,10 @@ public class Cell : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        if (Random.value < 0.5f)
+            gameObject.GetComponent<SpriteRenderer>().flipX = true;
+        if (Random.value < 0.5f)
+            gameObject.GetComponent<SpriteRenderer>().flipY = true;
     }
 
     // Update is called once per frame
