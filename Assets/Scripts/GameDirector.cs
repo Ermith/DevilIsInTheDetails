@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Microsoft.Unity.VisualStudio.Editor;
 using UnityEngine;
 
 public class GameDirector : MonoBehaviour
@@ -23,7 +24,14 @@ public class GameDirector : MonoBehaviour
 
     public static ItemManager ItemManagerInstance { get; private set; }
 
+    public static bool IsPaused { get; set; } = false;
+
+    public static float SimulationTime = 0f;
+
     private bool _fighting = false;
+
+    [SerializeField]
+    public ScreenDimmer ScreenDimmer;
 
     public void StartFight()
     {
@@ -32,6 +40,26 @@ public class GameDirector : MonoBehaviour
 
         EnemyInstance = Instantiate(_enemyPrefab);
         EnemyInstance.transform.position = _enemySpawn.position;
+    }
+
+    void Update()
+    {
+        if (!IsPaused)
+        {
+            SimulationTime += Time.deltaTime;
+        }
+        
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            if (IsPaused)
+            {
+                Unpause();
+            }
+            else
+            {
+                Pause();
+            }
+        }
     }
 
     public void EndFight()
@@ -49,6 +77,7 @@ public class GameDirector : MonoBehaviour
         GameDirectorInstance = this;
         WordManagerInstance = FindObjectOfType<WordManager>();
         InventoryInstance = FindObjectOfType<Inventory>();
+        ItemManagerInstance = FindObjectOfType<ItemManager>();
 
         // HERO
         HeroInstance = Instantiate(_heroPrefab);
@@ -59,7 +88,7 @@ public class GameDirector : MonoBehaviour
     {
         //StartFight();
     }
-    
+
 #if DEBUG
     private void OnGUI()
     {
@@ -73,4 +102,23 @@ public class GameDirector : MonoBehaviour
         GUILayout.EndVertical();
     }
 #endif
+
+    public void Pause()
+    {
+        IsPaused = true;
+        ScreenDimmer.gameObject.SetActive(true);
+        // stretch it across camera view
+        Camera camera = Camera.main;
+        ScreenDimmer.gameObject.transform.localScale = new Vector3(
+            camera.orthographicSize * camera.aspect * 2,
+            camera.orthographicSize * 2,
+            1);
+        ScreenDimmer.gameObject.transform.position = new Vector3(0, 0, 0);
+    }
+
+    public void Unpause()
+    {
+        IsPaused = false;
+        ScreenDimmer.gameObject.SetActive(false);
+    }
 }

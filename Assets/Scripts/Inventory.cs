@@ -175,6 +175,8 @@ public class Inventory : MonoBehaviour
             }
         }
 
+        if (!item.InInventory)
+            GameDirector.ItemManagerInstance.LooseItems--;
         item.InInventory = true;
         item.transform.parent = transform;
         item.transform.localPosition = (Vector2)pos;
