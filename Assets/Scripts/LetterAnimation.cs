@@ -8,7 +8,9 @@ public static class AnimationExtensions
     public static IEnumerator OnComplete(this Animation animation, string clipName, Action onComplete)
     {
         while (animation.IsPlaying(clipName))
-            yield return null;
+        {
+            yield return new WaitForSeconds(0.01f);
+        }
 
         onComplete();
     }
@@ -41,5 +43,9 @@ public class LetterAnimation : MonoBehaviour
     void Start()
     {
         _animation = GetComponent<Animation>();
+    }
+
+    private void OnDestroy()
+    {
     }
 }

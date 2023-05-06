@@ -5,14 +5,12 @@ using System.Runtime.CompilerServices;
 using JetBrains.Annotations;
 using UnityEngine;
 using static UnityEditor.PlayerSettings;
+using TMPro;
 
 public class Item : MonoBehaviour
 {
     [HideInInspector]
     public bool CanMove = true;
-
-    [HideInInspector]
-    public Vector2 Direction = Vector2.up;
 
     private bool _moving;
 
@@ -54,7 +52,6 @@ public class Item : MonoBehaviour
 
     public void Execute()
     {
-        gameObject.BroadcastMessage("ExecuteEffect");
     }
 
     public void Start()
@@ -83,6 +80,15 @@ public class Item : MonoBehaviour
         }
     }
 
+    public void ColorTo(Color color)
+    {
+        foreach (var text in GetComponentsInChildren<TextMeshPro>())
+        {
+            var rightColor = text.colorGradient.topRight;
+            var gradient = new VertexGradient(color, rightColor, color, rightColor);
+            text.colorGradient = gradient;
+        }
+    }
     public void TileDestroyed(ItemTile tile)
     {
         var pos = tile.InItemPos();
@@ -113,7 +119,7 @@ public class Item : MonoBehaviour
         SpriteRenderer spriteRenderer = GetComponent<SpriteRenderer>();
 
         // Left Down
-        if (Input.GetMouseButtonDown(0) && CanMove && !_moving)
+        if (Input.GetMouseButtonDown(0) && CanMove && !_moving && !GameDirector.GameDirectorInstance.IsPaused)
         {
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
             Collider2D collider = Physics2D.GetRayIntersection(ray, float.MaxValue, LayerMask.GetMask("Item")).collider;
@@ -129,7 +135,7 @@ public class Item : MonoBehaviour
         }
 
         // Left Up
-        if (Input.GetMouseButtonUp(0) || GameDirector.IsPaused)
+        if (Input.GetMouseButtonUp(0) || GameDirector.GameDirectorInstance.IsPaused)
         {
             if (_moving)
             {
@@ -137,6 +143,7 @@ public class Item : MonoBehaviour
                 {
                     transform.position = _dragStartPosition;
                     transform.rotation = _dragStartRotation;
+                    FixLetterRotation();
                 }
                 ChangeColor(new Color(1, 1, 1, 1));
                 DraggedItem = null;
@@ -251,18 +258,17 @@ public class Item : MonoBehaviour
     public void PlayAppearing()
     {
         string clip = "DevilAnimation";
-        var animation = Instantiate(_devilPrefab).GetComponent<Animation>();
-        animation.transform.position = transform.position + Vector3.right * 2;
-        animation.Play(clip);
+        var devilAnimation = Instantiate(_devilPrefab).GetComponent<Animation>();
+        devilAnimation.transform.position = transform.position + Vector3.right * 2;
+        devilAnimation.Play(clip);
 
-        StartCoroutine(animation.OnComplete(clip, () =>
+        StartCoroutine(devilAnimation.OnComplete(clip, () =>
         {
             foreach (var anim in GetComponentsInChildren<LetterAnimation>())
                 anim.PlayAppearing();
+
+            Destroy(devilAnimation.gameObject);
         }));
-
-        StartCoroutine(animation.OnComplete(clip, () => Destroy(animation.gameObject)));
-
     }
 
     public bool OverlapsAnyCell()

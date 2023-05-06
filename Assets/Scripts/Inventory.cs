@@ -188,7 +188,7 @@ public class Inventory : MonoBehaviour
     {
         foreach (Cell cell in GetActivations())
         {
-            cell.ItemTile.UseAndDestroy(GameDirector.HeroInstance.transform.position);
+            cell.ItemTile.UseAndDestroy();
         }
     }
 
@@ -227,6 +227,9 @@ public class Inventory : MonoBehaviour
                 {
                     result.AddRange(cells);
                     Debug.Log($"Word completed: {word}");
+                    (float pos, float neg) = GameDirector.WordManagerInstance.GetSentiment(word);
+                    GameDirector.GameDirectorInstance.PosSentiment += pos;
+                    GameDirector.GameDirectorInstance.NegSentiment += neg;
                 }
             }
         }

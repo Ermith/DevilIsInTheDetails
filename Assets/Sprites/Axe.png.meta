@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 7495ca3c7f749f04dba10605ff6889c1
+guid: afec740c381de374b939a0fce91a5496
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -47,7 +47,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 240
+  spritePixelsToUnits: 224
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -101,29 +101,17 @@ TextureImporter:
     overridden: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
-  - serializedVersion: 3
-    buildTarget: WebGL
-    maxTextureSize: 2048
-    resizeAlgorithm: 0
-    textureFormat: -1
-    textureCompression: 1
-    compressionQuality: 50
-    crunchedCompression: 0
-    allowsAlphaSplitting: 0
-    overridden: 0
-    androidETC2FallbackOverride: 0
-    forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: item_shield_1x2_0
+      name: Axe_0
       rect:
         serializedVersion: 2
         x: 0
-        y: 240
+        y: 448
         width: 224
-        height: 240
+        height: 224
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -131,20 +119,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 6bd84f4d522963c498a5aed65e1116ec
-      internalID: -1697947461
+      spriteID: 0fbb778bbc194d348ba42d8fc04ba6b3
+      internalID: 40515159
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: item_shield_1x2_1
+      name: Axe_1
       rect:
         serializedVersion: 2
         x: 0
-        y: 0
+        y: 224
         width: 224
-        height: 240
+        height: 224
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -152,8 +140,29 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 85535a51ca769f34faa1f827c633a06e
-      internalID: 1541413507
+      spriteID: ea12796eec9d0304e8597f5926ea1649
+      internalID: -1318956708
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Axe_2
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 224
+        height: 224
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 896d1e105e2747846a4ac70d5697fff4
+      internalID: 1840372982
       vertices: []
       indices: 
       edges: []
@@ -169,8 +178,9 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      item_shield_1x2_0: -1697947461
-      item_shield_1x2_1: 1541413507
+      Axe_0: 40515159
+      Axe_1: -1318956708
+      Axe_2: 1840372982
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0
