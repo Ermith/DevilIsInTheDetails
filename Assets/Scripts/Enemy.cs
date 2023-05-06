@@ -15,4 +15,10 @@ public class Enemy : MonoBehaviour
         var hero = GameDirector.HeroInstance;
         hero.GetComponent<Health>().HitBy(Damage, gameObject);
     }
+
+    private void OnDestroy()
+    {
+        GameDirector.GameDirectorInstance.EndFight();
+        GameDirector.GameDirectorInstance.StartFight();
+    }
 }
