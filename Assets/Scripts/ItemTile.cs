@@ -1,3 +1,4 @@
+using JetBrains.Annotations;
 using UnityEngine;
 
 
@@ -5,6 +6,8 @@ using UnityEngine;
 public class ItemTile : MonoBehaviour
 {
     public char Letter { get; private set; }
+
+    [CanBeNull] public Cell Cell;
 
     void Start()
     {
@@ -31,6 +34,10 @@ public class ItemTile : MonoBehaviour
         if (Item != null)
         {
             Item.TileDestroyed(this);
+        }
+        if (Cell != null)
+        {
+            Cell.ItemTile = null;
         }
     }
 }

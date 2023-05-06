@@ -70,8 +70,21 @@ public class Inventory : MonoBehaviour
         return true;
     }
 
+    public void RemoveItem(Item item)
+    {
+        if (!item.InInventory)
+            throw new System.Exception("Item is not in inventory");
+        foreach (ItemTile tile in item.GetTiles())
+        {
+            tile.Cell.ItemTile = null;
+        }
+    }
+
     public void PlaceItem(Item item, Vector2Int pos)
     {
+        if (item.InInventory)
+            RemoveItem(item);
+
         for (int y = 0; y < item.Height; y++)
         {
             for (int x = 0; x < item.Width; x++)
@@ -79,7 +92,9 @@ public class Inventory : MonoBehaviour
                 if (item.Shape[x, y] != null)
                 {
                     var cell = GetCell(pos.x + x, pos.y + y);
-                    cell.ItemTile = item.Shape[x, y];
+                    ItemTile tile = item.Shape[x, y];
+                    cell.ItemTile = tile;
+                    tile.Cell = cell;
                 }
             }
         }
