@@ -18,6 +18,8 @@ public class Item : MonoBehaviour
 
     private Vector2 _dragStartPosition;
 
+    private Quaternion _dragStartRotation;
+
     [CanBeNull] private ItemTile _draggedTile;
 
     private Vector2 _dragOffset;
@@ -105,6 +107,7 @@ public class Item : MonoBehaviour
             if (_moving)
             {
                 _dragStartPosition = transform.position;
+                _dragStartRotation = transform.rotation;
                 _dragOffset = transform.position - Camera.main.ScreenToWorldPoint(Input.mousePosition);
                 DraggedItem = this;
                 _draggedTile = collider.gameObject.GetComponentInParent<ItemTile>();
@@ -119,6 +122,7 @@ public class Item : MonoBehaviour
                 if (!OnDropped())
                 {
                     transform.position = _dragStartPosition;
+                    transform.rotation = _dragStartRotation;
                 }
                 ChangeColor(new Color(1, 1, 1, 1));
                 DraggedItem = null;
@@ -135,7 +139,19 @@ public class Item : MonoBehaviour
             var pos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
             pos.z = transform.position.z;
             transform.position = pos + (Vector3)_dragOffset;
+
+            if (Input.GetMouseButtonDown(1))
+            {
+                Rotate(left: false);
+            }
         }
+    }
+
+    public void Rotate(bool left)
+    {
+        // rotate around _dragOffset position
+        transform.RotateAround(Camera.main.ScreenToWorldPoint(Input.mousePosition), Vector3.forward, left ? 90 : -90);
+        _dragOffset = transform.position - Camera.main.ScreenToWorldPoint(Input.mousePosition);
     }
     
     void OnDestroy()
