@@ -10,8 +10,27 @@ public class Cell : MonoBehaviour
     public Inventory Inventory;
 
     public Vector2Int InInventoryPos;
+    
+    [CanBeNull] private ItemTile _itemTile;
 
-    [CanBeNull] public ItemTile ItemTile;
+    [CanBeNull]
+    public ItemTile ItemTile
+    {
+        get => _itemTile;
+        set
+        {
+            _itemTile = value;
+            RefreshColor();
+        }
+    }
+
+    public void RefreshColor()
+    {
+        if (ItemTile != null)
+            gameObject.GetComponent<SpriteRenderer>().color = new Color(0.5f, 1f, 0.5f);
+        else
+            gameObject.GetComponent<SpriteRenderer>().color = Color.white;
+    }
 
     // Start is called before the first frame update
     void Start()

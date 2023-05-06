@@ -18,6 +18,8 @@ public class Item : MonoBehaviour
 
     private Vector2 _dragStartPosition;
 
+    private Quaternion _dragStartRotation;
+
     [CanBeNull] private ItemTile _draggedTile;
 
     private Vector2 _dragOffset;
@@ -105,6 +107,7 @@ public class Item : MonoBehaviour
             if (_moving)
             {
                 _dragStartPosition = transform.position;
+                _dragStartRotation = transform.rotation;
                 _dragOffset = transform.position - Camera.main.ScreenToWorldPoint(Input.mousePosition);
                 DraggedItem = this;
                 _draggedTile = collider.gameObject.GetComponentInParent<ItemTile>();
@@ -119,6 +122,7 @@ public class Item : MonoBehaviour
                 if (!OnDropped())
                 {
                     transform.position = _dragStartPosition;
+                    transform.rotation = _dragStartRotation;
                 }
                 ChangeColor(new Color(1, 1, 1, 1));
                 DraggedItem = null;
@@ -135,6 +139,25 @@ public class Item : MonoBehaviour
             var pos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
             pos.z = transform.position.z;
             transform.position = pos + (Vector3)_dragOffset;
+
+            if (Input.GetMouseButtonDown(1))
+            {
+                Rotate(left: false);
+            }
+
+            
+        }
+    }
+
+    public void Rotate(bool left)
+    {
+        // rotate around _dragOffset position
+        transform.RotateAround(Camera.main.ScreenToWorldPoint(Input.mousePosition), Vector3.forward, left ? 90 : -90);
+        _dragOffset = transform.position - Camera.main.ScreenToWorldPoint(Input.mousePosition);
+
+        foreach (ItemTile tile in GetTiles())
+        {
+            tile.FixLetterRotation();
         }
     }
     
@@ -162,34 +185,50 @@ public class Item : MonoBehaviour
         }
     }
 
+    public (Cell, Vector2Int)? GetPlaceData()
+    {
+        // ray from the _draggedTile
+        Ray ray = new Ray(_draggedTile.transform.position + new Vector3(0, 0, 1), Vector3.back);
+        var collider = Physics2D.GetRayIntersection(ray, distance: float.MaxValue, layerMask: LayerMask.GetMask("Inventory")).collider;
+        if (collider != null)
+        {
+            Cell cell = collider.gameObject.GetComponent<Cell>();
+            Inventory inventory = cell.transform.parent.GetComponent<Inventory>();
+            var placePos = cell.InInventoryPos - _draggedTile.RotatedInItemPos();
+            if (inventory.CanPlace(this, placePos, this))
+                return (cell, placePos);
+        }
+        return null;
+    }
+
     bool OnDropped()
     {
-        // TODO return false on out of bounds
-        
         if (!InInventory && DragOnTrash())
         {
             Destroy(gameObject);
             return true;
         }
 
-        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-        var collider = Physics2D.GetRayIntersection(ray, distance: float.MaxValue, layerMask: LayerMask.GetMask("Inventory")).collider;
-        if (collider != null)
+        var placeData = GetPlaceData();
+        if (placeData != null)
         {
-            Cell cell = collider.gameObject.GetComponent<Cell>();
-            Inventory inventory = cell.transform.parent.GetComponent<Inventory>();
-            // TODO shift pos by where we are holding the thing
-            var placePos = cell.InInventoryPos - _draggedTile.InItemPos();
-            if (inventory.CanPlace(this, placePos, this))
-            {
-                inventory.PlaceItem(this, placePos);
-                return true;
-            }
+            var (cell, placePos) = placeData.Value;
+            cell.Inventory.PlaceItem(this, placePos);
+            return true;
+        }
 
-            // TODO check if we aren't overlapping with inventory grid maybe?
+        // if out of camera view
+        Camera camera = Camera.main;
+        Vector3 viewPos = camera.WorldToViewportPoint(transform.position);
+        if (viewPos.x < 0 || viewPos.x > 1 || viewPos.y < 0 || viewPos.y > 1)
+        {
             return false;
         }
 
-        return false;
+        // can't move out of inventory once inside
+        if (InInventory)
+            return false;
+
+        return true;
     }
 }
