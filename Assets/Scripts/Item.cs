@@ -176,9 +176,9 @@ public class Item : MonoBehaviour
             Cell cell = collider.gameObject.GetComponent<Cell>();
             Inventory inventory = cell.transform.parent.GetComponent<Inventory>();
             // TODO shift pos by where we are holding the thing
-            if (inventory.CanPlace(this, cell.InInventoryPos(), this))
+            if (inventory.CanPlace(this, cell.InInventoryPos, this))
             {
-                inventory.PlaceItem(this, cell.InInventoryPos());
+                inventory.PlaceItem(this, cell.InInventoryPos);
                 return true;
             }
 

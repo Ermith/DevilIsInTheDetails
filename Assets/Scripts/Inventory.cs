@@ -8,28 +8,30 @@ public class Inventory : MonoBehaviour
     public int Height;
     public Cell Cell;
 
-    private List<List<Cell>> _list;
+    private List<List<Cell>> _grid;
 
     // Start is called before the first frame update
     void Start()
     {
         gameObject.name = GameDirector.InventoryName;
 
-        _list = new List<List<Cell>>();
+        _grid = new List<List<Cell>>();
         for (int y = 0; y < Height; y++)
         {
-            var list = new List<Cell>();
+            var row = new List<Cell>();
             for (int x = 0; x < Width; x++)
             {
                 Cell cell = Instantiate(Cell);
+                cell.InInventoryPos = new Vector2Int(x, y);
                 Bounds bounds = cell.GetComponent<SpriteRenderer>().sprite.bounds;
                 float width = bounds.size.x;
                 float height = bounds.size.y;
                 cell.Inventory = this;
                 cell.transform.parent = transform;
-                cell.transform.position = (Vector2.right * width * (x - Width / 2)) + (Vector2.down * height * (y - Height / 2));
-                list.Add(cell);
+                cell.transform.localPosition = (Vector2.right * width * x) + (Vector2.up * height * y);
+                row.Add(cell);
             }
+            _grid.Add(row);
         }
     }
 
@@ -43,7 +45,7 @@ public class Inventory : MonoBehaviour
     {
         if (x < 0 || x >= Width || y < 0 || y >= Height)
             return null;
-        return _list[y][x];
+        return _grid[y][x];
     }
 
     public Cell GetCell(Vector2Int pos)
@@ -84,6 +86,6 @@ public class Inventory : MonoBehaviour
 
         item.InInventory = true;
         item.transform.parent = transform;
-        item.transform.position = (Vector2.right * 0.5f * (item.Width - 1)) + (Vector2.down * 0.5f * (item.Height - 1));
+        item.transform.localPosition = (Vector2)pos;
     }
 }

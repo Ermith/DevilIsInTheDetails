@@ -9,6 +9,8 @@ public class Cell : MonoBehaviour
     [HideInInspector]
     public Inventory Inventory;
 
+    public Vector2Int InInventoryPos;
+
     [CanBeNull] public ItemTile ItemTile;
 
     // Start is called before the first frame update
@@ -20,10 +22,5 @@ public class Cell : MonoBehaviour
     void Update()
     {
         
-    }
-
-    public Vector2Int InInventoryPos()
-    {
-        return new Vector2Int((int)transform.localPosition.x, (int)transform.localPosition.y);
     }
 }
