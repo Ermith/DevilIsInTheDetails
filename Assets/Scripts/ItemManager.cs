@@ -39,7 +39,7 @@ public class ItemManager : MonoBehaviour
     {
         Item item = Instantiate(PickItem());
         Camera camera = Camera.main;
-        int nTries = 10;
+        int nTries = 30;
         do
         {
             // random position in the camera view
