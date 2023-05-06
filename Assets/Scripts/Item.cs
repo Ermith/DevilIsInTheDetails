@@ -24,7 +24,20 @@ public class Item : MonoBehaviour
 
     private Vector2 _dragOffset;
 
-    [ItemCanBeNull] public ItemTile[,] Shape;
+    [ItemCanBeNull] private ItemTile[,] _shape;
+
+    public ItemTile[,] Shape
+    {
+        get
+        {
+            if (_shape == null)
+            {
+                InitShape();
+            }
+
+            return _shape;
+        }
+    }
 
     public int Width => Shape.GetLength(0);
 
@@ -41,13 +54,6 @@ public class Item : MonoBehaviour
         gameObject.BroadcastMessage("ExecuteEffect");
     }
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        if (Shape == null)
-            InitShape();
-    }
-
     void InitShape()
     {
         int width = 0;
@@ -60,7 +66,7 @@ public class Item : MonoBehaviour
         }
 
         TileCount = 0;
-        Shape = new ItemTile[width, height];
+        _shape = new ItemTile[width, height];
         foreach (var tile in GetComponentsInChildren<ItemTile>())
         {
             var pos = tile.InItemPos();
@@ -194,7 +200,6 @@ public class Item : MonoBehaviour
         {
             Cell cell = collider.gameObject.GetComponent<Cell>();
             Inventory inventory = cell.transform.parent.GetComponent<Inventory>();
-            // TODO shift pos by where we are holding the thing
             var placePos = cell.InInventoryPos - _draggedTile.RotatedInItemPos();
             if (inventory.CanPlace(this, placePos, this))
                 return (cell, placePos);
@@ -204,8 +209,6 @@ public class Item : MonoBehaviour
 
     bool OnDropped()
     {
-        // TODO return false on out of bounds
-        
         if (!InInventory && DragOnTrash())
         {
             Destroy(gameObject);
@@ -227,6 +230,18 @@ public class Item : MonoBehaviour
             return true;
         }
 
-        return false;
+        // if out of camera view
+        Camera camera = Camera.main;
+        Vector3 viewPos = camera.WorldToViewportPoint(transform.position);
+        if (viewPos.x < 0 || viewPos.x > 1 || viewPos.y < 0 || viewPos.y > 1)
+        {
+            return false;
+        }
+
+        // can't move out of inventory once inside
+        if (InInventory)
+            return false;
+
+        return true;
     }
 }
