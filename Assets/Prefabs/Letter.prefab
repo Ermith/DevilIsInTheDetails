@@ -186,6 +186,7 @@ Animation:
   m_Animation: {fileID: 0}
   m_Animations:
   - {fileID: 7400000, guid: 1cf7dd16ed82a0645a6fdaba0346d684, type: 2}
+  - {fileID: 7400000, guid: 8c92cf37ff4dda1488570a193a75275f, type: 2}
   m_WrapMode: 0
   m_PlayAutomatically: 0
   m_AnimatePhysics: 0
@@ -202,4 +203,3 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b75b6fff401f94e4bac467bf0f98296f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _appearingAnimation: {fileID: 7400000, guid: 1cf7dd16ed82a0645a6fdaba0346d684, type: 2}
