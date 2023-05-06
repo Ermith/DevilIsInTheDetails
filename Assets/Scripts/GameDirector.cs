@@ -21,6 +21,8 @@ public class GameDirector : MonoBehaviour
     public static GameDirector GameDirectorInstance { get; private set; }
     public static Inventory InventoryInstance { get; private set; }
 
+    public static ItemManager ItemManagerInstance { get; private set; }
+
     private bool _fighting = false;
 
     public void StartFight()
