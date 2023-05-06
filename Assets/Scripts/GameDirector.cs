@@ -24,8 +24,6 @@ public class GameDirector : MonoBehaviour
 
     public static ItemManager ItemManagerInstance { get; private set; }
 
-    public static bool IsPaused { get; set; } = false;
-
     public static float SimulationTime = 0f;
 
     private bool _fighting = false;
@@ -33,6 +31,12 @@ public class GameDirector : MonoBehaviour
     public Healthbar Healthbar;
 
     [SerializeField] public Canvas PauseCanvas;
+
+    [SerializeField] public Canvas GameOverCanvas;
+
+    public bool IsGameOver = false;
+
+    public bool IsPaused = false;
 
     public void StartFight()
     {
@@ -60,6 +64,11 @@ public class GameDirector : MonoBehaviour
             {
                 Pause();
             }
+        }
+
+        if (IsGameOver && Input.GetKeyDown(KeyCode.Return))
+        {
+            UnityEngine.SceneManagement.SceneManager.LoadScene("SampleScene");
         }
     }
 
@@ -108,11 +117,23 @@ public class GameDirector : MonoBehaviour
     {
         IsPaused = true;
         PauseCanvas.gameObject.SetActive(true);
+        Time.timeScale = 0f;
+    }
+
+    public void GameOver()
+    {
+        if (IsPaused)
+            Unpause();
+        IsGameOver = true;
+        GameOverCanvas.gameObject.SetActive(true);
     }
 
     public void Unpause()
     {
+        if (IsGameOver)
+            return;
         IsPaused = false;
         PauseCanvas.gameObject.SetActive(false);
+        Time.timeScale = 1f;
     }
 }
