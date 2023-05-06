@@ -5,7 +5,7 @@ using UnityEngine;
 [RequireComponent(typeof(Item))]
 public class ItemHeal : MonoBehaviour, IEffect
 {
-    public int HealAmmount = 20;
+    public int HealAmount = 20;
     public void ExecuteEffect()
     {
         Vector2 dir = GetComponent<Item>().Direction;
@@ -25,7 +25,7 @@ public class ItemHeal : MonoBehaviour, IEffect
             health = GameDirector.EnemyInstance.GetComponent<Health>();
         }
 
-        health?.HealBy(HealAmmount, gameObject);
+        health?.HealBy(HealAmount, gameObject);
     }
 
     // Start is called before the first frame update
