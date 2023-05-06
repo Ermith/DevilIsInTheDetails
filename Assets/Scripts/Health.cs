@@ -22,6 +22,8 @@ public class Health : MonoBehaviour
 
     public event Action OnBlockChange;
 
+    public event Action OnPoisonChange;
+
     public enum DamageType
     {
         Slash,
@@ -34,11 +36,22 @@ public class Health : MonoBehaviour
     private int _slashBlock;
     private int _thrustBlock;
     private int _strikeBlock;
+    private int _poisonCount;
 
     public int SlashBlock => _slashBlock;
     public int ThrustBlock => _thrustBlock;
     public int StrikeBlock => _strikeBlock;
-    
+
+    public int PoisonCount
+    {
+        get => _poisonCount;
+        private set
+        {
+            _poisonCount = value;
+            OnPoisonChange?.Invoke();
+        }
+    }
+
 
     private void Awake()
     {
@@ -71,6 +84,7 @@ public class Health : MonoBehaviour
         OnHeal += Healthbar.OnHeal;
         OnHit += Healthbar.OnHit;
         OnBlockChange += Healthbar.OnBlockChange;
+        OnPoisonChange += Healthbar.OnPoisonChange;
     }
 
     public void HitBy(int damage, DamageType type, GameObject attacker)
@@ -108,18 +122,22 @@ public class Health : MonoBehaviour
         }
     }
 
-    public void Poison(int damage, int count, float interval)
+    public void Poison(int count)
     {
-        StartCoroutine(PoisonRoutine(damage, count, interval));
+        float interval = 1f;
+        int damage = 5;
+        PoisonCount += count;
+        if (PoisonCount == count) // not started yet (probably) (I hope)
+            StartCoroutine(PoisonRoutine(damage, interval));
     }
 
-    private IEnumerator PoisonRoutine(int damage, int count, float interval)
+    private IEnumerator PoisonRoutine(int damage, float interval)
     {
-        while (count > 0)
+        while (PoisonCount > 0)
         {
-            HitBy(damage, DamageType.Poison, null);
-            count--;
             yield return new WaitForSeconds(interval);
+            HitBy(damage, DamageType.Poison, null);
+            PoisonCount--;
         }
     }
 

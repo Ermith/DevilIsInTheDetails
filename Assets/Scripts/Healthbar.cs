@@ -11,7 +11,8 @@ public class Healthbar : MonoBehaviour
     public UnityEngine.UI.Image Background;
     public UnityEngine.UI.Image SlashBlock;
     public UnityEngine.UI.Image StrikeBlock;
-    public UnityEngine.UI.Image PierceBlock;
+    public UnityEngine.UI.Image ThrustBlock;
+    public UnityEngine.UI.Image PoisonIndicator;
     public TextMeshProUGUI Text;
     public Health Health;
 
@@ -75,13 +76,27 @@ public class Healthbar : MonoBehaviour
 
         if (Health.ThrustBlock > 0)
         {
-            PierceBlock.gameObject.SetActive(true);
-            TextMeshProUGUI pierceText = PierceBlock.GetComponentInChildren<TextMeshProUGUI>();
-            pierceText.text = Health.ThrustBlock.ToString();
+            ThrustBlock.gameObject.SetActive(true);
+            TextMeshProUGUI thrustText = ThrustBlock.GetComponentInChildren<TextMeshProUGUI>();
+            thrustText.text = Health.ThrustBlock.ToString();
         }
         else
         {
-            PierceBlock.gameObject.SetActive(false);
+            ThrustBlock.gameObject.SetActive(false);
+        }
+    }
+
+    public void OnPoisonChange()
+    {
+        if (Health.PoisonCount > 0)
+        {
+            PoisonIndicator.gameObject.SetActive(true);
+            TextMeshProUGUI poisonText = PoisonIndicator.GetComponentInChildren<TextMeshProUGUI>();
+            poisonText.text = Health.PoisonCount.ToString();
+        }
+        else
+        {
+            PoisonIndicator.gameObject.SetActive(false);
         }
     }
 

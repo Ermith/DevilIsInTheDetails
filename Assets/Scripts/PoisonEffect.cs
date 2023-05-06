@@ -4,9 +4,7 @@ using UnityEngine;
 
 public class PoisonEffect : MonoBehaviour, IEffect
 {
-    public int PoisonDamage = 5;
     public int Ticks = 3;
-    public float Interval = 1f;
 
     public void ExecuteEffect(EffectArgs args)
     {
@@ -23,14 +21,14 @@ public class PoisonEffect : MonoBehaviour, IEffect
         if (health != null)
         {
             args.Target = health.transform.position;
-            args.Effect += () => health.Poison(PoisonDamage, Ticks, Interval);
+            args.Effect += () => health.Poison(Ticks);
             return;
         }
 
         ItemTile itemTile = null;
 
         if (dir == Vector2.up)
-            while (itemTile != null && itemTile != this)
+            while (itemTile == null || itemTile == this)
             {
                 pos.y += 1;
                 var cell = GameDirector.InventoryInstance.GetCell(pos);
@@ -38,8 +36,8 @@ public class PoisonEffect : MonoBehaviour, IEffect
                 itemTile = cell.ItemTile;
             }
 
-        if (dir == Vector2.down)
-            while (itemTile != null && itemTile != this)
+        else if (dir == Vector2.down)
+            while (itemTile == null || itemTile == this)
             {
                 pos.y -= 1;
                 var cell = GameDirector.InventoryInstance.GetCell(pos);
@@ -54,7 +52,6 @@ public class PoisonEffect : MonoBehaviour, IEffect
 
         args.Effect += () =>
         {
-            poison.PoisonDamage = PoisonDamage;
             poison.Ticks = Ticks - 1;
         };
     }
