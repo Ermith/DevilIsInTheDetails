@@ -144,6 +144,8 @@ public class Item : MonoBehaviour
             {
                 Rotate(left: false);
             }
+
+            
         }
     }
 
@@ -178,6 +180,22 @@ public class Item : MonoBehaviour
         }
     }
 
+    public (Cell, Vector2Int)? GetPlaceData()
+    {
+        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+        var collider = Physics2D.GetRayIntersection(ray, distance: float.MaxValue, layerMask: LayerMask.GetMask("Inventory")).collider;
+        if (collider != null)
+        {
+            Cell cell = collider.gameObject.GetComponent<Cell>();
+            Inventory inventory = cell.transform.parent.GetComponent<Inventory>();
+            // TODO shift pos by where we are holding the thing
+            var placePos = cell.InInventoryPos - _draggedTile.RotatedInItemPos();
+            if (inventory.CanPlace(this, placePos, this))
+                return (cell, placePos);
+        }
+        return null;
+    }
+
     bool OnDropped()
     {
         // TODO return false on out of bounds
@@ -188,22 +206,12 @@ public class Item : MonoBehaviour
             return true;
         }
 
-        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-        var collider = Physics2D.GetRayIntersection(ray, distance: float.MaxValue, layerMask: LayerMask.GetMask("Inventory")).collider;
-        if (collider != null)
+        var placeData = GetPlaceData();
+        if (placeData != null)
         {
-            Cell cell = collider.gameObject.GetComponent<Cell>();
-            Inventory inventory = cell.transform.parent.GetComponent<Inventory>();
-            // TODO shift pos by where we are holding the thing
-            var placePos = cell.InInventoryPos - _draggedTile.InItemPos();
-            if (inventory.CanPlace(this, placePos, this))
-            {
-                inventory.PlaceItem(this, placePos);
-                return true;
-            }
-
-            // TODO check if we aren't overlapping with inventory grid maybe?
-            return false;
+            var (cell, placePos) = placeData.Value;
+            cell.Inventory.PlaceItem(this, placePos);
+            return true;
         }
 
         return false;

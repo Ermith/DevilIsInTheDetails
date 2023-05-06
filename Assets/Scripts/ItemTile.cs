@@ -26,6 +26,16 @@ public class ItemTile : MonoBehaviour
         return new Vector2Int(x, y);
     }
 
+    public Vector2Int RotatedInItemPos()
+    {
+        var pos = transform.position - transform.parent.position;
+        var x = (int)Mathf.Round(pos.x);
+        var y = (int)Mathf.Round(pos.y);
+        if (Mathf.Abs(x - pos.x) > 0.01f || Mathf.Abs(y - pos.y) > 0.01f)
+            throw new System.Exception("Relative position of item tile is not integer");
+        return new Vector2Int(x, y);
+    }
+
     public Item Item => GetComponentInParent<Item>();
 
     void OnDestroy()
