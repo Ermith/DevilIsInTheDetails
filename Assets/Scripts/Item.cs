@@ -220,6 +220,18 @@ public class Item : MonoBehaviour
             return true;
         }
 
-        return false;
+        // if out of camera view
+        Camera camera = Camera.main;
+        Vector3 viewPos = camera.WorldToViewportPoint(transform.position);
+        if (viewPos.x < 0 || viewPos.x > 1 || viewPos.y < 0 || viewPos.y > 1)
+        {
+            return false;
+        }
+
+        // can't move out of inventory once inside
+        if (InInventory)
+            return false;
+
+        return true;
     }
 }
