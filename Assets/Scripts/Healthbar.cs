@@ -27,6 +27,7 @@ public class Healthbar : MonoBehaviour
         Sequence damageSequence = DOTween.Sequence();
         damageSequence.AppendInterval(0.5f);
         damageSequence.Append(DamageBar.DOFillAmount(ratio, 0.25f));
+        damageSequence.Play();
 
         // tween the text
         DOTween.To(
@@ -53,5 +54,11 @@ public class Healthbar : MonoBehaviour
     public void OnHeal(int amount, GameObject whatever)
     {
         SetHealth(Health.HealthPoints, Health.MaxHealth);
+    }
+
+    void OnDestroy()
+    {
+        // kill all tweens
+        DOTween.Kill(this);
     }
 }

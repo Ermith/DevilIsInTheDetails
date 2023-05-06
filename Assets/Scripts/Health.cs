@@ -76,7 +76,6 @@ public class Health : MonoBehaviour
         if (HealthPoints <= 0)
         {
             OnDeath?.Invoke(attacker);
-            Destroy(gameObject);
         }
     }
 
