@@ -24,9 +24,10 @@ public class Health : MonoBehaviour
     {
         Slash,
         Thrust,
-        Strike
+        Strike,
+        Poison
     }
-    
+
     Healthbar _healthbar;
     private int _slashBlock;
     private int _thrustBlock;
@@ -70,6 +71,8 @@ public class Health : MonoBehaviour
         _thrustBlock = 0;
         _strikeBlock = 0;
 
+        if (damage < 0) damage = 0;
+
         HealthPoints -= damage;
         OnHit?.Invoke(damage, type, attacker);
 
@@ -89,6 +92,21 @@ public class Health : MonoBehaviour
         {
             HealthPoints = MaxHealth;
             OnHealthFull?.Invoke(healer);
+        }
+    }
+
+    public void Poison(int damage, int count, float interval)
+    {
+        StartCoroutine(PoisonRoutine(damage, count, interval));
+    }
+
+    private IEnumerator PoisonRoutine(int damage, int count, float interval)
+    {
+        while (count > 0)
+        {
+            HitBy(damage, DamageType.Poison, null);
+            count--;
+            yield return new WaitForSeconds(interval);
         }
     }
 

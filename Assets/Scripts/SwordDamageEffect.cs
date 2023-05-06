@@ -19,7 +19,7 @@ public class SwordDamageEffect : MonoBehaviour, IEffect
 
         if (dir == Vector2.down)
         {
-            health = GameDirector.HeroInstance.GetComponent<Health>();
+            health = GameDirector.EnemyInstance.GetComponent<Health>();
             type = Health.DamageType.Slash;
         }
 

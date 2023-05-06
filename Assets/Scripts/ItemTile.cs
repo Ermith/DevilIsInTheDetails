@@ -72,7 +72,7 @@ public class ItemTile : MonoBehaviour
             transform.DOJump(effectArgs.Target, 2, 1, throwTime).Join(
                 Rotation(throwTime)).OnComplete(() =>
                 {
-                    effectArgs.Effect();
+                    effectArgs.Effect?.Invoke();
                     Destroy(gameObject);
                 });
         });

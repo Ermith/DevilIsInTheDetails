@@ -11,31 +11,31 @@ public class ShieldEffect : MonoBehaviour, IEffect
     {
         var dir = GetComponent<Item>().transform.up;
         var health = GameDirector.HeroInstance.GetComponent<Health>();
-
+        args.Target = health.transform.position;
 
         if (!_orientedShield)
         {
-            health.AddBlock(5, 5, 10);
+            args.Effect += () => health.AddBlock(5, 5, 10);
         }
         
         if (dir == Vector3.up)
         {
-            health.AddBlock(20, 5, 5);
+            args.Effect += () => health.AddBlock(20, 5, 5);
         }
 
         if (dir == Vector3.down)
         {
-            health.AddBlock(5, 5, 20);
+            args.Effect += () => health.AddBlock(5, 5, 20);
         }
 
         if (dir == Vector3.right)
         {
-            health.AddBlock(5, 20, 5);
+            args.Effect += () => health.AddBlock(5, 20, 5);
         }
 
         if (dir == Vector3.left)
         {
-            health.AddBlock(-5, -5, -5);
+            args.Effect += () => health.AddBlock(-5, -5, -5);
         }
     }
 

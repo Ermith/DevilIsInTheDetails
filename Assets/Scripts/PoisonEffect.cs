@@ -2,10 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[RequireComponent(typeof(Item))]
-public class HealEffect : MonoBehaviour, IEffect
+public class PoisonEffect : MonoBehaviour, IEffect
 {
-    public int HealAmount = 20;
+    public int PoisonDamage = 5;
+    public int Ticks = 3;
+    public float Interval = 1f;
+
     public void ExecuteEffect(EffectArgs args)
     {
         Vector2 dir = GetComponent<Item>().transform.up;
@@ -21,7 +23,7 @@ public class HealEffect : MonoBehaviour, IEffect
         if (health != null)
         {
             args.Target = health.transform.position;
-            args.Effect += () => health.HealBy(HealAmount, gameObject);
+            args.Effect += () => health.Poison(PoisonDamage, Ticks, Interval);
             return;
         }
 
@@ -45,21 +47,27 @@ public class HealEffect : MonoBehaviour, IEffect
                 itemTile = cell.ItemTile;
             }
 
-        if (itemTile == null)
+        if (itemTile == null || Ticks <= 1)
             return;
 
-        args.Effect += () => itemTile.gameObject.AddComponent<HealEffect>().HealAmount = HealAmount / 2;
+        var poison = itemTile.gameObject.AddComponent<PoisonEffect>();
+
+        args.Effect += () =>
+        {
+            poison.PoisonDamage = PoisonDamage;
+            poison.Ticks = Ticks - 1;
+        };
     }
 
     // Start is called before the first frame update
     void Start()
     {
-
+        
     }
 
     // Update is called once per frame
     void Update()
     {
-
+        
     }
 }
