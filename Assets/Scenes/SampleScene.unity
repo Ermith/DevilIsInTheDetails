@@ -1579,7 +1579,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ItemSpawnWeights:
     keys:
-    - {fileID: 4002420723338126241, guid: 74417bbcce8652449a6e14e88108695b, type: 3}
     - {fileID: 7479835052029008222, guid: 6d8da83a15ef4e04d95503e1418458cb, type: 3}
     - {fileID: 6442309791268930786, guid: 600bdbccdc00aa740b56e3e1747b05de, type: 3}
     - {fileID: 6442309791268930786, guid: f6fc701b32b3eb84bbd87b98e50f0626, type: 3}
@@ -1587,7 +1586,7 @@ MonoBehaviour:
     - {fileID: 6442309791268930786, guid: d5b9e92b4e0bd6948b748f71c00e67c6, type: 3}
     - {fileID: 6442309791268930786, guid: 64686a344a77bfc4097e7c5a951b9ae0, type: 3}
     - {fileID: 7952085110807939507, guid: 8d72470fc1bffa147b040e3c1bdff406, type: 3}
-    values: 1400000064000000050000000a0000000a000000140000001400000064000000
+    values: 64000000050000000a0000000a000000140000001400000064000000
   LooseItems: 0
   MaxLooseItems: 3
   PerSecondChance: 0.3
