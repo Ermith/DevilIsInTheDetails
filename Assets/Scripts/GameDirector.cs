@@ -60,10 +60,13 @@ public class GameDirector : MonoBehaviour
 
     private void OnGUI()
     {
+        GUILayout.BeginVertical();
         if (GUILayout.Button("StartFight"))
             StartFight();
 
         if (GUILayout.Button("EndFight"))
             EndFight();
+
+        GUILayout.EndVertical();
     }
 }

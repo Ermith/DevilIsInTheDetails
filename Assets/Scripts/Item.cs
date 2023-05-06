@@ -217,6 +217,13 @@ public class Item : MonoBehaviour
         {
             var (cell, placePos) = placeData.Value;
             cell.Inventory.PlaceItem(this, placePos);
+
+            // For debugging purposes
+            //*/
+            foreach (var anim in GetComponentsInChildren<LetterAnimation>())
+                anim.PlayAppearing();
+            //*/
+
             return true;
         }
 

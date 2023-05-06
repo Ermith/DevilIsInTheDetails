@@ -11,6 +11,8 @@ GameObject:
   - component: {fileID: 5031266096344291859}
   - component: {fileID: 3695021410200114431}
   - component: {fileID: 1178919832881220749}
+  - component: {fileID: 2130473370279609854}
+  - component: {fileID: 3626125363668207707}
   m_Layer: 0
   m_Name: Letter
   m_TagString: Untagged
@@ -111,13 +113,13 @@ MonoBehaviour:
     serializedVersion: 2
     rgba: 3372221183
   m_fontColor: {r: 1, g: 0.008412408, b: 0, a: 0.7882353}
-  m_enableVertexGradient: 0
-  m_colorMode: 3
+  m_enableVertexGradient: 1
+  m_colorMode: 1
   m_fontColorGradient:
-    topLeft: {r: 1, g: 1, b: 1, a: 1}
-    topRight: {r: 1, g: 1, b: 1, a: 1}
-    bottomLeft: {r: 1, g: 1, b: 1, a: 1}
-    bottomRight: {r: 1, g: 1, b: 1, a: 1}
+    topLeft: {r: 1, g: 1, b: 1, a: 0}
+    topRight: {r: 1, g: 1, b: 1, a: 0}
+    bottomLeft: {r: 1, g: 1, b: 1, a: 0}
+    bottomRight: {r: 1, g: 1, b: 1, a: 0}
   m_fontColorGradientPreset: {fileID: 0}
   m_spriteAsset: {fileID: 0}
   m_tintAllSprites: 0
@@ -172,3 +174,32 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_renderer: {fileID: 3695021410200114431}
   m_maskType: 0
+--- !u!111 &2130473370279609854
+Animation:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6144502145642913537}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Animation: {fileID: 0}
+  m_Animations:
+  - {fileID: 7400000, guid: 1cf7dd16ed82a0645a6fdaba0346d684, type: 2}
+  m_WrapMode: 0
+  m_PlayAutomatically: 0
+  m_AnimatePhysics: 0
+  m_CullingType: 0
+--- !u!114 &3626125363668207707
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6144502145642913537}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b75b6fff401f94e4bac467bf0f98296f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _appearingAnimation: {fileID: 7400000, guid: 1cf7dd16ed82a0645a6fdaba0346d684, type: 2}
