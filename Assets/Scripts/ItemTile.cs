@@ -6,17 +6,26 @@ using UnityEngine;
 [RequireComponent(typeof(Collider2D), typeof(SpriteRenderer))]
 public class ItemTile : MonoBehaviour
 {
-    public char Letter { get; private set; }
+    [SerializeField]
+    public char Letter
+    {
+        get => _letter;
+        set
+        {
+            _letter = value;
+            _text.text = Letter.ToString();
+        }
+    }
 
     [CanBeNull] public Cell Cell;
 
     private TextMeshPro _text;
+    private char _letter;
 
     void Start()
     {
-        Letter = GameDirector.WordManagerInstance.GetLetter();
         _text = GetComponentInChildren<TextMeshPro>();
-        _text.text = Letter.ToString();
+        Letter = GameDirector.WordManagerInstance.GetLetter();
     }
 
     public void FixLetterRotation()
