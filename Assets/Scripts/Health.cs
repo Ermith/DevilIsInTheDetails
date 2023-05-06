@@ -19,10 +19,28 @@ public class Health : MonoBehaviour
 
     public delegate void OnHealthFullHandler(GameObject healer);
     public event OnDeathHandler OnHealthFull;
+    
+    Healthbar _healthbar;
 
     private void Awake()
     {
         HealthPoints = MaxHealth;
+    }
+
+    private void Start()
+    {
+        SetupHealthbar();
+    }
+
+    public void SetupHealthbar()
+    {
+        Canvas canvas = GameObject.FindWithTag("Canvas").GetComponent<Canvas>();
+        _healthbar = Instantiate(GameDirector.GameDirectorInstance.Healthbar, canvas.transform);
+        _healthbar.Health = this;
+        RectTransform rectTransform = _healthbar.GetComponent<RectTransform>();
+        rectTransform.anchoredPosition = transform.position + Vector3.up * 2f;
+        OnHeal += _healthbar.OnHealthChange;
+        OnHit += _healthbar.OnHealthChange;
     }
 
     public void HitBy(int damage, GameObject attacker)

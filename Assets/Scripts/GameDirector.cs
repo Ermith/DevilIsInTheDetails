@@ -30,6 +30,8 @@ public class GameDirector : MonoBehaviour
 
     private bool _fighting = false;
 
+    public Healthbar Healthbar;
+
     [SerializeField] public Canvas PauseCanvas;
 
     public void StartFight()
