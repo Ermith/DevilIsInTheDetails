@@ -10,7 +10,7 @@ public class LetterAnimation : MonoBehaviour
 
     public void PlayAppearing()
     {
-        _animation.Play("LetterCurse");
+        _animation.Play("Letter Appearing");
     }
 
     void Start()
