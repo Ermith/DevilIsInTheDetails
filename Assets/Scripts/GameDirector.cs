@@ -37,7 +37,7 @@ public class GameDirector : MonoBehaviour
         if (!_fighting) return;
         _fighting = false;
 
-        Destroy(EnemyInstance);
+        Destroy(EnemyInstance.gameObject);
         EnemyInstance = null;
     }
 
