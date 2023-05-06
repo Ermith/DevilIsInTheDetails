@@ -11,9 +11,9 @@ public class ItemDamage : MonoBehaviour, IEffect
         Health health = null;
 
         if (dir == Vector2.right)
-            health = GameObject.Find(GameDirector.EnemyName).GetComponent<Health>();
+            health = GameDirector.EnemyInstance.GetComponent<Health>();
         if (dir == Vector2.left)
-            health = GameObject.Find(GameDirector.HeroName).GetComponent<Health>();
+            health = GameDirector.HeroInstance.GetComponent<Health>();
 
         health?.HitBy(Damage, gameObject);
     }

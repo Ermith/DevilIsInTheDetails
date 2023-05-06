@@ -11,8 +11,7 @@ public class ItemTile : MonoBehaviour
 
     void Start()
     {
-        WordManager wordManager = GameObject.Find(GameDirector.WordManagerName).GetComponent<WordManager>();
-        Letter = wordManager.GetLetter();
+        Letter = GameDirector.WordManagerInstance.GetLetter();
     }
 
     public Vector2Int InItemPos()
