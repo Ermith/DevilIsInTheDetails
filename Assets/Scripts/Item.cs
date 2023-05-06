@@ -20,6 +20,9 @@ public class Item : MonoBehaviour
 
     private Quaternion _dragStartRotation;
 
+    [SerializeField]
+    private GameObject _devilPrefab;
+
     [CanBeNull] private ItemTile _draggedTile;
 
     private Vector2 _dragOffset;
@@ -247,8 +250,19 @@ public class Item : MonoBehaviour
 
     public void PlayAppearing()
     {
-        foreach (var anim in GetComponentsInChildren<LetterAnimation>())
-            anim.PlayAppearing();
+        string clip = "DevilAnimation";
+        var animation = Instantiate(_devilPrefab).GetComponent<Animation>();
+        animation.transform.position = transform.position + Vector3.right * 2;
+        animation.Play(clip);
+
+        StartCoroutine(animation.OnComplete(clip, () =>
+        {
+            foreach (var anim in GetComponentsInChildren<LetterAnimation>())
+                anim.PlayAppearing();
+        }));
+
+        StartCoroutine(animation.OnComplete(clip, () => Destroy(animation.gameObject)));
+
     }
 
     public bool OverlapsAnyCell()

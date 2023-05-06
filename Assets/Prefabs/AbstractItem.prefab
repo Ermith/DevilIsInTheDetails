@@ -46,3 +46,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   CanMove: 1
   Direction: {x: 0, y: 1}
+  _devilPrefab: {fileID: 6654033811241860091, guid: c0f1c625c9cb72a42ac90d91c9e5e97c, type: 3}
