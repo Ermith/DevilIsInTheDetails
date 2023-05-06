@@ -17,9 +17,9 @@ public class WordManager : MonoBehaviour
         string[] lines = WordFile.text.Split('\n');
         foreach (string line in lines)
         {
-            line = line.Trim();
-            _words.Add(line);
-            foreach (char c in line)
+            string word = line.Trim();
+            _words.Add(word);
+            foreach (char c in word)
             {
                 if (_letterFrequency.ContainsKey(c))
                 {
