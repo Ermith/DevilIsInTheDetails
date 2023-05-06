@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Threading;
 using UnityEngine;
 
 public class WordManager : MonoBehaviour
@@ -9,17 +10,26 @@ public class WordManager : MonoBehaviour
 
     private readonly HashSet<string> _words = new();
 
+    private readonly Dictionary<string, (float, float)> _sentiment = new();
+
     private readonly  Dictionary<char, int> _letterFrequency = new();
 
     private int _totalLetters;
 
     private void Awake()
     {
+        // set invariant culture because float parsing and stuff
+        Thread.CurrentThread.CurrentCulture = System.Globalization.CultureInfo.InvariantCulture;
+
         // read all words from the file
         string[] lines = WordFile.text.Split('\n');
         foreach (string line in lines)
         {
-            string word = line.Trim();
+            string[] parts = line.Split();
+            string word = parts[0];
+            float posSentiment = float.Parse(parts[1]);
+            float negSentiment = float.Parse(parts[2]);
+            _sentiment.Add(word, (posSentiment, negSentiment));
             if (word.Length < MinWordLength)
             {
                 continue;
@@ -38,11 +48,18 @@ public class WordManager : MonoBehaviour
                 _totalLetters++;
             }
         }
+
+        Debug.Log("Loaded " + _words.Count + " words");
     }
 
     public bool IsWord(string word)
     {
         return _words.Contains(word);
+    }
+
+    public (float, float) GetSentiment(string word)
+    {
+        return _sentiment[word];
     }
 
     public char GetLetter()

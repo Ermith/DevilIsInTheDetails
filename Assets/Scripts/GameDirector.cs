@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using DG.Tweening;
 using Microsoft.Unity.VisualStudio.Editor;
 using UnityEngine;
 
@@ -38,13 +39,28 @@ public class GameDirector : MonoBehaviour
 
     public bool IsPaused = false;
 
+    [SerializeField]
+    public float PosSentiment { get; set; }
+
+    [SerializeField]
+    public float NegSentiment { get; set; }
+
     public void StartFight()
     {
         if (_fighting) return;
         _fighting = true;
 
         EnemyInstance = Instantiate(_enemyPrefab);
-        EnemyInstance.transform.position = _enemySpawn.position;
+        EnemyInstance.transform.position = _enemySpawn.position + Vector3.right * Random.Range(3f, 5f);
+        SpriteRenderer spriteRenderer = EnemyInstance.GetComponent<SpriteRenderer>();
+        spriteRenderer.color = new Color(1f, 1f, 1f, 0f);
+
+        spriteRenderer.DOColor(Color.white, 0.5f).SetEase(Ease.OutBack);
+        EnemyInstance.transform.DOMoveX(_enemySpawn.position.x, 0.5f).SetEase(Ease.OutBack);
+
+        EnemyInstance.GetComponent<Health>().SetupHealthbar();
+        RectTransform rt = EnemyInstance.GetComponent<Health>().Healthbar.GetComponent<RectTransform>();
+        rt.DOAnchorPos((Vector2)_enemySpawn.transform.position + Vector2.up * 2f, 0.5f).SetEase(Ease.OutBack);
     }
 
     void Update()
@@ -76,8 +92,7 @@ public class GameDirector : MonoBehaviour
     {
         if (!_fighting) return;
         _fighting = false;
-
-        Destroy(EnemyInstance.gameObject);
+        
         EnemyInstance = null;
     }
 
@@ -108,6 +123,9 @@ public class GameDirector : MonoBehaviour
 
         if (GUILayout.Button("EndFight"))
             EndFight();
+
+        GUILayout.Label($"PosSentiment: {PosSentiment}");
+        GUILayout.Label($"NegSentiment: {NegSentiment}");
 
         GUILayout.EndVertical();
     }

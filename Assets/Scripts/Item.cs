@@ -133,6 +133,7 @@ public class Item : MonoBehaviour
                 {
                     transform.position = _dragStartPosition;
                     transform.rotation = _dragStartRotation;
+                    FixLetterRotation();
                 }
                 ChangeColor(new Color(1, 1, 1, 1));
                 DraggedItem = null;
