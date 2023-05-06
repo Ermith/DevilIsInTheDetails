@@ -36,7 +36,23 @@ public class Inventory : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        Item item = Item.DraggedItem;
+        if (item == null)
+        {
+            HighlightDrag(null, Vector2Int.zero);
+        }
+        else
+        {
+            var placeData = item.GetPlaceData();
+            if (placeData == null)
+            {
+                HighlightDrag(null, Vector2Int.zero);
+            }
+            else
+            {
+                HighlightDrag(item, placeData.Value.Item2);
+            }
+        }
     }
 
     public Cell GetCell(int x, int y)
@@ -59,13 +75,50 @@ public class Inventory : MonoBehaviour
             {
                 if (item.Shape[x, y] != null)
                 {
-                    var cell = GetCell(pos.x + x, pos.y + y);
+                    Vector2Int tileRelPos = item.Shape[x, y].RotatedInItemPos();
+                    var cell = GetCell(tileRelPos + pos);
                     if (cell == null || cell.ItemTile != null && (excludeItem == null || cell.ItemTile.Item != excludeItem))
                         return false;
                 }
             }
         }
         return true;
+    }
+
+    public IEnumerable<Cell> GetCells()
+    {
+        foreach (var row in _grid)
+        {
+            foreach (var cell in row)
+            {
+                yield return cell;
+            }
+        }
+    }
+
+    public void HighlightDrag(Item item, Vector2Int pos)
+    {
+        foreach (Cell cell in GetCells())
+        {
+            cell.RefreshColor();
+        }
+        
+        if(item == null)
+            return;
+        
+        for (int y = 0; y < item.Height; y++)
+        {
+            for (int x = 0; x < item.Width; x++)
+            {
+                if (item.Shape[x, y] != null)
+                {
+                    Vector2Int tileRelPos = item.Shape[x, y].RotatedInItemPos();
+                    var cell = GetCell(tileRelPos + pos);
+                    if (cell != null)
+                        cell.GetComponent<SpriteRenderer>().color = new Color(0.5f, 0.7f, 0.5f);
+                }
+            }
+        }
     }
 
     public void RemoveItem(Item item)
@@ -87,10 +140,11 @@ public class Inventory : MonoBehaviour
         {
             for (int x = 0; x < item.Width; x++)
             {
-                if (item.Shape[x, y] != null)
+                ItemTile tile = item.Shape[x, y];
+                if (tile != null)
                 {
-                    var cell = GetCell(pos.x + x, pos.y + y);
-                    ItemTile tile = item.Shape[x, y];
+                    Vector2Int tileRelPos = tile.RotatedInItemPos();
+                    var cell = GetCell(tileRelPos + pos);
                     cell.ItemTile = tile;
                     tile.Cell = cell;
                 }
