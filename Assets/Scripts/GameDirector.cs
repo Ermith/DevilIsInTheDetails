@@ -30,8 +30,7 @@ public class GameDirector : MonoBehaviour
 
     private bool _fighting = false;
 
-    [SerializeField]
-    public ScreenDimmer ScreenDimmer;
+    [SerializeField] public Canvas PauseCanvas;
 
     public void StartFight()
     {
@@ -106,19 +105,12 @@ public class GameDirector : MonoBehaviour
     public void Pause()
     {
         IsPaused = true;
-        ScreenDimmer.gameObject.SetActive(true);
-        // stretch it across camera view
-        Camera camera = Camera.main;
-        ScreenDimmer.gameObject.transform.localScale = new Vector3(
-            camera.orthographicSize * camera.aspect * 2,
-            camera.orthographicSize * 2,
-            1);
-        ScreenDimmer.gameObject.transform.position = new Vector3(0, 0, 0);
+        PauseCanvas.gameObject.SetActive(true);
     }
 
     public void Unpause()
     {
         IsPaused = false;
-        ScreenDimmer.gameObject.SetActive(false);
+        PauseCanvas.gameObject.SetActive(false);
     }
 }
