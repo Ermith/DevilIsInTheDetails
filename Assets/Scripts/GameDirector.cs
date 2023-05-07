@@ -106,8 +106,8 @@ public class GameDirector : MonoBehaviour
         {
             SimulationTime += Time.deltaTime;
         }
-        
-        if (Input.GetKeyDown(KeyCode.Escape))
+
+        if (Input.GetKeyDown(KeyCode.Escape) && !IsGameOver)
         {
             if (IsPaused)
             {
@@ -273,6 +273,7 @@ public class GameDirector : MonoBehaviour
             Unpause();
         UpdateStatsText();
         IsGameOver = true;
+        IsPaused = true;
         GameOverCanvas.gameObject.SetActive(true);
     }
 
