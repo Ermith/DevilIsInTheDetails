@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 6649273367003132303}
   - component: {fileID: 8721154965162399555}
   - component: {fileID: 4408849516848307120}
+  - component: {fileID: 8631296746756312210}
   m_Layer: 5
   m_Name: DamageType
   m_TagString: Untagged
@@ -76,6 +77,21 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &8631296746756312210
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 93396483579860059}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 99634edca86565b4a96a0b7b261787f8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  simpleTooltipStyle: {fileID: 11400000, guid: f1d1c287ded68be43934c42c517f05d2, type: 2}
+  infoLeft: Blocking bludgeoning damage.
+  infoRight: 
 --- !u!1 &254346094271709029
 GameObject:
   m_ObjectHideFlags: 0
@@ -87,6 +103,7 @@ GameObject:
   - component: {fileID: 7034324541755562196}
   - component: {fileID: 426862309525683021}
   - component: {fileID: 5893006855947119062}
+  - component: {fileID: 5188952344555512397}
   m_Layer: 5
   m_Name: StrikeBlock
   m_TagString: Untagged
@@ -154,6 +171,24 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &5188952344555512397
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 254346094271709029}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 99634edca86565b4a96a0b7b261787f8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  simpleTooltipStyle: {fileID: 11400000, guid: f1d1c287ded68be43934c42c517f05d2, type: 2}
+  infoLeft: 'Blocking damage. The next attack received is decreased by this number
+    if it''s bludgeoning damage.
+
+    After each attack all blocks are removed.'
+  infoRight: 
 --- !u!1 &968180015802393839
 GameObject:
   m_ObjectHideFlags: 0
@@ -165,6 +200,7 @@ GameObject:
   - component: {fileID: 2627584129668696634}
   - component: {fileID: 6489720612636485362}
   - component: {fileID: 4845795203313119703}
+  - component: {fileID: 1786602818813646319}
   m_Layer: 5
   m_Name: DamageType
   m_TagString: Untagged
@@ -230,6 +266,21 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &1786602818813646319
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 968180015802393839}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 99634edca86565b4a96a0b7b261787f8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  simpleTooltipStyle: {fileID: 11400000, guid: f1d1c287ded68be43934c42c517f05d2, type: 2}
+  infoLeft: Blocking slashing damage.
+  infoRight: 
 --- !u!1 &1610263647602631411
 GameObject:
   m_ObjectHideFlags: 0
@@ -241,6 +292,7 @@ GameObject:
   - component: {fileID: 6058776157628789972}
   - component: {fileID: 6479282871932418885}
   - component: {fileID: 63823989366279176}
+  - component: {fileID: 8742541852095301064}
   m_Layer: 5
   m_Name: Poison
   m_TagString: Untagged
@@ -306,6 +358,21 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &8742541852095301064
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1610263647602631411}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 99634edca86565b4a96a0b7b261787f8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  simpleTooltipStyle: {fileID: 11400000, guid: f1d1c287ded68be43934c42c517f05d2, type: 2}
+  infoLeft: The attack will be poison damage.
+  infoRight: 
 --- !u!1 &1961900053818125693
 GameObject:
   m_ObjectHideFlags: 0
@@ -587,6 +654,7 @@ GameObject:
   - component: {fileID: 804525544165397727}
   - component: {fileID: 2196694167101304399}
   - component: {fileID: 915317932552090538}
+  - component: {fileID: 2453669765356737581}
   m_Layer: 5
   m_Name: Strike
   m_TagString: Untagged
@@ -652,6 +720,21 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &2453669765356737581
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2634115429906845290}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 99634edca86565b4a96a0b7b261787f8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  simpleTooltipStyle: {fileID: 11400000, guid: f1d1c287ded68be43934c42c517f05d2, type: 2}
+  infoLeft: The attack will be bludgeoning damage.
+  infoRight: 
 --- !u!1 &2724792619945557424
 GameObject:
   m_ObjectHideFlags: 0
@@ -663,6 +746,7 @@ GameObject:
   - component: {fileID: 3410215025153604097}
   - component: {fileID: 7768586477167863945}
   - component: {fileID: 8195844086378113537}
+  - component: {fileID: 3345197799435680327}
   m_Layer: 5
   m_Name: Poison
   m_TagString: Untagged
@@ -729,6 +813,23 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &3345197799435680327
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2724792619945557424}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 99634edca86565b4a96a0b7b261787f8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  simpleTooltipStyle: {fileID: 11400000, guid: f1d1c287ded68be43934c42c517f05d2, type: 2}
+  infoLeft: 'Poisonied
+
+    Will take 5 damage every second for this amount of seconds.'
+  infoRight: 
 --- !u!1 &3418832071338623954
 GameObject:
   m_ObjectHideFlags: 0
@@ -740,6 +841,7 @@ GameObject:
   - component: {fileID: 6345510428359154179}
   - component: {fileID: 7395816177701841972}
   - component: {fileID: 2803494109196609429}
+  - component: {fileID: 7933655295586959432}
   m_Layer: 5
   m_Name: Slash
   m_TagString: Untagged
@@ -805,6 +907,21 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &7933655295586959432
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3418832071338623954}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 99634edca86565b4a96a0b7b261787f8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  simpleTooltipStyle: {fileID: 11400000, guid: f1d1c287ded68be43934c42c517f05d2, type: 2}
+  infoLeft: The attack will be slashing damage.
+  infoRight: 
 --- !u!1 &3515391325237336541
 GameObject:
   m_ObjectHideFlags: 0
@@ -899,7 +1016,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   simpleTooltipStyle: {fileID: 11400000, guid: f1d1c287ded68be43934c42c517f05d2, type: 2}
-  infoLeft: Hello
+  infoLeft: This enemy will attack once this indicator is full.
   infoRight: 
 --- !u!1 &3606875551746964139
 GameObject:
@@ -1182,6 +1299,7 @@ GameObject:
   - component: {fileID: 8484875633093121262}
   - component: {fileID: 176040451731571337}
   - component: {fileID: 6382472804574372779}
+  - component: {fileID: 7402429028557884856}
   m_Layer: 5
   m_Name: DamageType
   m_TagString: Untagged
@@ -1247,6 +1365,21 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &7402429028557884856
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4280671453046655590}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 99634edca86565b4a96a0b7b261787f8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  simpleTooltipStyle: {fileID: 11400000, guid: f1d1c287ded68be43934c42c517f05d2, type: 2}
+  infoLeft: Blocking piercing damage.
+  infoRight: 
 --- !u!1 &5748256520148243703
 GameObject:
   m_ObjectHideFlags: 0
@@ -1258,6 +1391,7 @@ GameObject:
   - component: {fileID: 4213097405066470563}
   - component: {fileID: 7761905579788989411}
   - component: {fileID: 8155439263658548352}
+  - component: {fileID: 3554664300562004516}
   m_Layer: 5
   m_Name: SlashBlock
   m_TagString: Untagged
@@ -1325,6 +1459,24 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &3554664300562004516
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5748256520148243703}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 99634edca86565b4a96a0b7b261787f8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  simpleTooltipStyle: {fileID: 11400000, guid: f1d1c287ded68be43934c42c517f05d2, type: 2}
+  infoLeft: 'Blocking damage. The next attack received is decreased by this number
+    if it''s slashing damage.
+
+    After each attack all blocks are removed.'
+  infoRight: 
 --- !u!1 &6171169542017988716
 GameObject:
   m_ObjectHideFlags: 0
@@ -1336,6 +1488,7 @@ GameObject:
   - component: {fileID: 1152025057131973060}
   - component: {fileID: 8705926971516424026}
   - component: {fileID: 624402114038450130}
+  - component: {fileID: 3253536255398197669}
   m_Layer: 5
   m_Name: Thrust
   m_TagString: Untagged
@@ -1401,6 +1554,21 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &3253536255398197669
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6171169542017988716}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 99634edca86565b4a96a0b7b261787f8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  simpleTooltipStyle: {fileID: 11400000, guid: f1d1c287ded68be43934c42c517f05d2, type: 2}
+  infoLeft: The attack will be piercing damage.
+  infoRight: 
 --- !u!1 &6443621760071376440
 GameObject:
   m_ObjectHideFlags: 0
@@ -1412,6 +1580,7 @@ GameObject:
   - component: {fileID: 3574566416415286226}
   - component: {fileID: 4544200312444231199}
   - component: {fileID: 5281888482227491999}
+  - component: {fileID: 7246347092331092032}
   m_Layer: 5
   m_Name: ThrustBlock
   m_TagString: Untagged
@@ -1479,6 +1648,24 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &7246347092331092032
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6443621760071376440}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 99634edca86565b4a96a0b7b261787f8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  simpleTooltipStyle: {fileID: 11400000, guid: f1d1c287ded68be43934c42c517f05d2, type: 2}
+  infoLeft: 'Blocking damage. The next attack received is decreased by this number
+    if it''s piercing damage.
+
+    After each attack all blocks are removed.'
+  infoRight: 
 --- !u!1 &7944916453334565751
 GameObject:
   m_ObjectHideFlags: 0
