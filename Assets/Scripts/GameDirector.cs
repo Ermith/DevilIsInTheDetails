@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using DG.Tweening;
 using Microsoft.Unity.VisualStudio.Editor;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameDirector : MonoBehaviour
 {
