@@ -241,7 +241,7 @@ public class Inventory : MonoBehaviour
                     GameDirector.GameDirectorInstance.NegSentiment += neg;
 
                     float karmaDelta = GameDirector.GameDirectorInstance.Karma - beforeKarma;
-                    if (karmaDelta > 0)
+                    if (karmaDelta != 0)
                     {
                         Vector3 startPos = cells[cells.Count / 2].transform.position;
                         var karmaRect = GameDirector.KarmaBarInstance.GetComponent<RectTransform>();
