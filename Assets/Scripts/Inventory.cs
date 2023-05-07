@@ -246,7 +246,9 @@ public class Inventory : MonoBehaviour
 
                     if (collides)
                         continue;
-                    
+
+                    emittedWords.Add(word);
+
                     Debug.Log($"Word completed: {word}");
                     (float pos, float neg) = GameDirector.WordManagerInstance.GetSentiment(word);
 
