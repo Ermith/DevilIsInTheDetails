@@ -99,9 +99,10 @@ public class Enemy : MonoBehaviour
     {
         GameDirector.GameDirectorInstance.EndFight();
 
+        var spriteHeight = SpriteRenderer.sprite.bounds.size.y;
         Sequence sequence = DOTween.Sequence();
         sequence.Append(transform.DOScale(new Vector3(2f, 0f, 1f), 0.8f).SetEase(Ease.InBack));
-        sequence.Join(transform.DOLocalMoveY(-1f, 0.8f).SetEase(Ease.InBack));
+        sequence.Join(transform.DOMoveY(transform.position.y -spriteHeight / 2, 0.8f).SetEase(Ease.InBack));
         sequence.Join(SpriteRenderer.DOColor(Color.red, 0.8f).SetEase(Ease.InBack));
         sequence.Join(Health.Healthbar.Background.DOColor(new Color(1f, 1f, 1f, 0f), 0.8f).SetEase(Ease.InBack));
         sequence.Join(Health.Healthbar.HealthBar.DOColor(new Color(1f, 1f, 1f, 0f), 0.8f).SetEase(Ease.InBack));
