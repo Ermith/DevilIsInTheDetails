@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using DG.Tweening;
@@ -51,6 +52,10 @@ public class GameDirector : MonoBehaviour
     public Vector2 LastMousePosition = Vector2.zero;
 
     public float TooltipDelay = 0.3f;
+
+    public float KarmaFactor = 0.2f;
+
+    public float Karma => Math.Clamp((PosSentiment - NegSentiment) * KarmaFactor, -1f, 1f);
 
     public void StartFight()
     {
@@ -155,6 +160,7 @@ public class GameDirector : MonoBehaviour
 
         GUILayout.Label($"PosSentiment: {PosSentiment}");
         GUILayout.Label($"NegSentiment: {NegSentiment}");
+        GUILayout.Label($"Karma: {Karma}");
 
         GUILayout.EndVertical();
     }
