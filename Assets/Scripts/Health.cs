@@ -172,6 +172,6 @@ public class Health : MonoBehaviour
 
     private void OnDestroy()
     {
-        Destroy(Healthbar.gameObject);
+        Destroy(Healthbar?.gameObject);
     }
 }
