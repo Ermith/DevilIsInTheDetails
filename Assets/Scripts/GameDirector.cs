@@ -162,7 +162,7 @@ public class GameDirector : MonoBehaviour
 
     private void Start()
     {
-        //StartFight();
+        StartFight();
     }
 
 #if DEBUG
