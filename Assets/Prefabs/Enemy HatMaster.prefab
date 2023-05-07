@@ -1,15 +1,19 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1001 &6050451337803447646
+--- !u!1001 &8896659973183140182
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2181893674414024699, guid: f56a7727de87b104ba043361c29bd92e, type: 3}
+      propertyPath: MaxHealth
+      value: 150
+      objectReference: {fileID: 0}
     - target: {fileID: 2338354351196427001, guid: f56a7727de87b104ba043361c29bd92e, type: 3}
       propertyPath: m_Name
-      value: Enemy Slash Focused
+      value: Enemy HatMaster
       objectReference: {fileID: 0}
     - target: {fileID: 4186503870967388134, guid: f56a7727de87b104ba043361c29bd92e, type: 3}
       propertyPath: m_RootOrder
@@ -58,25 +62,41 @@ PrefabInstance:
     - target: {fileID: 6019023909827494984, guid: f56a7727de87b104ba043361c29bd92e, type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: 21300000, guid: f46df65bf28b39a4aa5d324d91866bcb, type: 3}
-    - target: {fileID: 6019023909827494984, guid: f56a7727de87b104ba043361c29bd92e, type: 3}
-      propertyPath: m_Color.b
+      objectReference: {fileID: 21300000, guid: ca22dfeab445aa8409c8248c0e206c22, type: 3}
+    - target: {fileID: 7361560643592183650, guid: f56a7727de87b104ba043361c29bd92e, type: 3}
+      propertyPath: Damage
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7361560643592183650, guid: f56a7727de87b104ba043361c29bd92e, type: 3}
+      propertyPath: AttackInterval
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 7361560643592183650, guid: f56a7727de87b104ba043361c29bd92e, type: 3}
+      propertyPath: NextDamageType
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 6019023909827494984, guid: f56a7727de87b104ba043361c29bd92e, type: 3}
-      propertyPath: m_Color.g
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 6019023909827494984, guid: f56a7727de87b104ba043361c29bd92e, type: 3}
-      propertyPath: m_Color.r
+    - target: {fileID: 7361560643592183650, guid: f56a7727de87b104ba043361c29bd92e, type: 3}
+      propertyPath: BlockSlashWeight
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7361560643592183650, guid: f56a7727de87b104ba043361c29bd92e, type: 3}
       propertyPath: AttackSlashWeight
-      value: 10
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7361560643592183650, guid: f56a7727de87b104ba043361c29bd92e, type: 3}
+      propertyPath: BlockStrikeWeight
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7361560643592183650, guid: f56a7727de87b104ba043361c29bd92e, type: 3}
       propertyPath: BlockThrustWeight
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7361560643592183650, guid: f56a7727de87b104ba043361c29bd92e, type: 3}
+      propertyPath: AttackStrikeWeight
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 7361560643592183650, guid: f56a7727de87b104ba043361c29bd92e, type: 3}
+      propertyPath: AttackThrustWeight
       value: 10
       objectReference: {fileID: 0}
     m_RemovedComponents: []

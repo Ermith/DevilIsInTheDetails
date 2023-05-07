@@ -100,6 +100,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Damage: 2
   AttackInterval: 5
+  AttackSlashWeight: 1
+  AttackStrikeWeight: 1
+  AttackThrustWeight: 1
+  AttackPoisonWeight: 0
+  BlockChance: 0.5
+  BlockSlashWeight: 1
+  BlockStrikeWeight: 1
+  BlockThrustWeight: 1
+  BlockAmount: 5
   NextDamageType: 0
 --- !u!114 &2181893674414024699
 MonoBehaviour:
@@ -114,4 +123,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   MaxHealth: 100
+  HealthBarHeight: 1.5
   Healthbar: {fileID: 0}
