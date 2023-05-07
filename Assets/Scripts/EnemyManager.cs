@@ -36,9 +36,11 @@ public class EnemyManager : MonoBehaviour
         
         enemy.transform.position = _enemySpawn.position + Vector3.right * Random.Range(3f, 5f);
         SpriteRenderer spriteRenderer = enemy.GetComponent<SpriteRenderer>();
-        spriteRenderer.color = new Color(1f, 1f, 1f, 0f);
+        var color = spriteRenderer.color;
+        color.a = 0;
+        spriteRenderer.color = color;
 
-        spriteRenderer.DOColor(Color.white, 0.5f).SetEase(Ease.OutBack);
+        spriteRenderer.DOFade(1, 0.5f).SetEase(Ease.OutCubic);
         enemy.transform.DOMoveX(_enemySpawn.position.x, 0.5f).SetEase(Ease.OutBack);
 
         enemy.GetComponent<Health>().SetupHealthbar();
