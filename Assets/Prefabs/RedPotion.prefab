@@ -132,6 +132,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: RedPotion
       objectReference: {fileID: 0}
+    - target: {fileID: 1558583955704837554, guid: be64c54c627693f4b8a255d06692490c, type: 3}
+      propertyPath: TooltipText
+      value: Health Potion
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: be64c54c627693f4b8a255d06692490c, type: 3}
 --- !u!1 &5309651895755049231 stripped

@@ -39,15 +39,15 @@ public class ShieldEffect : MonoBehaviour, IEffect
         }
     }
 
-    // Start is called before the first frame update
-    void Start()
+    public string TooltipText
     {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+        get
+        {
+            if (!_orientedShield)
+                return "Adds 5 slash block, 5 piercing block, 10 bludgeoning block.";
+            else
+                return
+                    "Adds block.\nPointing up: 20 slash block, 5 piercing block, 5 bludgeoning block.\nPointing down: 5 slash block, 5 piercing block, 20 bludgeoning block.\nPointing right: 5 slash block, 20 piercing block, 5 bludgeoning block.\nPointing left: -5 slash block, -5 piercing block, -5 bludgeoning block.";
+        }
     }
 }

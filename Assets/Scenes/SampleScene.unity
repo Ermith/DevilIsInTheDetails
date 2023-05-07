@@ -123,6 +123,55 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1 &88069953
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 88069955}
+  - component: {fileID: 88069954}
+  m_Layer: 0
+  m_Name: EnemyManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 5132851093641282708, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &88069954
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 88069953}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 77721a1c7caf1fe4ba99a021e2f1aa44, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  EnemySpawnWeights:
+    keys:
+    - {fileID: 7361560643592183650, guid: f56a7727de87b104ba043361c29bd92e, type: 3}
+    values: 64000000
+  _enemySpawn: {fileID: 2115603334}
+--- !u!4 &88069955
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 88069953}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 8.75, y: 3.87, z: -0.06612107}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 13
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &146661497
 GameObject:
   m_ObjectHideFlags: 0
@@ -546,9 +595,9 @@ Camera:
     height: 1
   near clip plane: 0.3
   far clip plane: 1000
-  field of view: 35.9834
+  field of view: 32.020752
   orthographic: 1
-  orthographic size: 6.75
+  orthographic size: 5.9639645
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -1446,16 +1495,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 245a7cb84ee8f334dbad1dac24ef7e4c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _enemyPrefab: {fileID: 7361560643592183650, guid: f56a7727de87b104ba043361c29bd92e, type: 3}
   _heroPrefab: {fileID: 4151870986425449421, guid: 477bfc7c1027a334da7445fb8cc11acf, type: 3}
   _heroSpawn: {fileID: 1759465377}
-  _enemySpawn: {fileID: 2115603334}
   Healthbar: {fileID: 2861761090971177264, guid: 0080a123bd02caf4f919d0e87a31e543, type: 3}
   PauseCanvas: {fileID: 935069801}
   GameOverCanvas: {fileID: 685726313}
   IsGameOver: 0
   IsPaused: 0
   DummyEnemy: {fileID: 386759277}
+  TimeMouseStopped: 0
+  LastMousePosition: {x: 0, y: 0}
+  TooltipDelay: 0.3
 --- !u!4 &1726133491
 Transform:
   m_ObjectHideFlags: 0
@@ -1677,7 +1727,7 @@ MonoBehaviour:
     - {fileID: 7952085110807939507, guid: 8d72470fc1bffa147b040e3c1bdff406, type: 3}
     values: 64000000050000000a0000000a000000140000001400000064000000
   LooseItems: 0
-  MaxLooseItems: 3
+  MaxLooseItems: 5
   PerSecondChance: 0.3
 --- !u!4 &1915043755
 Transform:

@@ -54,12 +54,19 @@ public class WordManager : MonoBehaviour
 
     public bool IsWord(string word)
     {
+        word = word.ToUpper();
         return _words.Contains(word);
     }
 
     public (float, float) GetSentiment(string word)
     {
-        return _sentiment[word];
+        word = word.ToUpper();
+        (float pos, float neg) = _sentiment[word];
+        if (word.Contains("DEVIL"))
+        {
+            (pos, neg) = (0, 6.66f); // devilish >:)
+        }
+        return (pos, neg);
     }
 
     public char GetLetter()

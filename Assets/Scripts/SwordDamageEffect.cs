@@ -41,16 +41,5 @@ public class SwordDamageEffect : MonoBehaviour, IEffect
         args.Target = health.transform.position;
         args.Effect += () => health.HitBy(Damage, type, gameObject);
     }
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+    public string TooltipText => $"Deals {Damage} damage.\nPointing up: Slash damage.\nPointing down: Slash damage.\nPointing right: Piercing damage.\nPointing left: Piercing damage TO YOU.";
 }

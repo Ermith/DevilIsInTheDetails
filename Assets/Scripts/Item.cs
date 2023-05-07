@@ -27,6 +27,8 @@ public class Item : MonoBehaviour
 
     [ItemCanBeNull] private ItemTile[,] _shape;
 
+    public string TooltipText;
+
     public ItemTile[,] Shape
     {
         get
@@ -57,6 +59,29 @@ public class Item : MonoBehaviour
     public void Start()
     {
         GameDirector.ItemManagerInstance.LooseItems++;
+
+        // call InitTooltips with a delay
+        // this is needed because the item tiles are not initialized yet and I'm too lazy to do it properly
+        StartCoroutine(InitTooltipsDelayed());
+    }
+
+    IEnumerator InitTooltipsDelayed()
+    {
+        yield return new WaitForSeconds(0.1f);
+        InitTooltips();
+    }
+
+    void InitTooltips()
+    {
+        string tooltipText = TooltipText;
+        foreach (IEffect effect in GetComponentsInChildren<IEffect>())
+        {
+            tooltipText += "\n" + effect.TooltipText;
+        }
+        foreach (ItemTile tile in GetTiles())
+        {
+            tile.InitTooltip(tooltipText);
+        }
     }
 
     void InitShape()

@@ -128,6 +128,7 @@ public class Health : MonoBehaviour
 
         if (HealthPoints <= 0)
         {
+            HealthPoints = 0;
             OnDeath?.Invoke(attacker);
         }
     }

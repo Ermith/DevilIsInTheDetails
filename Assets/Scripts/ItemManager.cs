@@ -72,6 +72,8 @@ public class ItemManager : MonoBehaviour
 
     public void Update()
     {
+        if (GameDirector.GameDirectorInstance.IsPaused)
+            return;
         double prob = 1 - Math.Pow(1 - PerSecondChance, Time.deltaTime);
         if (SpawningItems && LooseItems < MaxLooseItems && Random.Range(0f, 1f) < prob)
         {
