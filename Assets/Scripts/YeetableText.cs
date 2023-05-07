@@ -9,11 +9,11 @@ public class YeetableText : MonoBehaviour
 {
     public TextMeshProUGUI Text;
 
-    public static void Yeet(string text, Color color, Vector3 source, Vector3 target, float duration, float spinSpeed = 0f, int fontSize = 4)
+    public static YeetableText Yeet(string text, Color color, Vector3 source, Vector3 target, float duration, float spinSpeed = 0f, int fontSize = 4, Transform parent = null)
     {
         var yeetableText = Instantiate(GameDirector.GameDirectorInstance.YeetableTextPrefab, source, Quaternion.identity);
         var go = yeetableText.gameObject;
-        go.transform.SetParent(GameObject.FindWithTag("Canvas").transform);
+        go.transform.SetParent(parent ?? GameObject.FindWithTag("Canvas").transform);
         yeetableText.Text.text = text;
         yeetableText.Text.fontSize = fontSize;
 
@@ -31,5 +31,12 @@ public class YeetableText : MonoBehaviour
         {
             yeetableText.transform.DORotate(Vector3.forward * 360f, spinSpeed, RotateMode.FastBeyond360).SetEase(Ease.Linear).SetLoops(-1);
         }
+
+        return yeetableText;
+    }
+
+    public void OnDestroy()
+    {
+        DOTween.Kill(transform);
     }
 }

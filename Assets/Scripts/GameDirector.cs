@@ -1,11 +1,14 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Numerics;
 using DG.Tweening;
 using Microsoft.Unity.VisualStudio.Editor;
 using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using Random = UnityEngine.Random;
+using Vector2 = UnityEngine.Vector2;
 
 public class GameDirector : MonoBehaviour
 {
@@ -88,6 +91,8 @@ public class GameDirector : MonoBehaviour
     public TextMeshProUGUI PauseStats;
     public TextMeshProUGUI GameOverStats;
 
+    private int _wordsMatchedIndex = 0;
+
     public void StartFight()
     {
         if (_fighting) return;
@@ -142,13 +147,58 @@ public class GameDirector : MonoBehaviour
         }
 
         LastMousePosition = mousePos;
+
+        if ((IsPaused || IsGameOver) && Random.value < Time.deltaTime)
+        {
+            YeetWords(IsGameOver ? GameOverCanvas.transform : PauseCanvas.transform);
+        }
+    }
+
+    public void YeetWords(Transform parent)
+    {
+        if (WordsMatched.Count == 0) return;
+        if (_wordsMatchedIndex >= WordsMatched.Count) _wordsMatchedIndex = 0;
+        (string word, float karmaDelta) = WordsMatched[_wordsMatchedIndex++];
+
+        // interpolate color for karma delta (-1 = red, 0 = white, 1 = light blue)
+        Color color = karmaDelta < 0
+            ? Color.Lerp(Color.red, Color.white, 0.5f + karmaDelta * 0.5f)
+            : Color.Lerp(Color.white, Color.cyan, karmaDelta * 0.5f);
+
+        Canvas canvas = parent.GetComponent<Canvas>();
+        var canvasWidth = canvas.pixelRect.width;
+        var canvasHeight = canvas.pixelRect.height;
+
+        float radius = MathF.Sqrt(canvasWidth * canvasWidth + canvasHeight * canvasHeight) * 0.5f * 1.1f;
+        // random on the circle
+        float angle = Random.value * MathF.PI * 2;
+        Vector2 startPosition = new Vector2(MathF.Cos(angle), MathF.Sin(angle)) * radius;
+
+        float oppositeAngle = angle + MathF.PI + Random.Range(-1f, 1f) * MathF.PI * 0.5f * 0.3f;
+        Vector2 endPosition = new Vector2(MathF.Cos(oppositeAngle), MathF.Sin(oppositeAngle)) * radius;
+
+        startPosition += new Vector2(canvasWidth / 2, canvasHeight / 2);
+        endPosition += new Vector2(canvasWidth / 2, canvasHeight / 2);
+
+        var yeetText = YeetableText.Yeet(
+            word,
+            color,
+            startPosition,
+            endPosition,
+            duration: Random.Range(2f, 8f),
+            parent: parent,
+            spinSpeed: Random.value > 0.7f ? 0f : Random.Range(-3f, 3f) * 360f
+            );
+
+        RectTransform rectTransform = yeetText.GetComponent<RectTransform>();
+        rectTransform.localScale = new Vector2(10, 10);
     }
 
     public void UpdateStatsText()
     {
         string text = $"Enemies Defeated: {EnemiesDefeated}\n";
         text += $"Words Matched: {WordsMatched.Count}\n";
-        text += $"Karma: {Karma}\n";
+        text += $"Karma: {(int)(Karma * 1000)}\n";
 
         PauseStats.text = text;
         GameOverStats.text = text;
