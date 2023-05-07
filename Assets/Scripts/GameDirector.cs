@@ -174,7 +174,6 @@ public class GameDirector : MonoBehaviour
     {
         IsPaused = true;
         PauseCanvas.gameObject.SetActive(true);
-        Time.timeScale = 0f;
     }
 
     public void GameOver()
@@ -186,8 +185,6 @@ public class GameDirector : MonoBehaviour
 
         Health heroHealth = HeroInstance.GetComponent<Health>();
         heroHealth.Healthbar.SetHealth(0, heroHealth.MaxHealth, 0f);
-
-        Time.timeScale = 0f;
     }
 
     public void Unpause()
@@ -196,6 +193,5 @@ public class GameDirector : MonoBehaviour
             return;
         IsPaused = false;
         PauseCanvas.gameObject.SetActive(false);
-        Time.timeScale = 1f;
     }
 }

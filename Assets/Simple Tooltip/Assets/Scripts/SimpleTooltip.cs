@@ -62,11 +62,13 @@ public class SimpleTooltip : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
 
         if (eventSystem)
         {
+            /*
             if (eventSystem.IsPointerOverGameObject())
             {
                 HideTooltip();
                 return;
             }
+            */
         }
         ShowTooltip();
     }
@@ -112,13 +114,13 @@ public class SimpleTooltip : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
 
     public void HideTooltip()
     {
+        if (ActiveTooltip == this)
+            ActiveTooltip = null;
         if (!showing)
             return;
         showing = false;
         cursorInside = false;
         tooltipController.HideTooltip();
-
-        ActiveTooltip = null;
     }
 
     private void Reset()
