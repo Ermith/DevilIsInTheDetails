@@ -220,7 +220,7 @@ public class Item : MonoBehaviour
             tile.FixLetterRotation();
         }
     }
-    
+
     void OnDestroy()
     {
         if (DraggedItem == this)
@@ -286,7 +286,8 @@ public class Item : MonoBehaviour
             return false;
 
         // if out of camera view
-        if (!InCameraView()) {
+        if (!InCameraView())
+        {
             return false;
         }
 
@@ -299,8 +300,13 @@ public class Item : MonoBehaviour
 
     public void PlayAppearing()
     {
-        string clip = "DevilAnimation";
+        string clip = "DevilShake";
         var devilAnimation = Instantiate(_devilPrefab).GetComponent<Animation>();
+
+        int r = UnityEngine.Random.Range(0, devilAnimation.GetClipCount());
+        foreach (AnimationState c in devilAnimation)
+            if (r-- == 0) { clip = c.name; break; }
+
         devilAnimation.transform.position = transform.position + Vector3.right * 2;
         devilAnimation.Play(clip);
 
