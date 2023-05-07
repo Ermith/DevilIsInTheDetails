@@ -99,7 +99,7 @@ public class Enemy : MonoBehaviour
     {
         var hero = GameDirector.HeroInstance;
         hero.GetComponent<Health>().HitBy(Damage, Health.DamageType.Slash, gameObject);
-        GameDirector.AudioManagerInstance.Play("SwordHit");
+        GameDirector.AudioManagerInstance.Play("GetHit");
 
         // animate slight movement to the left
         Sequence sequence = DOTween.Sequence();
