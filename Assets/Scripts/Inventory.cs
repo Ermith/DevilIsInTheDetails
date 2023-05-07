@@ -219,6 +219,7 @@ public class Inventory : MonoBehaviour
     public List<Cell> GetActivations()
     {
         List<Cell> result = new();
+        List<string> emittedWords = new();
         foreach (Cell cell in GetCells())
         {
             if (cell.ItemTile?.Letter == '\0')
@@ -232,6 +233,22 @@ public class Inventory : MonoBehaviour
                 if (WordAt(cell.InInventoryPos, dir, out string word, out List<Cell> cells))
                 {
                     result.AddRange(cells);
+
+                    bool collides = false;
+                    foreach (var alreadyEmitted in emittedWords)
+                    {
+                        if (alreadyEmitted.Contains(word))
+                        {
+                            collides = true;
+                            break;
+                        }
+                    }
+
+                    if (collides)
+                        continue;
+
+                    emittedWords.Add(word);
+
                     Debug.Log($"Word completed: {word}");
                     (float pos, float neg) = GameDirector.WordManagerInstance.GetSentiment(word);
 
