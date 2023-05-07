@@ -47,17 +47,17 @@ MonoBehaviour:
   Sounds:
   - Name: DevilLaugh1
     Clip: {fileID: 8300000, guid: 993e9480bc5b016488544de25ef3e5aa, type: 3}
-    Volume: 0.1
+    Volume: 0.2
     Pitch: 1.4
     AudioSource: {fileID: 0}
   - Name: DevilLaugh2
     Clip: {fileID: 8300000, guid: cb9dc9b6d8b638d4cb1a0bd10389687b, type: 3}
-    Volume: 0.1
+    Volume: 0.2
     Pitch: 1.4
     AudioSource: {fileID: 0}
   - Name: DevilLaugh3
     Clip: {fileID: 8300000, guid: 741cd98e2cb9f7143858da20748b7d30, type: 3}
-    Volume: 0.1
+    Volume: 0.2
     Pitch: 1.4
     AudioSource: {fileID: 0}
   - Name: SwordHit
@@ -78,5 +78,10 @@ MonoBehaviour:
   - Name: GetHit
     Clip: {fileID: 8300000, guid: dfa034c9de03f564592dd958a5c0480a, type: 3}
     Volume: 1
+    Pitch: 1
+    AudioSource: {fileID: 0}
+  - Name: Music
+    Clip: {fileID: 8300000, guid: f05ff49bbc631cd42b4a9e13804b7f43, type: 3}
+    Volume: 0.1
     Pitch: 1
     AudioSource: {fileID: 0}

@@ -236,6 +236,7 @@ public class GameDirector : MonoBehaviour
     private void Start()
     {
         StartFight();
+        AudioManagerInstance.Play("Music", loop: true);
     }
 
 #if DEBUG
