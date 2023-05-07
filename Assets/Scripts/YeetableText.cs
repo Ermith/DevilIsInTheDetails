@@ -15,10 +15,17 @@ public class YeetableText : MonoBehaviour
         var go = yeetableText.gameObject;
         go.transform.SetParent(GameObject.FindWithTag("Canvas").transform);
         yeetableText.Text.text = text;
-        yeetableText.Text.color = color;
         yeetableText.Text.fontSize = fontSize;
 
-        yeetableText.transform.DOMove(target, duration).SetEase(Ease.OutCubic).OnComplete(() => Destroy(go));
+        var transparentColor = new Color(color.r, color.g, color.b, 0f);
+        yeetableText.Text.color = transparentColor;
+
+        var sequence = DOTween.Sequence();
+        sequence.Append(yeetableText.Text.DOColor(color, duration * 0.1f).SetEase(Ease.OutCubic));
+        sequence.Join(yeetableText.transform.DOMove(target, duration).SetEase(Ease.OutCubic));
+        sequence.Insert(duration * 0.9f, yeetableText.Text.DOColor(transparentColor, duration * 0.1f).SetEase(Ease.OutCubic));
+        sequence.OnComplete(() => Destroy(go));
+        sequence.Play();
 
         if (spinSpeed > 0f)
         {

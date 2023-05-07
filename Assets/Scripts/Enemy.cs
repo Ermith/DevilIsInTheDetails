@@ -93,6 +93,12 @@ public class Enemy : MonoBehaviour
     {
         var hero = GameDirector.HeroInstance;
         hero.GetComponent<Health>().HitBy(Damage, Health.DamageType.Slash, gameObject);
+
+        // animate slight movement to the left
+        Sequence sequence = DOTween.Sequence();
+        sequence.Append(transform.DOMoveX(transform.position.x + Damage / 10f, 0.1f).SetEase(Ease.OutCubic));
+        sequence.Append(transform.DOMoveX(transform.position.x - Damage / 4f, 0.1f).SetEase(Ease.OutCubic));
+        sequence.Append(transform.DOMoveX(transform.position.x, 0.1f).SetEase(Ease.InCubic));
     }
 
     private void OnDeath(GameObject attacker)
