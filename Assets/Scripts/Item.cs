@@ -304,6 +304,7 @@ public class Item : MonoBehaviour
         var devilAnimation = Instantiate(_devilPrefab).GetComponent<Animation>();
 
         int r = UnityEngine.Random.Range(0, devilAnimation.GetClipCount());
+        GameDirector.AudioManagerInstance.Play($"DevilLaugh{r + 1}");
         foreach (AnimationState c in devilAnimation)
             if (r-- == 0) { clip = c.name; break; }
 

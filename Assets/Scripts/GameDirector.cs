@@ -26,6 +26,7 @@ public class GameDirector : MonoBehaviour
     public static ItemManager ItemManagerInstance { get; private set; }
     public static EnemyManager EnemyManagerInstance { get; private set; }
     public static KarmaBar KarmaBarInstance { get; private set; }
+    public static AudioManager AudioManagerInstance { get; private set; }
 
     public static float SimulationTime = 0f;
 
@@ -173,6 +174,7 @@ public class GameDirector : MonoBehaviour
         ItemManagerInstance = FindObjectOfType<ItemManager>();
         EnemyManagerInstance = FindObjectOfType<EnemyManager>();
         KarmaBarInstance = FindObjectOfType<KarmaBar>();
+        AudioManagerInstance = FindObjectOfType<AudioManager>();
 
         // HERO
         HeroInstance = Instantiate(_heroPrefab);
