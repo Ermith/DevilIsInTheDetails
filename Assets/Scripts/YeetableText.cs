@@ -9,14 +9,15 @@ public class YeetableText : MonoBehaviour
 {
     public TextMeshProUGUI Text;
 
-    public static void Yeet(string text, Color color, Vector3 source, Vector3 target, float duration, float spinSpeed = 0f)
+    public static void Yeet(string text, Color color, Vector3 source, Vector3 target, float duration, float spinSpeed = 0f, int fontSize = 4)
     {
-        var go = Instantiate(GameDirector.GameDirectorInstance.YeetableTextPrefab, source, Quaternion.identity);
+        var yeetableText = Instantiate(GameDirector.GameDirectorInstance.YeetableTextPrefab, source, Quaternion.identity);
+        var go = yeetableText.gameObject;
         go.transform.SetParent(GameObject.FindWithTag("Canvas").transform);
-        var yeetableText = go.GetComponent<YeetableText>();
         yeetableText.Text.text = text;
         yeetableText.Text.color = color;
-        
+        yeetableText.Text.fontSize = fontSize;
+
         yeetableText.transform.DOMove(target, duration).SetEase(Ease.OutCubic).OnComplete(() => Destroy(go));
 
         if (spinSpeed > 0f)

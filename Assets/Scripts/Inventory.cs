@@ -255,7 +255,7 @@ public class Inventory : MonoBehaviour
 
                         var color = karmaDelta > 0 ? Color.blue : Color.red;
 
-                        YeetableText.Yeet(text, color, startPos,endPos, 1.5f);
+                        YeetableText.Yeet(text, color, startPos,endPos, 1f);
                     }
                 }
             }
