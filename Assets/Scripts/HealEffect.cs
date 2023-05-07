@@ -28,7 +28,7 @@ public class HealEffect : MonoBehaviour, IEffect
         ItemTile itemTile = null;
 
         if (dir == Vector2.up)
-            while (itemTile != null && itemTile != this)
+            while (itemTile == null || itemTile == this)
             {
                 pos.y += 1;
                 var cell = GameDirector.InventoryInstance.GetCell(pos);
@@ -37,7 +37,7 @@ public class HealEffect : MonoBehaviour, IEffect
             }
 
         if (dir == Vector2.down)
-            while (itemTile != null && itemTile != this)
+            while (itemTile == null || itemTile == this)
             {
                 pos.y -= 1;
                 var cell = GameDirector.InventoryInstance.GetCell(pos);
@@ -53,7 +53,7 @@ public class HealEffect : MonoBehaviour, IEffect
         args.Effect += () =>
         {
             itemTile.gameObject.AddComponent<HealEffect>().HealAmount = HealAmount / 2;
-            itemTile.Item.ColorTo(Color.red);
+            itemTile.Item.ChangeFontColor(Color.red, outline: true);
         };
     }
 

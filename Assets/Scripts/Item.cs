@@ -80,13 +80,25 @@ public class Item : MonoBehaviour
         }
     }
 
-    public void ColorTo(Color color)
+    [Flags]
+    public enum FontColoring
+    {
+        left = 1,
+        right = 2,
+        outline = 4
+    }
+
+    public void ChangeFontColor(Color color, bool left = false, bool right = false, bool outline = false)
     {
         foreach (var text in GetComponentsInChildren<TextMeshPro>())
         {
-            var rightColor = text.colorGradient.topRight;
-            var gradient = new VertexGradient(color, rightColor, color, rightColor);
+            Color rightColor = right ? color : text.colorGradient.topRight;
+            Color leftColor = left ? color : text.colorGradient.topLeft;
+            Color outlineColor = outline ? color : text.outlineColor;
+
+            var gradient = new VertexGradient(leftColor, rightColor, leftColor, rightColor);
             text.colorGradient = gradient;
+            text.outlineColor = outlineColor;
         }
     }
     public void TileDestroyed(ItemTile tile)

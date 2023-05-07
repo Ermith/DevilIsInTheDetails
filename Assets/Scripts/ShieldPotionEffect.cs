@@ -2,9 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PoisonEffect : MonoBehaviour, IEffect
+public class ShieldPotionEffect : MonoBehaviour, IEffect
 {
-    public int Ticks = 3;
+    public int Slash;
+    public int Thrust;
+    public int Strike;
 
     public void ExecuteEffect(EffectArgs args)
     {
@@ -21,7 +23,7 @@ public class PoisonEffect : MonoBehaviour, IEffect
         if (health != null)
         {
             args.Target = health.transform.position;
-            args.Effect += () => health.Poison(Ticks);
+            args.Effect += () => health.AddBlock(Slash, Thrust, Strike);
             return;
         }
 
@@ -36,7 +38,7 @@ public class PoisonEffect : MonoBehaviour, IEffect
                 itemTile = cell.ItemTile;
             }
 
-        else if (dir == Vector2.down)
+        if (dir == Vector2.down)
             while (itemTile == null || itemTile == this)
             {
                 pos.y -= 1;
@@ -45,27 +47,18 @@ public class PoisonEffect : MonoBehaviour, IEffect
                 itemTile = cell.ItemTile;
             }
 
-        if (itemTile == null || Ticks <= 1)
+        if (itemTile == null)
             return;
 
         args.Target = itemTile.transform.position;
         args.Effect += () =>
         {
-            var poison = itemTile.gameObject.AddComponent<PoisonEffect>();
-            poison.Ticks = Ticks - 1;
-            itemTile.Item.ChangeFontColor(Color.green, right:true);
+            var effect = itemTile.gameObject.AddComponent<ShieldPotionEffect>();
+            effect.Slash = Slash;
+            effect.Thrust = Thrust;
+            effect.Strike = Strike;
+
+            itemTile.Item.ChangeFontColor(Color.blue, left:true);
         };
-    }
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 }
