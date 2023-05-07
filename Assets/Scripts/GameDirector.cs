@@ -22,8 +22,8 @@ public class GameDirector : MonoBehaviour
     public static GameDirector GameDirectorInstance { get; private set; }
     public static Inventory InventoryInstance { get; private set; }
     public static ItemManager ItemManagerInstance { get; private set; }
-
     public static EnemyManager EnemyManagerInstance { get; private set; }
+    public static KarmaBar KarmaBarInstance { get; private set; }
 
     public static float SimulationTime = 0f;
 
@@ -39,11 +39,30 @@ public class GameDirector : MonoBehaviour
 
     public bool IsPaused = false;
 
-    [SerializeField]
-    public float PosSentiment { get; set; }
+    private float _posSentiment;
+    private float _negSentiment;
 
     [SerializeField]
-    public float NegSentiment { get; set; }
+    public float PosSentiment
+    {
+        get => _posSentiment;
+        set
+        {
+            _posSentiment = value;
+            KarmaBarInstance.OnKarmaChange();
+        }
+    }
+
+    [SerializeField]
+    public float NegSentiment
+    {
+        get => _negSentiment;
+        set
+        {
+            _negSentiment = value;
+            KarmaBarInstance.OnKarmaChange();
+        }
+    }
 
     public Enemy DummyEnemy;
 
@@ -131,6 +150,7 @@ public class GameDirector : MonoBehaviour
         InventoryInstance = FindObjectOfType<Inventory>();
         ItemManagerInstance = FindObjectOfType<ItemManager>();
         EnemyManagerInstance = FindObjectOfType<EnemyManager>();
+        KarmaBarInstance = FindObjectOfType<KarmaBar>();
 
         // HERO
         HeroInstance = Instantiate(_heroPrefab);
