@@ -67,14 +67,14 @@ public class Inventory : MonoBehaviour
         }
         else
         {
-            var placeData = item.GetPlaceData();
-            if (placeData == null)
+            var (_, pos) = item.GetPlaceData();
+            if (pos == null)
             {
                 HighlightDrag(null, Vector2Int.zero);
             }
             else
             {
-                HighlightDrag(item, placeData.Value.Item2);
+                HighlightDrag(item, pos.Value);
             }
         }
     }

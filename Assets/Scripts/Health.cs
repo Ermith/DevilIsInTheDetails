@@ -24,6 +24,8 @@ public class Health : MonoBehaviour
 
     public event Action OnPoisonChange;
 
+    public float HealthBarHeight = 3f;
+
     public enum DamageType
     {
         Slash,
@@ -106,7 +108,7 @@ public class Health : MonoBehaviour
         Healthbar = Instantiate(GameDirector.GameDirectorInstance.Healthbar, canvas.transform);
         Healthbar.Health = this;
         RectTransform rectTransform = Healthbar.GetComponent<RectTransform>();
-        rectTransform.anchoredPosition = transform.position + Vector3.up * 2f;
+        rectTransform.anchoredPosition = transform.position + Vector3.up * HealthBarHeight;
         OnHeal += Healthbar.OnHeal;
         OnHit += Healthbar.OnHit;
         OnBlockChange += Healthbar.OnBlockChange;
