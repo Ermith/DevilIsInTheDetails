@@ -41,7 +41,8 @@ public class AudioManager : MonoBehaviour
                 s.AudioSource.volume = s.Volume;
                 s.AudioSource.pitch = s.Pitch;
                 s.AudioSource.loop = loop;
-                s.AudioSource.Play();
+
+                s.AudioSource.PlayOneShot(s.Clip, s.Volume);
                 return;
             }
     }

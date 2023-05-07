@@ -30,7 +30,13 @@ public class Enemy : MonoBehaviour
     void Start()
     {
         Health.OnDeath += OnDeath;
+        Health.OnHit += OnHit;
         PrepareNextAttack();
+    }
+
+    private void OnHit(int damage, Health.DamageType type, GameObject attacker)
+    {
+        GameDirector.AudioManagerInstance.Play("HammerHit");
     }
 
     void PrepareNextAttack()
@@ -93,6 +99,7 @@ public class Enemy : MonoBehaviour
     {
         var hero = GameDirector.HeroInstance;
         hero.GetComponent<Health>().HitBy(Damage, Health.DamageType.Slash, gameObject);
+        GameDirector.AudioManagerInstance.Play("SwordHit");
 
         // animate slight movement to the left
         Sequence sequence = DOTween.Sequence();

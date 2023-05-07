@@ -10,6 +10,12 @@ public class Hero : MonoBehaviour
     private void Start()
     {
         Health.OnDeath += OnDeath;
+        Health.OnHit += OnHit;
+    }
+
+    private void OnHit(int damage, Health.DamageType type, GameObject attacker)
+    {
+        GameDirector.AudioManagerInstance.Play("Ouch");
     }
 
     private void OnDeath(GameObject attacker)

@@ -48,15 +48,30 @@ MonoBehaviour:
   - Name: DevilLaugh1
     Clip: {fileID: 8300000, guid: 993e9480bc5b016488544de25ef3e5aa, type: 3}
     Volume: 0.3
-    Pitch: 1
+    Pitch: 1.4
     AudioSource: {fileID: 0}
   - Name: DevilLaugh2
     Clip: {fileID: 8300000, guid: cb9dc9b6d8b638d4cb1a0bd10389687b, type: 3}
     Volume: 0.3
-    Pitch: 1
+    Pitch: 1.4
     AudioSource: {fileID: 0}
   - Name: DevilLaugh3
     Clip: {fileID: 8300000, guid: 741cd98e2cb9f7143858da20748b7d30, type: 3}
     Volume: 0.3
-    Pitch: 1
+    Pitch: 1.4
+    AudioSource: {fileID: 0}
+  - Name: SwordHit
+    Clip: {fileID: 8300000, guid: 1bc9c9ab26b41ff4585aa29176bdf4a9, type: 3}
+    Volume: 1
+    Pitch: 1.4
+    AudioSource: {fileID: 0}
+  - Name: HammerHit
+    Clip: {fileID: 8300000, guid: c3e49c7715d037f4f9c8f7554176e91c, type: 3}
+    Volume: 1
+    Pitch: 1.4
+    AudioSource: {fileID: 0}
+  - Name: Ouch
+    Clip: {fileID: 8300000, guid: 2b4b65c7774859e4eba4cdbf0c9497aa, type: 3}
+    Volume: 1
+    Pitch: 1.4
     AudioSource: {fileID: 0}
