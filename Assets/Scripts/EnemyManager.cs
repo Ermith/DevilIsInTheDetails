@@ -43,9 +43,10 @@ public class EnemyManager : MonoBehaviour
         spriteRenderer.DOFade(1, 0.5f).SetEase(Ease.OutCubic);
         enemy.transform.DOMoveX(_enemySpawn.position.x, 0.5f).SetEase(Ease.OutBack);
 
-        enemy.GetComponent<Health>().SetupHealthbar();
+        Health health = enemy.GetComponent<Health>();
+        health.SetupHealthbar();
         RectTransform rt = enemy.GetComponent<Health>().Healthbar.GetComponent<RectTransform>();
-        rt.DOAnchorPos((Vector2)_enemySpawn.transform.position + Vector2.up * 2f, 0.5f).SetEase(Ease.OutBack);
+        rt.DOAnchorPos((Vector2)_enemySpawn.transform.position + Vector2.up * health.HealthBarHeight, 0.5f).SetEase(Ease.OutBack);
 
         return enemy;
     }
