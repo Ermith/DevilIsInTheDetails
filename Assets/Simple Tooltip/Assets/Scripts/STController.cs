@@ -68,7 +68,11 @@ public class STController : MonoBehaviour
 
         if (showNow)
         {
-            rect.anchoredPosition = Input.mousePosition;
+            var position = Input.mousePosition;
+            // clip position not to poke out of camera
+            position.x = Mathf.Clamp(position.x, 0, Screen.width - rect.sizeDelta.x);
+            position.y = Mathf.Clamp(position.y, 0, Screen.height - rect.sizeDelta.y);
+            rect.anchoredPosition = position;
         }
 
         showInFrames -= 1;
