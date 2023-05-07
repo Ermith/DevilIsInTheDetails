@@ -83,7 +83,7 @@ public class WordManager : MonoBehaviour
             return '#'; // terrible curse
         }
 
-        if (karma > 0.05f && Random.value < 0.02f + 0.15f * karma)
+        if (karma > 0.05f && Random.value < 0.02f + 0.25f * karma)
         {
             return '\0'; // no curse at all!
         }
