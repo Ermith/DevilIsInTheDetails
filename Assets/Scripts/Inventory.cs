@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
@@ -266,9 +267,9 @@ public class Inventory : MonoBehaviour
 
                         string text = word + "\n";
                         if (karmaDelta > 0)
-                            text += $"+{(int)(karmaDelta * 1000)}";
+                            text += $"+{(int)MathF.Round(karmaDelta * 1000)}";
                         else
-                            text += $"{(int)(karmaDelta * 1000)}";
+                            text += $"{(int)MathF.Round(karmaDelta * 1000)}";
 
                         var color = karmaDelta > 0 ? Color.blue : Color.red;
 

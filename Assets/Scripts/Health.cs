@@ -114,6 +114,7 @@ public class Health : MonoBehaviour
         OnHit += Healthbar.OnHit;
         OnBlockChange += Healthbar.OnBlockChange;
         OnPoisonChange += Healthbar.OnPoisonChange;
+        Healthbar.SetHealth(HealthPoints, MaxHealth, 0f);
     }
 
     public void HitBy(int damage, DamageType type, GameObject attacker)

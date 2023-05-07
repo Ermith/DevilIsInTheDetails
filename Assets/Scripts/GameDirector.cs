@@ -197,7 +197,7 @@ public class GameDirector : MonoBehaviour
     {
         string text = $"Enemies Defeated: {EnemiesDefeated}\n";
         text += $"Words Matched: {WordsMatched.Count}\n";
-        text += $"Karma: {(int)(Karma * 1000)}\n";
+        text += $"Karma: {(int)MathF.Round(Karma * 1000)}\n";
 
         PauseStats.text = text;
         GameOverStats.text = text;

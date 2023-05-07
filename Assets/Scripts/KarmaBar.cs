@@ -26,7 +26,7 @@ public class KarmaBar : MonoBehaviour
             x =>
             {
                 _textNumber = x;
-                Text.text = $"{(int)(x * 1000)}";
+                Text.text = $"{(int)MathF.Round(x * 1000)}";
             },
             karma,
             tweenTime
