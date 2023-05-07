@@ -63,7 +63,12 @@ public class WordManager : MonoBehaviour
         (float pos, float neg) = _sentiment[word];
         if (word.Contains("DEVIL"))
         {
-            (pos, neg) = (0, 6.66f); // devilish >:)
+            return (0, 6.66f); // devilish >:)
+        }
+        if (pos == 0 && neg == 0 && word[^1] == 'S')
+        {
+            // plural
+            return GetSentiment(word[..^1]);
         }
         return (pos, neg);
     }
