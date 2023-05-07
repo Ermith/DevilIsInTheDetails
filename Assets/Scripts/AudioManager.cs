@@ -37,6 +37,9 @@ public class AudioManager : MonoBehaviour
         foreach (Sound s in Sounds)
             if (s.Name == name)
             {
+                s.AudioSource.clip = s.Clip;
+                s.AudioSource.volume = s.Volume;
+                s.AudioSource.pitch = s.Pitch;
                 s.AudioSource.loop = loop;
                 s.AudioSource.Play();
                 return;
