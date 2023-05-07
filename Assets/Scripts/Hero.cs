@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 [RequireComponent(typeof(Health))]
@@ -15,6 +16,13 @@ public class Hero : MonoBehaviour
 
     private void OnHit(int damage, Health.DamageType type, GameObject attacker)
     {
+        StartCoroutine(DelayedOuch(0.5f));
+    }
+
+ 
+    private IEnumerator DelayedOuch(float secs)
+    {
+        yield return new WaitForSeconds(secs);
         GameDirector.AudioManagerInstance.Play("Ouch");
     }
 
