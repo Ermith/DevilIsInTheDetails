@@ -105,7 +105,7 @@ public class GameDirector : MonoBehaviour
 
         if (IsGameOver && Input.GetKeyDown(KeyCode.Return))
         {
-            UnityEngine.SceneManagement.SceneManager.LoadScene("SampleScene");
+            SceneManager.LoadScene("Game");
         }
 
         // Tooltip stuff, should be moved to its own class
