@@ -1,6 +1,8 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Threading;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 public class WordManager : MonoBehaviour
 {
@@ -13,8 +15,6 @@ public class WordManager : MonoBehaviour
     private readonly Dictionary<string, (float, float)> _sentiment = new();
 
     private readonly  Dictionary<char, int> _letterFrequency = new();
-
-    private int _totalLetters;
 
     private void Awake()
     {
@@ -45,7 +45,6 @@ public class WordManager : MonoBehaviour
                 {
                     _letterFrequency.Add(c, 1);
                 }
-                _totalLetters++;
             }
         }
 
@@ -69,13 +68,31 @@ public class WordManager : MonoBehaviour
         return (pos, neg);
     }
 
-    public char GetLetter()
+    public char GetLetter(float karma)
     {
-        // weighted pick based on letter frequencies
-        int r = Random.Range(0, _totalLetters);
+        // makes it so karma 0 => power of 0.75 approximately and at 0 and 1 it matches the original
+        float pow = MathF.Pow((karma + 1f) / 2, 0.4f) * 2 - 1;
+
+        if (karma < -0.05f && Random.value < 0.02f + 0.15f * (-karma))
+        {
+            return '#'; // terrible curse
+        }
+
+        if (karma > 0.05f && Random.value < 0.02f + 0.15f * karma)
+        {
+            return '\0'; // no curse at all!
+        }
+
+        float total = 0;
         foreach (KeyValuePair<char, int> pair in _letterFrequency)
         {
-            r -= pair.Value;
+            total += MathF.Pow(pair.Value, pow);
+        }
+        // weighted pick based on letter frequencies
+        float r = Random.Range(0f, total);
+        foreach (KeyValuePair<char, int> pair in _letterFrequency)
+        {
+            r -= MathF.Pow(pair.Value, pow);
             if (r <= 0)
             {
                 return pair.Key;

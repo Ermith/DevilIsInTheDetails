@@ -27,7 +27,8 @@ public class ItemTile : MonoBehaviour
 
     void Start()
     {
-        Letter = GameDirector.WordManagerInstance.GetLetter();
+        float karma = GameDirector.GameDirectorInstance.Karma;
+        Letter = GameDirector.WordManagerInstance.GetLetter(karma);
     }
 
     public void FixLetterRotation()

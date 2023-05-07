@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using DG.Tweening;
@@ -51,6 +52,10 @@ public class GameDirector : MonoBehaviour
     public Vector2 LastMousePosition = Vector2.zero;
 
     public float TooltipDelay = 0.3f;
+
+    public float KarmaFactor = 0.2f;
+
+    public float Karma => Math.Clamp((PosSentiment - NegSentiment) * KarmaFactor, -1f, 1f);
 
     public void StartFight()
     {
@@ -155,6 +160,7 @@ public class GameDirector : MonoBehaviour
 
         GUILayout.Label($"PosSentiment: {PosSentiment}");
         GUILayout.Label($"NegSentiment: {NegSentiment}");
+        GUILayout.Label($"Karma: {Karma}");
 
         GUILayout.EndVertical();
     }
@@ -172,9 +178,6 @@ public class GameDirector : MonoBehaviour
             Unpause();
         IsGameOver = true;
         GameOverCanvas.gameObject.SetActive(true);
-
-        Health heroHealth = HeroInstance.GetComponent<Health>();
-        heroHealth.Healthbar.SetHealth(0, heroHealth.MaxHealth, 0f);
     }
 
     public void Unpause()

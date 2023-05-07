@@ -199,7 +199,7 @@ public class Inventory : MonoBehaviour
         cells = null;
         List<Cell> currentCells = new();
         Cell cell = GetCell(pos);
-        while (cell != null && cell.ItemTile != null)
+        while (cell != null && cell.ItemTile != null && cell.ItemTile.Letter != '\0' && cell.ItemTile.Letter != '#')
         {
             currentWord += cell.ItemTile.Letter;
             currentCells.Add(cell);
@@ -221,6 +221,12 @@ public class Inventory : MonoBehaviour
         List<Cell> result = new();
         foreach (Cell cell in GetCells())
         {
+            if (cell.ItemTile?.Letter == '\0')
+            {
+                result.Add(cell);
+                Debug.Log($"Free tile at {cell.InInventoryPos}");
+                continue;
+            }
             foreach (Vector2Int dir in new[] { Vector2Int.down, Vector2Int.right })
             {
                 if (WordAt(cell.InInventoryPos, dir, out string word, out List<Cell> cells))
