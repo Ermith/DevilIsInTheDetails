@@ -47,16 +47,16 @@ MonoBehaviour:
   Sounds:
   - Name: DevilLaugh1
     Clip: {fileID: 8300000, guid: 993e9480bc5b016488544de25ef3e5aa, type: 3}
-    Volume: 1
+    Volume: 0.3
     Pitch: 1
     AudioSource: {fileID: 0}
   - Name: DevilLaugh2
     Clip: {fileID: 8300000, guid: cb9dc9b6d8b638d4cb1a0bd10389687b, type: 3}
-    Volume: 1
+    Volume: 0.3
     Pitch: 1
     AudioSource: {fileID: 0}
   - Name: DevilLaugh3
     Clip: {fileID: 8300000, guid: 741cd98e2cb9f7143858da20748b7d30, type: 3}
-    Volume: 1
+    Volume: 0.3
     Pitch: 1
     AudioSource: {fileID: 0}
