@@ -1,3 +1,4 @@
+using DG.Tweening;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -127,6 +128,9 @@ public class Health : MonoBehaviour
 
         HealthPoints -= damage;
         OnHit?.Invoke(damage, type, attacker);
+
+        float relDelta = damage / (float)MaxHealth;
+        transform.DOShakePosition(0.5f, relDelta * 1f);
 
         if (HealthPoints <= 0)
         {
