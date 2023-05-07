@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using DG.Tweening;
 using Microsoft.Unity.VisualStudio.Editor;
+using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -79,6 +80,13 @@ public class GameDirector : MonoBehaviour
 
     public YeetableText YeetableTextPrefab;
 
+    public int EnemiesDefeated = 0;
+
+    public List<(string, float)> WordsMatched = new();
+
+    public TextMeshProUGUI PauseStats;
+    public TextMeshProUGUI GameOverStats;
+
     public void StartFight()
     {
         if (_fighting) return;
@@ -135,11 +143,22 @@ public class GameDirector : MonoBehaviour
         LastMousePosition = mousePos;
     }
 
+    public void UpdateStatsText()
+    {
+        string text = $"Enemies Defeated: {EnemiesDefeated}\n";
+        text += $"Words Matched: {WordsMatched.Count}\n";
+        text += $"Karma: {Karma}\n";
+
+        PauseStats.text = text;
+        GameOverStats.text = text;
+    }
+
     public void EndFight()
     {
         if (!_fighting) return;
         _fighting = false;
 
+        EnemiesDefeated++;
         EnemyInstance = DummyEnemy;
     }
 
@@ -193,12 +212,14 @@ public class GameDirector : MonoBehaviour
     {
         IsPaused = true;
         PauseCanvas.gameObject.SetActive(true);
+        UpdateStatsText();
     }
 
     public void GameOver()
     {
         if (IsPaused)
             Unpause();
+        UpdateStatsText();
         IsGameOver = true;
         GameOverCanvas.gameObject.SetActive(true);
     }
