@@ -1645,6 +1645,7 @@ MonoBehaviour:
   LastMousePosition: {x: 0, y: 0}
   TooltipDelay: 0.3
   KarmaFactor: 0.2
+  YeetableTextPrefab: {fileID: 5635826223437665761, guid: c501075b034ad244583b8298322524ac, type: 3}
 --- !u!4 &1726133491
 Transform:
   m_ObjectHideFlags: 0
