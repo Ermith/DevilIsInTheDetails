@@ -8,6 +8,15 @@ public class ShieldPotionEffect : MonoBehaviour, IEffect
     public int Thrust;
     public int Strike;
 
+    public string TooltipText =>
+        $"Adds block.\n" +
+        $"Slash: {Slash}\n" +
+        $"Thrust: {Thrust}\n" +
+        $"Strike: {Strike}\n" +
+        $"Pointing left shields the hero.\n" +
+        $"Pointing right shields the enemy.\n" +
+        $"Pointing up or down transfers this effect to the next item in that direction.";
+
     public void ExecuteEffect(EffectArgs args)
     {
         Vector2 dir = GetComponent<Item>().transform.up;
