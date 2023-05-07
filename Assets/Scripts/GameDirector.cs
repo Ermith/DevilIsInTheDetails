@@ -77,6 +77,8 @@ public class GameDirector : MonoBehaviour
 
     public float Karma => Math.Clamp((PosSentiment - NegSentiment) * KarmaFactor, -1f, 1f);
 
+    public YeetableText YeetableTextPrefab;
+
     public void StartFight()
     {
         if (_fighting) return;

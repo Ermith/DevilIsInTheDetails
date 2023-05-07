@@ -234,8 +234,29 @@ public class Inventory : MonoBehaviour
                     result.AddRange(cells);
                     Debug.Log($"Word completed: {word}");
                     (float pos, float neg) = GameDirector.WordManagerInstance.GetSentiment(word);
+
+                    float beforeKarma = GameDirector.GameDirectorInstance.Karma;
+
                     GameDirector.GameDirectorInstance.PosSentiment += pos;
                     GameDirector.GameDirectorInstance.NegSentiment += neg;
+
+                    float karmaDelta = GameDirector.GameDirectorInstance.Karma - beforeKarma;
+                    if (karmaDelta > 0)
+                    {
+                        Vector3 startPos = cells[cells.Count / 2].transform.position;
+                        var karmaRect = GameDirector.KarmaBarInstance.GetComponent<RectTransform>();
+                        Vector3 endPos = karmaRect.anchoredPosition;
+
+                        string text = word + "\n";
+                        if (karmaDelta > 0)
+                            text += $"+{(int)(karmaDelta * 1000)}";
+                        else
+                            text += $"{(int)(karmaDelta * 1000)}";
+
+                        var color = karmaDelta > 0 ? Color.blue : Color.red;
+
+                        YeetableText.Yeet(text, color, startPos,endPos, 1.5f);
+                    }
                 }
             }
         }
