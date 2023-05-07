@@ -247,7 +247,7 @@ public class Item : MonoBehaviour
         }
     }
 
-    public (Cell, Vector2Int)? GetPlaceData()
+    public (Cell?, Vector2Int?) GetPlaceData()
     {
         // ray from the _draggedTile
         Ray ray = new Ray(_draggedTile.transform.position + new Vector3(0, 0, 1), Vector3.back);
@@ -259,8 +259,10 @@ public class Item : MonoBehaviour
             var placePos = cell.InInventoryPos - _draggedTile.RotatedInItemPos();
             if (inventory.CanPlace(this, placePos, this))
                 return (cell, placePos);
+            return (cell, null);
         }
-        return null;
+
+        return (null, null);
     }
 
     bool OnDropped()
@@ -271,14 +273,17 @@ public class Item : MonoBehaviour
             return true;
         }
 
-        var placeData = GetPlaceData();
-        if (placeData != null)
+        var (cell, placePos) = GetPlaceData();
+        if (placePos != null)
         {
-            var (cell, placePos) = placeData.Value;
-            cell.Inventory.PlaceItem(this, placePos);
+            cell.Inventory.PlaceItem(this, placePos.Value);
 
             return true;
         }
+
+        // don't place on a cell if we don't fit there
+        if (cell != null)
+            return false;
 
         // if out of camera view
         if (!InCameraView()) {
