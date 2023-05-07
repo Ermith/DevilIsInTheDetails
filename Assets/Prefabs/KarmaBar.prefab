@@ -221,6 +221,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7944916453919443506}
   - component: {fileID: 1174510371694323904}
+  - component: {fileID: 1813396824874658420}
   m_Layer: 5
   m_Name: KarmaBar
   m_TagString: Untagged
@@ -265,9 +266,28 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   simpleTooltipStyle: {fileID: 11400000, guid: f1d1c287ded68be43934c42c517f05d2, type: 2}
-  infoLeft: Your karma.\nAffects the cursed letters you get.\nUse positively charged
-    words and avoid using negatively charged words to keep it high.
+  infoLeft: 'Your karma
+
+    Affects the cursed letters you get.
+
+    Use positively
+    charged words and avoid using negatively charged words to keep it high.'
   infoRight: 
+--- !u!114 &1813396824874658420
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7944916453919443505}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8c669c8b8491eac49966f58da8b99499, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  GoodBar: {fileID: 7944916454213541199}
+  EvilBar: {fileID: 7944916453334565705}
+  Text: {fileID: 1600713435294304303}
 --- !u!1 &7944916454213541197
 GameObject:
   m_ObjectHideFlags: 0
