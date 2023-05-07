@@ -127,8 +127,8 @@ MonoBehaviour:
   simpleTooltipStyle: {fileID: 11400000, guid: f1d1c287ded68be43934c42c517f05d2, type: 2}
   infoLeft: 'Trash
 
-    Drop not-yet-placed items here to get rid of them.
+    Drop loose (not yet placed) items here to get rid of them.
 
     You
-    can only have 3 not-yet-placed items at once.'
+    can only have 5 loose items at once.'
   infoRight: 

@@ -1680,7 +1680,7 @@ MonoBehaviour:
     - {fileID: 7952085110807939507, guid: 8d72470fc1bffa147b040e3c1bdff406, type: 3}
     values: 64000000050000000a0000000a000000140000001400000064000000
   LooseItems: 0
-  MaxLooseItems: 3
+  MaxLooseItems: 5
   PerSecondChance: 0.3
 --- !u!4 &1915043755
 Transform:
