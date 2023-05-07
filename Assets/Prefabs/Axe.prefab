@@ -250,6 +250,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Axe
       objectReference: {fileID: 0}
+    - target: {fileID: 1558583955704837554, guid: be64c54c627693f4b8a255d06692490c, type: 3}
+      propertyPath: TooltipText
+      value: Axe
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: be64c54c627693f4b8a255d06692490c, type: 3}
 --- !u!1 &9120767388182103134 stripped

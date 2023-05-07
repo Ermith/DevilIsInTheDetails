@@ -13,4 +13,5 @@ public class EffectArgs
 public interface IEffect
 {
     public void ExecuteEffect(EffectArgs args);
+    public string TooltipText { get; }
 }

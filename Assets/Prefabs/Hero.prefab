@@ -129,8 +129,10 @@ MonoBehaviour:
   simpleTooltipStyle: {fileID: 11400000, guid: f1d1c287ded68be43934c42c517f05d2, type: 2}
   infoLeft: 'This is you. Try not to die.
 
-    Match English words from items to
-    activate them. But be careful where you point your weapons.'
+    Match 4+ letter English words from
+    items to activate them.
+
+    But be careful where you point your weapons.'
   infoRight: 
 --- !u!65 &-2855939882357944028
 BoxCollider:

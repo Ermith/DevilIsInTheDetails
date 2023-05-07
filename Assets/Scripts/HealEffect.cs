@@ -57,15 +57,5 @@ public class HealEffect : MonoBehaviour, IEffect
         };
     }
 
-    // Start is called before the first frame update
-    void Start()
-    {
-
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
+    public string TooltipText => $"Heals {HealAmount} HP.\nPointing left heals the hero.\nPointing right heals the enemy.\nPointing up or down transfers this effect to the next item in that direction.";
 }

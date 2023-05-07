@@ -20,13 +20,13 @@ public class AxeDamageEffect : MonoBehaviour, IEffect
         if (dir == Vector2.down)
         {
             health = GameDirector.EnemyInstance.GetComponent<Health>();
-            type = Health.DamageType.Strike;
+            type = Health.DamageType.Slash;
         }
 
         if (dir == Vector2.right)
         {
             health = GameDirector.EnemyInstance.GetComponent<Health>();
-            type = Health.DamageType.Slash;
+            type = Health.DamageType.Strike;
         }
 
         if (dir == Vector2.left)
@@ -41,4 +41,6 @@ public class AxeDamageEffect : MonoBehaviour, IEffect
         args.Target = health.transform.position;
         args.Effect += () => health.HitBy(Damage, type, gameObject);
     }
+
+    public string TooltipText => $"Deals {Damage} damage.\nPointing up: Slash damage.\nPointing down: Slash damage.\nPointing right: Bludgeoning damage.\nPointing left: Bludgeoning damage TO YOU.";
 }

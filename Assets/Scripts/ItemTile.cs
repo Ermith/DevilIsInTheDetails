@@ -35,6 +35,20 @@ public class ItemTile : MonoBehaviour
         Text.transform.up = Vector3.up;
     }
 
+    public void InitTooltip(string itemTooltip)
+    {
+        SimpleTooltip tooltip = gameObject.GetComponent<SimpleTooltip>() ?? gameObject.AddComponent<SimpleTooltip>();
+        string tooltipText = itemTooltip;
+        tooltipText += "\n";
+        if (Letter == '#')
+            tooltipText += "This tile is super duper cursed and cannot be used in any words. Oh no.";
+        else if (Letter == '\0')
+            tooltipText += "This tile is not cursed at all. It will be used as soon as it is placed.";
+        else
+            tooltipText += "This tile contains letter " + Letter + ". Form a 4+ letter English word to use it.";
+        tooltip.infoLeft = tooltipText;
+    }
+
     private Vector2Int? _inItemPos;
     
     public Vector2Int InItemPos()

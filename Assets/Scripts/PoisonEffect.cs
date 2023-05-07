@@ -56,16 +56,5 @@ public class PoisonEffect : MonoBehaviour, IEffect
             itemTile.Item.ColorTo(Color.green);
         };
     }
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+    public string TooltipText => $"Poisons the target for {Ticks} turns.\nPointing left poisons the hero.\nPointing right poisons the enemy.\nPointing up or down transfers this effect to the next item in that direction.";
 }
