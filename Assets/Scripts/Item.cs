@@ -4,7 +4,6 @@ using System;
 using System.Runtime.CompilerServices;
 using JetBrains.Annotations;
 using UnityEngine;
-using static UnityEditor.PlayerSettings;
 using TMPro;
 
 public class Item : MonoBehaviour

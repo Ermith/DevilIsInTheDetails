@@ -1,6 +1,5 @@
 ﻿
 using DG.Tweening;
-using Microsoft.Unity.VisualStudio.Editor;
 using TMPro;
 using UnityEngine;
 
