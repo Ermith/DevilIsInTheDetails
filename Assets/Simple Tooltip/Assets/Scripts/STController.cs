@@ -1,8 +1,10 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using JetBrains.Annotations;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using UnityEngine.EventSystems;
 
 public class STController : MonoBehaviour
 {
@@ -14,7 +16,10 @@ public class STController : MonoBehaviour
     private RectTransform rect;
     private int showInFrames = -1;
     private bool showNow = false;
-    
+    [CanBeNull] private SimpleTooltip _lastActiveTooltip = null;
+    private float _timeActive = 0;
+    private float _tooltipDelay = 0.35f;
+
     private void Awake()
     {
         // Load up both text layers
@@ -40,6 +45,30 @@ public class STController : MonoBehaviour
     {
         ResizeToMatchText();
         UpdateShow();
+
+        if (SimpleTooltip.ActiveTooltip != null && SimpleTooltip.ActiveTooltip == _lastActiveTooltip &&
+            !Input.GetMouseButton(0) && !Input.GetMouseButton(1) && !Input.GetMouseButton(2))
+        {
+            _timeActive += Time.deltaTime;
+        }
+        else
+        {
+            if (_timeActive > _tooltipDelay)
+            {
+                if (SimpleTooltip.ActiveTooltip != null)
+                    SimpleTooltip.ActiveTooltip.HideTooltip();
+                if (_lastActiveTooltip != null)
+                    _lastActiveTooltip.HideTooltip();
+            }
+            _timeActive = 0;
+        }
+
+        if (SimpleTooltip.ActiveTooltip != null && _timeActive > _tooltipDelay && _timeActive - Time.deltaTime < _tooltipDelay)
+        {
+            SimpleTooltip.ActiveTooltip.ShowTooltipForReal();
+        }
+
+        _lastActiveTooltip = SimpleTooltip.ActiveTooltip;
     }
 
     private void ResizeToMatchText()
@@ -140,5 +169,24 @@ public class STController : MonoBehaviour
         showInFrames = -1;
         showNow = false;
         rect.anchoredPosition = new Vector2(Screen.currentResolution.width * 420, Screen.currentResolution.height * 420);
+
+        PointerEventData pointerData = new PointerEventData(EventSystem.current)
+        {
+            pointerId = -1,
+        };
+
+        pointerData.position = Input.mousePosition;
+
+        List<RaycastResult> results = new List<RaycastResult>();
+        EventSystem.current.RaycastAll(pointerData, results);
+
+        foreach (RaycastResult result in results)
+        {
+            SimpleTooltip tooltip = result.gameObject.GetComponent<SimpleTooltip>();
+            if (tooltip != null)
+            {
+                tooltip.OnPointerEnter(pointerData);
+            }
+        }
     }
 }

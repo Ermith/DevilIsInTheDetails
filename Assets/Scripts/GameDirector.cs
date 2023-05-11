@@ -71,12 +71,6 @@ public class GameDirector : MonoBehaviour
 
     public Enemy DummyEnemy;
 
-    public float TimeMouseStopped = 0;
-
-    public Vector2 LastMousePosition = Vector2.zero;
-
-    public float TooltipDelay = 0.3f;
-
     public float KarmaFactor = 0.2f;
 
     public float Karma => Math.Clamp((PosSentiment - NegSentiment) * KarmaFactor, -1f, 1f);
@@ -122,30 +116,6 @@ public class GameDirector : MonoBehaviour
         {
             SceneManager.LoadScene("Game");
         }
-
-        // Tooltip stuff, should be moved to its own class
-        var mousePos = (Vector2)Input.mousePosition;
-        if (mousePos == LastMousePosition)
-        {
-            TimeMouseStopped += Time.deltaTime;
-        }
-        else
-        {
-            if (TimeMouseStopped > TooltipDelay)
-            {
-                if (SimpleTooltip.ActiveTooltip != null)
-                    SimpleTooltip.ActiveTooltip.HideTooltip();
-            }
-            TimeMouseStopped = 0;
-        }
-
-        if (TimeMouseStopped > TooltipDelay && TimeMouseStopped - Time.deltaTime < TooltipDelay)
-        {
-            if (SimpleTooltip.ActiveTooltip != null)
-                SimpleTooltip.ActiveTooltip.ShowTooltipForReal();
-        }
-
-        LastMousePosition = mousePos;
 
         if ((IsPaused || IsGameOver) && Random.value < Time.deltaTime)
         {

@@ -8,9 +8,9 @@ public class Healthbar : MonoBehaviour
     public UnityEngine.UI.Image HealthBar;
     public UnityEngine.UI.Image DamageBar;
     public UnityEngine.UI.Image Background;
-    public UnityEngine.UI.Image SlashBlock;
-    public UnityEngine.UI.Image StrikeBlock;
-    public UnityEngine.UI.Image ThrustBlock;
+    public Transform SlashBlock;
+    public Transform StrikeBlock;
+    public Transform ThrustBlock;
     public UnityEngine.UI.Image PoisonIndicator;
     public UnityEngine.UI.Image AttackIndicator;
     public UnityEngine.UI.Image AttackSlash;
