@@ -60,6 +60,8 @@ public class WordManager : MonoBehaviour
     public (float, float) GetSentiment(string word)
     {
         word = word.ToUpper();
+        if (!_sentiment.ContainsKey(word))
+            return (0, 0);
         (float pos, float neg) = _sentiment[word];
         if (word.Contains("DEVIL"))
         {
