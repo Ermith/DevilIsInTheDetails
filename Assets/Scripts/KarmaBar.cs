@@ -12,7 +12,7 @@ public class KarmaBar : MonoBehaviour
 
     private float _textNumber = -1;
 
-    public void SetKarma(float karma, float tweenTime = 1.2f)
+    public void SetKarma(int textKarma, float karma, float tweenTime = 1.2f)
     {
         if (_textNumber == -1)
             _textNumber = karma;
@@ -26,7 +26,7 @@ public class KarmaBar : MonoBehaviour
             x =>
             {
                 _textNumber = x;
-                Text.text = $"{(int)MathF.Round(x * 1000)}";
+                Text.text = $"{textKarma}";
             },
             karma,
             tweenTime
@@ -35,6 +35,6 @@ public class KarmaBar : MonoBehaviour
 
     public void OnKarmaChange()
     {
-        SetKarma(GameDirector.GameDirectorInstance.Karma);
+        SetKarma(GameDirector.GameDirectorInstance.Karma, GameDirector.GameDirectorInstance.NormalizedKarma);
     }
 }

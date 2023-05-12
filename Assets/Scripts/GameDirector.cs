@@ -53,6 +53,8 @@ public class GameDirector : MonoBehaviour
         get => _posSentiment;
         set
         {
+            float delta = value - _posSentiment;
+            NormalizedKarma = Math.Clamp(NormalizedKarma + delta * KarmaFactor, -1, 1);
             _posSentiment = value;
             KarmaBarInstance.OnKarmaChange();
         }
@@ -64,6 +66,8 @@ public class GameDirector : MonoBehaviour
         get => _negSentiment;
         set
         {
+            float delta = value - _negSentiment;
+            NormalizedKarma = Math.Clamp(NormalizedKarma - delta * KarmaFactor, -1, 1);
             _negSentiment = value;
             KarmaBarInstance.OnKarmaChange();
         }
@@ -73,7 +77,8 @@ public class GameDirector : MonoBehaviour
 
     public float KarmaFactor = 0.2f;
 
-    public float Karma => Math.Clamp((PosSentiment - NegSentiment) * KarmaFactor, -1f, 1f);
+    public int Karma => (int)MathF.Round(NormalizedKarma * 1000);
+    public float NormalizedKarma { get; private set; }
 
     public YeetableText YeetableTextPrefab;
 
@@ -167,7 +172,7 @@ public class GameDirector : MonoBehaviour
     {
         string text = $"Enemies Defeated: {EnemiesDefeated}\n";
         text += $"Words Matched: {WordsMatched.Count}\n";
-        text += $"Karma: {(int)MathF.Round(Karma * 1000)}\n";
+        text += $"Karma: {Karma}\n";
 
         PauseStats.text = text;
         GameOverStats.text = text;

@@ -253,12 +253,12 @@ public class Inventory : MonoBehaviour
                     Debug.Log($"Word completed: {word}");
                     (float pos, float neg) = GameDirector.WordManagerInstance.GetSentiment(word);
 
-                    float beforeKarma = GameDirector.GameDirectorInstance.Karma;
+                    int beforeKarma = GameDirector.GameDirectorInstance.Karma;
 
                     GameDirector.GameDirectorInstance.PosSentiment += pos;
                     GameDirector.GameDirectorInstance.NegSentiment += neg;
 
-                    float karmaDelta = GameDirector.GameDirectorInstance.Karma - beforeKarma;
+                    int karmaDelta = GameDirector.GameDirectorInstance.Karma - beforeKarma;
                     if (karmaDelta != 0)
                     {
                         Vector3 startPos = cells[cells.Count / 2].transform.position;
@@ -267,9 +267,9 @@ public class Inventory : MonoBehaviour
 
                         string text = word + "\n";
                         if (karmaDelta > 0)
-                            text += $"+{(int)MathF.Round(karmaDelta * 1000)}";
+                            text += $"+{karmaDelta}";
                         else
-                            text += $"{(int)MathF.Round(karmaDelta * 1000)}";
+                            text += $"{karmaDelta}";
 
                         var color = karmaDelta > 0 ? Color.blue : Color.red;
 

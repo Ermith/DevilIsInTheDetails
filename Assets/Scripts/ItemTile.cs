@@ -27,7 +27,7 @@ public class ItemTile : MonoBehaviour
 
     void Start()
     {
-        float karma = GameDirector.GameDirectorInstance.Karma;
+        float karma = GameDirector.GameDirectorInstance.NormalizedKarma;
         Letter = GameDirector.WordManagerInstance.GetLetter(karma);
     }
 
