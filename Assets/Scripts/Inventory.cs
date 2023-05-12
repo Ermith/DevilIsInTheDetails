@@ -275,7 +275,7 @@ public class Inventory : MonoBehaviour
 
                         YeetableText.Yeet(text, color, startPos,endPos, 1f);
                     }
-
+                    
                     GameDirector.GameDirectorInstance.WordsMatched.Add((word, karmaDelta));
                 }
             }

@@ -8,6 +8,7 @@ TagManager:
   - Hero
   - Trash
   - Canvas
+  - AboveGameCanvas
   layers:
   - Default
   - TransparentFX
@@ -53,6 +54,9 @@ TagManager:
     locked: 0
   - name: Items
     uniqueID: 1434902809
+    locked: 0
+  - name: AboveGameOverlay
+    uniqueID: 2607839621
     locked: 0
   - name: Overlay
     uniqueID: 1505059203

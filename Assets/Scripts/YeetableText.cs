@@ -13,7 +13,7 @@ public class YeetableText : MonoBehaviour
     {
         var yeetableText = Instantiate(GameDirector.GameDirectorInstance.YeetableTextPrefab, source, Quaternion.identity);
         var go = yeetableText.gameObject;
-        go.transform.SetParent(parent ?? GameObject.FindWithTag("Canvas").transform);
+        go.transform.SetParent(parent ?? GameObject.FindWithTag("AboveGameCanvas").transform);
         yeetableText.Text.text = text;
         yeetableText.Text.fontSize = fontSize;
 
