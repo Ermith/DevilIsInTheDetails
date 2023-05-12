@@ -1185,9 +1185,9 @@ Camera:
     height: 1
   near clip plane: 0.3
   far clip plane: 1000
-  field of view: 35.970272
+  field of view: 35.986534
   orthographic: 1
-  orthographic size: 6.747369
+  orthographic size: 6.7506294
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -3095,11 +3095,11 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Press Escape to resume.
+  m_text: 'Press Escape or P to resume.
 
 
-    Remember, you can right-click while dragging
-    items to rotate them.
+    Remember, you can right-click while
+    dragging items to rotate them.
 
     Hover over things to read their tooltips.'
   m_isRightToLeft: 0

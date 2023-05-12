@@ -107,7 +107,7 @@ public class GameDirector : MonoBehaviour
             SimulationTime += Time.deltaTime;
         }
 
-        if (Input.GetKeyDown(KeyCode.Escape) && !IsGameOver)
+        if ((Input.GetKeyDown(KeyCode.Escape) || Input.GetKeyDown(KeyCode.P)) && !IsGameOver)
         {
             if (IsPaused)
             {
