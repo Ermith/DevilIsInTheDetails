@@ -90,16 +90,24 @@ public class WordManager : MonoBehaviour
             return '\0'; // no curse at all!
         }
 
+        float vowelBoost = 1 + (karma + 1) / 2;
+
         float total = 0;
         foreach (KeyValuePair<char, int> pair in _letterFrequency)
         {
-            total += MathF.Pow(pair.Value, pow);
+            float weight = MathF.Pow(pair.Value, pow);
+            if ("AEIOU".Contains(pair.Key))
+                weight *= vowelBoost;
+            total += weight;
         }
         // weighted pick based on letter frequencies
         float r = Random.Range(0f, total);
         foreach (KeyValuePair<char, int> pair in _letterFrequency)
         {
-            r -= MathF.Pow(pair.Value, pow);
+            float weight = MathF.Pow(pair.Value, pow);
+            if ("AEIOU".Contains(pair.Key))
+                weight *= vowelBoost;
+            r -= weight;
             if (r <= 0)
             {
                 return pair.Key;

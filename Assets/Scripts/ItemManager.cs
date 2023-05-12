@@ -15,9 +15,11 @@ public class ItemManager : MonoBehaviour
 
     public int MaxLooseItems = 3;
 
-    public double PerSecondExpectedNewItems = 0.7f;
+    public double PerSecondExpectedNewItems = 0.5f;
 
-    public double InitialNewItemsBoost = 2.5f;
+    public double InitialNewItemsBoost = 2f;
+
+    public int TotalItemsSpawned { get; private set; }
 
     private Item PickItem()
     {
@@ -68,6 +70,8 @@ public class ItemManager : MonoBehaviour
         
         // call item.PlayAppearing after a short delay
         item.Invoke("PlayAppearing", 0.1f);
+
+        TotalItemsSpawned++;
         
         return item;
     }
@@ -77,8 +81,8 @@ public class ItemManager : MonoBehaviour
         if (GameDirector.GameDirectorInstance.IsPaused)
             return;
         double expected = PerSecondExpectedNewItems;
-        if (GameDirector.SimulationTime < 5)
-            expected += (InitialNewItemsBoost - expected) * (MaxLooseItems - LooseItems) / MaxLooseItems;
+        if (TotalItemsSpawned < MaxLooseItems)
+            expected += (InitialNewItemsBoost - expected) * (MaxLooseItems - TotalItemsSpawned) / MaxLooseItems;
         double prob = expected * Time.deltaTime;
         if (SpawningItems && LooseItems < MaxLooseItems && Random.Range(0f, 1f) < prob)
         {
