@@ -91,6 +91,8 @@ public class GameDirector : MonoBehaviour
 
     private int _wordsMatchedIndex = 0;
 
+    public bool DoesPlayerKnowTheyCanRotateStuff = false;
+
     public void StartFight()
     {
         if (_fighting) return;
@@ -125,6 +127,21 @@ public class GameDirector : MonoBehaviour
         if ((IsPaused || IsGameOver) && Random.value < Time.deltaTime)
         {
             YeetWords(IsGameOver ? GameOverCanvas.transform : PauseCanvas.transform);
+        }
+
+        if (!DoesPlayerKnowTheyCanRotateStuff && SimulationTime > 15f)
+        {
+            DoesPlayerKnowTheyCanRotateStuff = true;
+
+            Canvas canvas = GameObject.FindWithTag("Canvas").GetComponent<Canvas>();
+            RectTransform canvasRect = canvas.GetComponent<RectTransform>();
+            YeetableText.Yeet(
+                "Right click while dragging\nto rotate items",
+                Color.white,
+                new Vector2(-canvasRect.rect.width * 0.6f, 0),
+                new Vector2(canvasRect.rect.width * 0.6f, 0),
+                duration: 10f
+            );
         }
     }
 

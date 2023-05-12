@@ -199,6 +199,7 @@ public class Item : MonoBehaviour
 
             if (Input.GetMouseButtonDown(1))
             {
+                GameDirector.GameDirectorInstance.DoesPlayerKnowTheyCanRotateStuff = true;
                 Rotate(left: false);
             }
         }
