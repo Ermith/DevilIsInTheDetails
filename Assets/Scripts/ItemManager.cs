@@ -8,7 +8,7 @@ public class ItemManager : MonoBehaviour
 
     public bool SpawningItems
     {
-        get => !GameDirector.GameDirectorInstance.IsPaused;
+        get => !GameDirector.GameDirectorInstance.IsPaused && GameDirector.SimulationTime > 0.3f;
     }
 
     public int LooseItems = 0;
@@ -78,8 +78,6 @@ public class ItemManager : MonoBehaviour
 
     public void Update()
     {
-        if (GameDirector.GameDirectorInstance.IsPaused)
-            return;
         double expected = PerSecondExpectedNewItems;
         if (TotalItemsSpawned < MaxLooseItems)
             expected += (InitialNewItemsBoost - expected) * (MaxLooseItems - TotalItemsSpawned) / MaxLooseItems;
