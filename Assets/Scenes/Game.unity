@@ -1085,9 +1085,9 @@ Camera:
     height: 1
   near clip plane: 0.3
   far clip plane: 1000
-  field of view: 35.9834
+  field of view: 35.970272
   orthographic: 1
-  orthographic size: 6.75
+  orthographic size: 6.747369
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -2885,9 +2885,6 @@ MonoBehaviour:
   IsGameOver: 0
   IsPaused: 0
   DummyEnemy: {fileID: 386759277}
-  TimeMouseStopped: 0
-  LastMousePosition: {x: 0, y: 0}
-  TooltipDelay: 0.3
   KarmaFactor: 0.2
   YeetableTextPrefab: {fileID: 5635826223437665761, guid: c501075b034ad244583b8298322524ac, type: 3}
   EnemiesDefeated: 0
@@ -2999,6 +2996,9 @@ MonoBehaviour:
       m_Calls: []
   m_text: 'Press Escape to resume.
 
+
+    Remember, you can right-click while dragging
+    items to rotate them.
 
     Hover over things to read their tooltips.'
   m_isRightToLeft: 0
@@ -3118,7 +3118,8 @@ MonoBehaviour:
     values: 64000000050000000a0000000a000000140000001400000064000000
   LooseItems: 0
   MaxLooseItems: 5
-  PerSecondChance: 0.3
+  PerSecondExpectedNewItems: 0.8999999761581421
+  InitialNewItemsBoost: 3
 --- !u!4 &1915043755
 Transform:
   m_ObjectHideFlags: 0
