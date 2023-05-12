@@ -207,6 +207,7 @@ public class GameDirector : MonoBehaviour
     // Happens before Start
     private void Awake()
     {
+        SimulationTime = 0;
         Time.timeScale = 1f;
 
         GameDirectorInstance = this;
