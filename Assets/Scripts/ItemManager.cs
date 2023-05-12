@@ -15,9 +15,9 @@ public class ItemManager : MonoBehaviour
 
     public int MaxLooseItems = 3;
 
-    public double PerSecondExpectedNewItems = 0.9f;
+    public double PerSecondExpectedNewItems = 0.7f;
 
-    public double InitialNewItemsBoost = 3f;
+    public double InitialNewItemsBoost = 2.5f;
 
     private Item PickItem()
     {
