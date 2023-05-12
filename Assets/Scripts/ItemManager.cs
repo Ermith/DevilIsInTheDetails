@@ -15,7 +15,9 @@ public class ItemManager : MonoBehaviour
 
     public int MaxLooseItems = 3;
 
-    public double PerSecondChance = 0.9f;
+    public double PerSecondExpectedNewItems = 0.9f;
+
+    public double InitialNewItemsBoost = 3f;
 
     private Item PickItem()
     {
@@ -74,7 +76,10 @@ public class ItemManager : MonoBehaviour
     {
         if (GameDirector.GameDirectorInstance.IsPaused)
             return;
-        double prob = 1 - Math.Pow(1 - PerSecondChance, Time.deltaTime);
+        double expected = PerSecondExpectedNewItems;
+        if (GameDirector.SimulationTime < 5)
+            expected += (InitialNewItemsBoost - expected) * (MaxLooseItems - LooseItems) / MaxLooseItems;
+        double prob = expected * Time.deltaTime;
         if (SpawningItems && LooseItems < MaxLooseItems && Random.Range(0f, 1f) < prob)
         {
             SpawnItem();
