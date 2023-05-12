@@ -2990,6 +2990,7 @@ MonoBehaviour:
   EnemiesDefeated: 0
   PauseStats: {fileID: 415680000}
   GameOverStats: {fileID: 1324350713}
+  DoesPlayerKnowTheyCanRotateStuff: 0
 --- !u!4 &1726133491
 Transform:
   m_ObjectHideFlags: 0
@@ -3218,7 +3219,7 @@ MonoBehaviour:
     values: 64000000050000000a0000000a000000140000001400000064000000
   LooseItems: 0
   MaxLooseItems: 5
-  PerSecondExpectedNewItems: 0.8999999761581421
+  PerSecondExpectedNewItems: 0.5
   InitialNewItemsBoost: 3
 --- !u!4 &1915043755
 Transform:
